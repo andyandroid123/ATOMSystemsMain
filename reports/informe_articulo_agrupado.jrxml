@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informe_articulo_agrupado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c1d5b69-4b9a-4281-8365-735e413123e7">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pFiltro" class="java.lang.String"/>
+	<parameter name="pOperador" class="java.lang.String"/>
+	<parameter name="pFechaActual" class="java.lang.String"/>
+	<parameter name="pFiltroPor" class="java.lang.String"/>
+	<parameter name="pDescFiltro" class="java.lang.String"/>
+	<parameter name="pCodigoFiltro" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT articulo.descripcion, articulo.cod_articulo, stockart.stock, costoart.costo_neto,
+preciosart.precio_venta, articulo.cod_grupo || ' ' || grupo.descripcion AS grupo,
+(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad
+FROM articulo
+RIGHT OUTER JOIN stockart
+ON stockart.cod_articulo = articulo.cod_articulo
+INNER JOIN costoart
+ON costoart.cod_articulo = articulo.cod_articulo
+INNER JOIN preciosart
+ON preciosart.cod_articulo = articulo.cod_articulo
+INNER JOIN grupo
+ON grupo.cod_grupo = articulo.cod_grupo
+WHERE costoart.vigente = 'S' and preciosart.vigente = 'S' and preciosart.cod_lista = 1
+ORDER BY articulo.cod_grupo, articulo.descripcion]]>
+	</queryString>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="cod_articulo" class="java.math.BigDecimal"/>
+	<field name="stock" class="java.math.BigDecimal"/>
+	<field name="costo_neto" class="java.math.BigDecimal"/>
+	<field name="precio_venta" class="java.math.BigDecimal"/>
+	<field name="grupo" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Long"/>
+	<variable name="cantidad_articulos" class="java.math.BigDecimal" calculation="Count">
+		<variableExpression><![CDATA[$F{cod_articulo}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="filtro_page_header">
+		<groupExpression><![CDATA[$F{grupo}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField>
+					<reportElement key="textField" x="4" y="0" width="150" height="13" uuid="b2e68a67-01b4-4c5f-96c9-57b76a5b8742"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="184" height="20" uuid="0ecc9bb5-0947-4f37-9261-aeb0c9f51dc7"/>
+				<textElement>
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE ARTICULOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="20" width="100" height="12" uuid="8a2cffd2-3df0-479d-8602-fc3f3a5815ca"/>
+				<textElement>
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFiltro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="20" width="40" height="13" uuid="dadaa0e1-c301-4e2b-b4a7-167f1edf4573"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Página:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="439" y="20" width="100" height="13" uuid="824bf228-6365-4a02-a51d-6c0f955ccb64"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="11" width="100" height="15" uuid="003200bb-2893-4ab9-acad-fdc0c11a0845"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFiltroPor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="11" width="100" height="15" uuid="710d5aac-ee39-418f-abe3-61d956d8f6e3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pDescFiltro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="398" y="13" width="41" height="13" uuid="b1b368f9-1a3e-412b-b161-f5616e33da45"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="26" width="42" height="15" uuid="808bcd36-b366-4a74-b6c4-771ca40dc130"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="13" width="100" height="13" uuid="f0cd0add-24d6-48d4-926a-ca8718ebff26"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFechaActual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="26" width="100" height="15" uuid="54b65044-6f12-4e4f-93ab-b30d2a30d914"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pOperador}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="2" width="537" height="1" uuid="1194c3cb-2e38-4e58-b90d-37e8c09e5daa"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="43" width="537" height="1" uuid="eb44fb09-0059-4df1-98c6-52f21f632df2"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="398" y="2" width="57" height="15" uuid="1fc47e41-871e-4681-b663-625977edf69d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Vta.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="2" width="48" height="15" uuid="97fbd47e-5b13-4a85-ac0a-29bccc64b637"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="2" width="168" height="15" uuid="39dcaa4b-b864-4467-8d6f-6dd29d6f6f4d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="2" width="47" height="15" uuid="283a9f76-a18b-4a7c-ae08-70b62daea926"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="2" width="52" height="15" uuid="8caee8bf-dd06-4e41-96a9-a451bd56b198"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="20" width="537" height="1" uuid="81cb885e-34e4-443f-93d8-03edaca0547b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="0" width="47" height="13" uuid="e61e6953-91a9-4647-aafc-21b14591a585"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_articulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="168" height="13" uuid="292a09f3-4016-472f-bea0-b2611a839413"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="322" y="0" width="52" height="13" uuid="6f9bc8c7-de87-4f62-815b-56ceb53530a4"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo_neto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="397" y="0" width="58" height="13" uuid="e2ba3418-390e-42d8-af75-5db270ea84d1"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_venta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="479" y="0" width="48" height="13" uuid="0c2c4e52-6a21-4b65-90ad-fc01dc8b4b8b"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="23">
+			<textField pattern="#,##0">
+				<reportElement x="96" y="6" width="44" height="14" uuid="af612e05-1c7a-42f7-9820-31fed23352db"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{cantidad_articulos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="6" width="91" height="14" uuid="0ca4fe01-67dc-47a7-bad6-601556b73f96"/>
+				<textElement>
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Cantidad artìculos:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

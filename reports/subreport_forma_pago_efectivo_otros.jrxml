@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_forma_pago_efectivo_otros" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="bfb64aae-a490-44c4-bb04-7e664fc4dc79">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pNroTurno" class="java.math.BigDecimal"/>
+	<parameter name="pNroTerminal" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[SELECT cuenta.denominacion_cta,'(' || ' ' || forma_pago.tip_cambio || ' ' , sum(monto_pago) AS total
+FROM forma_pago
+INNER JOIN venta_cab
+ON forma_pago.nro_ticket = venta_cab.nro_ticket
+INNER JOIN cuenta
+ON forma_pago.cod_cuenta = cuenta.cod_cuenta
+WHERE forma_pago.nro_turno = 7 AND forma_pago.cod_caja = 16
+AND venta_cab.nro_turno = 7 AND venta_cab.cod_caja = 16
+AND forma_pago.cod_cuenta IN (SELECT cod_cuenta FROM cuenta WHERE tipo_cuenta NOT IN ('CHE', 'TCR', 'CRF', 'BON', 'CRE') AND cod_cuenta != 1)
+GROUP BY cuenta.denominacion_cta, forma_pago.tip_cambio]]>
+	</queryString>
+	<field name="denominacion_cta" class="java.lang.String"/>
+	<field name="?column?" class="java.lang.String"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="97" height="20" uuid="f3503e82-2025-4095-ae28-4f5000682249"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{denominacion_cta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="97" y="0" width="4" height="20" uuid="06524190-c1e9-49f0-aa7c-29b1304f1cb6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="106" y="0" width="51" height="20" uuid="3085c66e-d093-47cd-94e9-bff819339393"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="168" y="0" width="35" height="20" isRemoveLineWhenBlank="true" uuid="efa05ed4-419d-495d-a268-554c757c1cd8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tip_cambio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="203" y="0" width="4" height="20" uuid="2546e52d-413a-477f-ae10-459f3765b9d5"/>
+				<text><![CDATA[)]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

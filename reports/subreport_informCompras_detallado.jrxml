@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_informCompras_detallado" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="336e74c0-7509-481f-b268-fa2dc4cd99ec">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pNroComprob" class="java.math.BigDecimal"/>
+	<parameter name="pTimbrado" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT compra_det.cod_articulo, articulo.descripcion, compra_det.cant_recib,
+(compra_det.sigla_compra || '-' || compra_det.cansi_compra) AS  sigla,
+compra_det.costo_empaque,
+CASE WHEN compra_det.pct_iva = 0 THEN SUM(compra_det.mon_total) ELSE 0 END as exenta,
+CASE WHEN compra_det.pct_iva = 5 THEN SUM(compra_det.mon_total) ELSE 0 END as grav5,
+CASE WHEN compra_det.pct_iva = 10 THEN SUM(compra_det.mon_total) ELSE 0 END as grav10,
+compra_cab.total_monto AS total
+FROM compra_det
+INNER JOIN articulo
+ON compra_det.cod_articulo = articulo.cod_articulo
+INNER JOIN compra_cab
+ON compra_cab.nro_comprob = compra_det.nro_comprob
+WHERE compra_det.nro_comprob = $P{pNroComprob} AND compra_det.estado = 'V' AND compra_cab.nro_timbrado = $P{pTimbrado}
+GROUP BY compra_det.cod_articulo, articulo.descripcion, compra_det.cant_recib, compra_det.sigla_compra, compra_det.cansi_compra,
+compra_det.pct_iva, compra_det.costo_empaque, compra_cab.nro_timbrado, compra_cab.total_monto]]>
+	</queryString>
+	<field name="cod_articulo" class="java.math.BigDecimal"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="cant_recib" class="java.math.BigDecimal"/>
+	<field name="sigla" class="java.lang.String"/>
+	<field name="costo_empaque" class="java.math.BigDecimal"/>
+	<field name="exenta" class="java.math.BigDecimal"/>
+	<field name="grav5" class="java.math.BigDecimal"/>
+	<field name="grav10" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<variable name="fTotalDoc" class="java.math.BigDecimal" calculation="Sum">
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="45" height="20" uuid="cbc4086a-aebf-49ea-ae3c-30a5d520cf4a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="0" width="98" height="20" uuid="9a9eaea6-7371-4608-86c6-fae1c6bd4efd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="47" height="20" uuid="372ee13e-c2a7-4cd5-ba3a-5049f2c4160b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cant. Recib.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="0" width="27" height="20" uuid="589c97b9-f80e-4bf4-84e1-ea741636b68e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sigla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="0" width="37" height="20" uuid="40dfd5f8-30aa-4dd6-8eae-048c34f0716d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="0" width="40" height="20" uuid="2be52fb0-2b55-4803-9150-45c6046038be"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="0" width="40" height="20" uuid="6b42e009-deeb-49f8-8edd-195044ead3d6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grav 5%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="0" width="40" height="20" uuid="f3287485-af79-4713-8d19-418bf00f2564"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grav 10%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="0" width="98" height="10" uuid="4e1a0df7-a9af-4923-b194-47a0fa643897"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="150" y="0" width="47" height="10" uuid="95e6a08a-354d-4e0c-87f4-94340e54b0b7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cant_recib}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="0" width="27" height="10" uuid="4a309898-f7a3-4573-8981-47f3f7825695"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="224" y="0" width="37" height="10" uuid="7505ff4e-64d5-4e57-a20c-0c674cf08693"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo_empaque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="45" height="10" uuid="cb3891ef-0137-46b0-8a07-a4c6383e74a1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_articulo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="261" y="0" width="40" height="10" uuid="747ae3a3-6050-4326-83d5-16ed90817d6d"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="301" y="0" width="40" height="10" uuid="e8169ee4-48f6-4d6a-b67a-61bddddd7d3b"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grav5}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="341" y="0" width="40" height="10" uuid="b3319939-2f8a-4371-8762-e270000f235e"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grav10}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="22">
+			<textField pattern="#,##0">
+				<reportElement x="333" y="5" width="48" height="15" uuid="bc29bb42-645a-4316-a37e-febc64a57718"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="296" y="5" width="36" height="15" uuid="bce05f8b-afc7-4a9a-9003-33945e2223b9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="281" y="3" width="100" height="1" uuid="bec9c3d1-1cb3-48af-8030-7cc5810d046e"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

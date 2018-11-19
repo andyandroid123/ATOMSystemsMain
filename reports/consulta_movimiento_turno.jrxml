@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consulta_movimiento_turno" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3e8c16a-1c7a-45c4-8146-5ee2cd2390bb">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="17"/>
+	<parameter name="pNroTurno" class="java.math.BigDecimal"/>
+	<parameter name="pSaldoInicial" class="java.math.BigDecimal"/>
+	<parameter name="pTerminal" class="java.math.BigDecimal"/>
+	<parameter name="pFechaInicioTurno" class="java.lang.String"/>
+	<parameter name="pFechaFinTurno" class="java.lang.String"/>
+	<parameter name="pCajero" class="java.lang.String"/>
+	<parameter name="pTotalVtaCredito" class="java.math.BigDecimal"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\ATOMSystemsMain\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pTotalVentas" class="java.math.BigDecimal"/>
+	<parameter name="pDescuentos" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+CASE WHEN sum(forma_pago.monto_pago) > 0 THEN sum(forma_pago.monto_pago) ELSE 0 END AS total_venta_efectivo
+FROM venta_cab
+INNER JOIN forma_pago
+ON venta_cab.nro_ticket = forma_pago.nro_ticket
+WHERE venta_cab.nro_turno = $P{pNroTurno} AND venta_cab.cod_caja = $P{pTerminal} AND forma_pago.tipo_cuenta = 'EFE'
+AND forma_pago.nro_turno = $P{pNroTurno} AND forma_pago.cod_caja = $P{pTerminal} AND forma_pago.cod_cuenta = 1]]>
+	</queryString>
+	<field name="total_venta_efectivo" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="270" height="20" uuid="cf09afcf-8f8c-4474-98ac-6da5c396a27b"/>
+				<textElement>
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN DE MOVIMIENTO DE TURNO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="0" width="61" height="14" uuid="dc5018f3-6720-48c4-8c3b-361a5be0245b"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Caja:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="14" width="72" height="14" uuid="c3c179e4-95aa-4e89-9703-deef7a2c5e65"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Turno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="28" width="72" height="14" uuid="bc7d6d11-082c-4f48-aaf3-bb2300c3dd86"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Saldo Inicial:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="14" width="58" height="14" uuid="0d24a62d-04ad-4340-b319-134ae4724a8f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pNroTurno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="0" width="58" height="14" uuid="64f568e9-e019-4cad-94cf-a3bcb06750e5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pTerminal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="74" y="28" width="69" height="14" uuid="e8f4b7d8-b0a6-405d-82e2-9c97a3e4a8cd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pSaldoInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="0" width="100" height="14" uuid="44d9bc92-6d2e-4132-a4d8-984edd761817"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio turno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="14" width="100" height="14" uuid="74ecb196-b6dd-4ae3-91b9-9a6da797bd9c"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin turno:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="262" y="0" width="98" height="14" uuid="c3acbd49-c95c-4585-ab44-108bdd5375e6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFechaInicioTurno}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="262" y="14" width="98" height="14" uuid="bb30fe8e-0ae3-4612-89e8-ac4c521f4319"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFechaFinTurno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="373" y="0" width="36" height="14" uuid="4411382a-5907-4d14-897e-597121e43e56"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Cajero:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="411" y="0" width="124" height="14" uuid="59db1d51-eec4-4043-bebc-1aa1afcf8869"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pCajero}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="200" height="13" uuid="3076e14b-528d-4faa-8233-5e21a86168e3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen de Ventas por formas de pago]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="14" width="534" height="1" uuid="8d14324a-f1c9-4858-a025-82104bb1d165"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="33" width="534" height="1" uuid="d2d7ca50-4083-42e4-ac6a-1d1da9f59d20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="117" splitType="Stretch">
+			<staticText>
+				<reportElement x="284" y="32" width="100" height="14" uuid="d89a503f-e042-4eec-aa8e-e515d30aa463"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GUARANIES:]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement x="384" y="32" width="57" height="14" uuid="31fc3a28-1d7b-4da6-9f92-df54beef1566"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total_venta_efectivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="32" width="100" height="14" uuid="eceabc74-f190-4f88-8ca3-402855843adc"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDITO:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="160" y="32" width="57" height="14" uuid="ce8ebcca-45a8-4418-84e1-3dd26a6b4373"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{pTotalVtaCredito}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="56" y="46" width="157" height="68" isRemoveLineWhenBlank="true" uuid="6142ae5e-fc88-4ae5-a472-c211c1398b45"/>
+				<subreportParameter name="pNroTurno">
+					<subreportParameterExpression><![CDATA[$P{pNroTurno}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pTerminal">
+					<subreportParameterExpression><![CDATA[$P{pTerminal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "consulta_mov_turno_otras_formas_pago_subreport.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="56" y="6" width="117" height="14" uuid="d472e774-9bc5-4d49-8e85-f966f4f0bd11"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otras formas de pago:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="6" width="44" height="14" uuid="2e334da1-1eca-46bf-a118-0a049e0762d0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Efectivo:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="56" y="25" width="161" height="1" uuid="8758e75f-bd24-4d30-9e03-a47fdfc4f4aa"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="284" y="26" width="157" height="1" uuid="c7cd6242-3515-4022-81ff-3f9b942f2adf"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement x="284" y="46" width="191" height="49" isRemoveLineWhenBlank="true" uuid="d5ec279a-5f9c-4a8d-8daf-b351a12cd0cb"/>
+				<subreportParameter name="pTerminal">
+					<subreportParameterExpression><![CDATA[$P{pTerminal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pNroTurno">
+					<subreportParameterExpression><![CDATA[$P{pNroTurno}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subreport_forma_pago_efectivo_otros1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="534" height="1" uuid="a2c1b24f-df99-4e86-9371-d886b243cb80"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="26" width="534" height="1" uuid="3b1f0b5a-e874-44b1-b7bb-ebb28de8d9b1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="11" width="80" height="13" uuid="a56c9da5-2e71-4d61-b635-374ef576c1c2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Ventas:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="81" y="4" width="100" height="20" uuid="8d8f1bfe-3a7a-4d93-afa4-c9f4bccc0455"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pTotalVentas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="244" y="11" width="65" height="15" uuid="7f82c447-4913-4579-9d55-7b7a9ed299ea"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descuentos:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="310" y="6" width="100" height="20" uuid="b23f9d1f-6c72-489d-bb0d-908830d49c6d"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pDescuentos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

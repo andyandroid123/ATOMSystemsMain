@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formapago_subreport" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e5574dbc-56fc-4841-ae76-ee5b495e2eb8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pNroTicket" class="java.math.BigDecimal"/>
+	<parameter name="pTerminal" class="java.math.BigDecimal"/>
+	<parameter name="pNroTurno" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT nom_librador, abs(monto_pago),
+CASE WHEN tip_cambio <> 1 THEN '(' || abs(tip_cambio) || ')' END AS abs(tip_cambio)
+FROM forma_pago WHERE nro_ticket = $P{pNroTicket}::numeric AND nro_turno = $P{pNroTurno}::numeric AND cod_caja = $P{pTerminal}::numeric
+ORDER BY nom_librador]]>
+	</queryString>
+	<field name="nom_librador" class="java.lang.String"/>
+	<field name="abs" class="java.math.BigDecimal"/>
+	<field name="tip_cambio" class="java.lang.String"/>
+	<group name="nom_librador">
+		<groupExpression><![CDATA[$F{nom_librador}]]></groupExpression>
+	</group>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="58" height="12" forecolor="#999999" uuid="40b3ca12-63ef-4186-9970-b19baf16870a"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_librador}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;(#,##0)" isBlankWhenNull="true">
+				<reportElement x="58" y="0" width="37" height="12" uuid="537ee6c2-18d4-41db-9341-8fa5777dc341"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tip_cambio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;(#,##0)">
+				<reportElement x="95" y="0" width="63" height="12" uuid="22cfd19d-5f4b-49de-bfe0-d4aa6f037dac"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_pago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

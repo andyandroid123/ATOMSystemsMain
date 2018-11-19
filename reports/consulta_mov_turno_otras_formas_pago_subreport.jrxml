@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consulta_mov_turno_otras_formas_pago_subreport" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8aa8f14b-8c46-4438-bead-83e478c6e1ed">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pTerminal" class="java.math.BigDecimal"/>
+	<parameter name="pNroTurno" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[SELECT forma_pago.nom_librador, SUM(forma_pago.monto_pago) AS total_venta
+FROM venta_cab
+INNER JOIN forma_pago
+ON venta_cab.nro_ticket = forma_pago.nro_ticket
+WHERE venta_cab.nro_turno = $P{pNroTurno} AND venta_cab.cod_caja = $P{pTerminal} AND forma_pago.tipo_cuenta <> 'CRE' AND forma_pago.tipo_cuenta <> 'EFE'
+AND forma_pago.nro_turno = $P{pNroTurno} AND forma_pago.cod_caja = $P{pTerminal}
+GROUP BY forma_pago.nom_librador]]>
+	</queryString>
+	<field name="nom_librador" class="java.lang.String"/>
+	<field name="total_venta" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="15" uuid="394a6092-f437-4b91-ac87-7e533afde769"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nom_librador}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="103" y="0" width="58" height="15" uuid="084855c4-ae59-4a53-b0ba-fd1e89a20994"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total_venta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="0" width="3" height="15" uuid="7d112077-32c0-4bc5-b853-07ce14a3ca86"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

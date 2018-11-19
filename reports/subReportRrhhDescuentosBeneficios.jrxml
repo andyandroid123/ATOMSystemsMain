@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportRrhhDescuentosBeneficios" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ff4674a-353d-489b-ab75-3c0568ceb737">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select dce.cod_empleado, e.apellido, dce.cod_concepto,
+c.des_concepto, case dce.debcre when 'D' then dce.monto else 0 end debito, case dce.debcre when 'C' then dce.monto else 0 end credito, dce.fec_vencimiento,
+dce.tip_comprob, dce.nro_comprob, dce.observacion
+from debcre_empleado dce, empleado e, concepto c
+where dce.cod_empleado = e.cod_empleado and
+dce.cod_concepto= c.cod_concepto and
+dce.fec_vencimiento >= '01/01/2008' and
+dce.estado = 'V'
+order by dce.cod_empleado, dce.fec_vencimiento]]>
+	</queryString>
+	<field name="cod_empleado" class="java.math.BigDecimal"/>
+	<field name="apellido" class="java.lang.String"/>
+	<field name="cod_concepto" class="java.math.BigDecimal"/>
+	<field name="des_concepto" class="java.lang.String"/>
+	<field name="debito" class="java.math.BigDecimal"/>
+	<field name="credito" class="java.math.BigDecimal"/>
+	<field name="fec_vencimiento" class="java.sql.Timestamp"/>
+	<field name="tip_comprob" class="java.lang.String"/>
+	<field name="nro_comprob" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="54" height="14" uuid="bfed8523-eb97-4b9a-a356-384321a7fee6"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Cod. Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="0" width="100" height="14" uuid="a87a335a-d38a-4035-93e8-0d687bae998e"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="0" width="42" height="14" uuid="5f64b04d-b621-4971-8a28-e94d21992f70"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Comprob]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="0" width="54" height="14" uuid="e90f630c-fc29-4d38-9dcb-61c1ae93fcb6"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nro. Comprob]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="57" height="14" uuid="04dc3bb4-e20b-419a-8022-8ca0c87b9910"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Venc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="0" width="52" height="14" uuid="ee9ea004-56c4-495d-8c24-27fc9912d957"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Débito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="0" width="53" height="14" uuid="2b8d772d-e808-48d8-8be5-d5d6e459486e"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="0" width="100" height="14" uuid="0c038989-79d0-4a37-9325-b38905f39a30"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Observación]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="54" height="14" uuid="363ca4d4-c3eb-4f8a-9e52-b99608f19d9c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="0" width="100" height="14" uuid="1402b877-3c6d-4554-951f-21481f5bfabb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{des_concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="42" height="14" uuid="c546942d-cacd-4c8f-bfed-75832dcad065"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tip_comprob}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="0" width="54" height="14" uuid="6ad664e6-d96f-4672-bdbe-addf858ce989"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nro_comprob}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="57" height="14" uuid="b4afa265-0e1d-43d2-bba4-60bd1df807c6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fec_vencimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="0" width="52" height="14" uuid="f827aaeb-284a-49c9-8b0f-d03717290a77"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="53" height="14" uuid="a84d2ee4-a844-4d75-bf9f-6111e1c4f791"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="0" width="100" height="14" uuid="a6675390-f020-4e5f-b3ea-d2c76893bf7d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="22" splitType="Stretch"/>
+	</summary>
+</jasperReport>
