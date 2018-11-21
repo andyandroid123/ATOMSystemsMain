@@ -8,6 +8,8 @@ package utiles;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.watermark.SubstanceImageWatermark;
+import principal.FormMain;
 
 /**
  *
@@ -24,7 +26,7 @@ public class SetAppearance {
             //SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceTerracottaTheme"); //  SubstanceSunsetTheme"); // Se aplica el tema Aqui de Substance
             //SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSunsetTheme"); // Se aplica el tema Aqui de Substance
            SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBubblesWatermark"); // SubstanceBinaryWatermark");//Ejemplo de aplicacion de un watermark de Substance
-            //SubstanceLookAndFeel.setCurrentWatermark( new SubstanceImageWatermark("/VITALMarket/Recursos/VITALMarket.jpg"));
+           //SubstanceLookAndFeel.setCurrentWatermark( new SubstanceImageWatermark("/" + FormMain.nombreCarpetaProyecto + "/src/resources/atomLogo128.png"));
             //SubstanceLookAndFeel.setImageWatermarkOpacity(new Float(0.3)); //valor aproximado de la opacidad por default de imageWatermark, (0..1)
         } catch (Exception ex) {
             //ex.printStackTrace();
