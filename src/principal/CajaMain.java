@@ -10,13 +10,11 @@ import ModCaja.RegistroCobroClientes1;
 import ModCaja.TurnoVentas;
 import ModCaja.Ventas;
 import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.net.URL;
 import java.sql.ResultSet;
-import javax.swing.ImageIcon;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utiles.DBManager;
@@ -28,6 +26,12 @@ import utiles.InfoErrores;
  */
 public class CajaMain extends javax.swing.JFrame {
 
+    // para el título dinámico
+    private TimerTask task;
+    private Timer tiempo;
+    private int indice = 0;
+    private int speed = 200;
+    
     public static boolean resultExitVentas = false; 
     public static boolean resultExitReImpresiones = false; 
     public static boolean resultExitCobroCuentas = false; 
@@ -40,6 +44,7 @@ public class CajaMain extends javax.swing.JFrame {
         initComponents();
         cerrarVentana();
         labelBotones();
+        startTitleAnimation();
     }
 
     private void msgDesarrollo(){
@@ -104,6 +109,36 @@ public class CajaMain extends javax.swing.JFrame {
         return result;
     }
     
+    private String titulo(){
+        return "ATOMSystems";
+    }
+    
+    private String subTitulo(){
+        return "Módulo CAJA";
+    }
+    
+    private void setTitle(int i){
+        //this.setTitle(titulo().substring(0, i));
+        jTFTitulo.setText(titulo().substring(0, i));
+        jTFSubTitulo.setText(subTitulo().substring(0, i));
+    }
+    
+    private void startTitleAnimation(){
+        tiempo = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                if(indice == titulo().length()){
+                    indice = 1;
+                }else{
+                    indice++;
+                }
+                setTitle(indice);
+            }
+        };
+        tiempo.schedule(task, 0, speed);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,6 +153,12 @@ public class CajaMain extends javax.swing.JFrame {
         jBReImpresionDocs = new javax.swing.JButton();
         jBVentas = new javax.swing.JButton();
         jBCobroClientes = new javax.swing.JButton();
+        jTFTitulo = new javax.swing.JTextField();
+        jTFSubTitulo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ATOMSystems|Main - Módulo de Ventas");
@@ -162,19 +203,55 @@ public class CajaMain extends javax.swing.JFrame {
             }
         });
 
+        jTFTitulo.setBackground(new java.awt.Color(0, 0, 0));
+        jTFTitulo.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jTFTitulo.setForeground(new java.awt.Color(255, 0, 0));
+        jTFTitulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTFTitulo.setText("***");
+
+        jTFSubTitulo.setBackground(new java.awt.Color(0, 0, 0));
+        jTFSubTitulo.setFont(new java.awt.Font("Times New Roman", 1, 32)); // NOI18N
+        jTFSubTitulo.setForeground(new java.awt.Color(255, 0, 0));
+        jTFSubTitulo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTFSubTitulo.setText("***");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/forma_pago_maestro64.png"))); // NOI18N
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/forma_pago_mastercard64.png"))); // NOI18N
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/forma_pago_visa64.png"))); // NOI18N
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/forma_pago_ae64.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jBTurnoVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBCobroClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBReImpresionDocs)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBTurnoVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBCobroClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBReImpresionDocs))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                            .addComponent(jTFSubTitulo)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,7 +266,17 @@ public class CajaMain extends javax.swing.JFrame {
                     .addComponent(jBReImpresionDocs)
                     .addComponent(jBVentas)
                     .addComponent(jBCobroClientes))
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jTFTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBCobroClientes, jBReImpresionDocs, jBTurnoVenta, jBVentas});
@@ -292,6 +379,12 @@ public class CajaMain extends javax.swing.JFrame {
     private javax.swing.JButton jBReImpresionDocs;
     private javax.swing.JButton jBTurnoVenta;
     private javax.swing.JButton jBVentas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTFSubTitulo;
+    private javax.swing.JTextField jTFTitulo;
     // End of variables declaration//GEN-END:variables
 }

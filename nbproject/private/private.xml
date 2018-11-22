@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/ATOMSystemsMain/src/ModFinanciero/informes/CuentasClientes.java</file>
-            <file>file:/C:/ATOMSystemsMain/src/ModFinanciero/informes/DetalleCuentaCliente.java</file>
-            <file>file:/C:/ATOMSystemsMain/src/utiles/ButtonDetalleDocCuentaCliente.java</file>
-            <file>file:/C:/ATOMSystemsMain/src/ModFinanciero/informes/DetalleDocVenta.java</file>
+            <file>file:/C:/ATOMSystemsMain/src/ModCaja/Ventas.java</file>
+            <file>file:/C:/ATOMSystemsMain/src/principal/FormMain.java</file>
+            <file>file:/C:/ATOMSystemsMain/src/utiles/SetAppearance.java</file>
+            <file>file:/C:/ATOMSystemsMain/src/principal/CajaMain.java</file>
         </group>
     </open-files>
 </project-private>

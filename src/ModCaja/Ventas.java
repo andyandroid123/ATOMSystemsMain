@@ -48,6 +48,7 @@ import views.busca.DlgConsultasCuentasMonedas;
  */
 public class Ventas extends javax.swing.JFrame {
 
+    // para el título dinámico
     private TimerTask task;
     private Timer tiempo;
     private int indice = 0;
