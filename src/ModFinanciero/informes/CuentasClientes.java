@@ -13,15 +13,19 @@ import controls.ClienteCtrl;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import principal.FormMain;
 import utiles.ButtonDetalleCuentaCliente;
 import utiles.ButtonDetalleDocCuentaCliente;
 import utiles.DBManager;
 import utiles.Focus;
 import utiles.InfoErrores;
+import utiles.LibReportes;
 import utiles.MaxLength;
 import utiles.StatementManager;
 import views.busca.BuscaCliente;
@@ -208,7 +212,6 @@ public class CuentasClientes extends javax.swing.JDialog {
                 + " AND nro_pago = 0 "
                 + "AND estado = 'V' "
                 + "ORDER BY dias_vencidos DESC";
-                System.out.println("CALCULO DE INTERES - TODOS LOS CLIENTES: " + sql);
                 try{
                     sm.TheSql = sql;
                     sm.EjecutarSql();
@@ -235,6 +238,7 @@ public class CuentasClientes extends javax.swing.JDialog {
                     DBManager.CerrarStatements();
                 }
             }
+            System.out.println("CALCULO DE INTERES - TODOS LOS CLIENTES: " + sql);
         }else{
                 codCliente = jTFCodCliente.getText().trim();
                 
@@ -518,6 +522,98 @@ public class CuentasClientes extends javax.swing.JDialog {
         jTFTotalDocsAVencer.setText(decimalFormat.format(totalDocsAVencer));
         jTFSaldoSinInteres.setText(decimalFormat.format(saldoSinInteres));
         jTFSaldoConInteres.setText(decimalFormat.format(saldoMasInteres));
+    }
+    
+    private void deleteTablaInforme() {
+        try{
+            String sql = "BEGIN; "
+                       + "DELETE FROM inform_cta_clientes_cab; "
+                       + "DELETE FROM inform_cta_clientes_det; "
+                       + "COMMIT;";
+            System.out.println("DELETE FROM TABLA INFORME: " + sql);
+            DBManager.ejecutarDML(sql);
+            DBManager.conn.commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            InfoErrores.errores(ex);
+        }
+    }
+
+    private void insertTablaInformeCab() {
+        String cod_empresa = jCBCodEmpresa.getSelectedItem().toString();
+        String cod_local = jCBCodLocal.getSelectedItem().toString();
+        double pct_interes = Double.parseDouble(jTFInteres.getText().trim());
+        double total_credito = Double.parseDouble(jTFTotalCredito.getText().trim().replace(",", ""));
+        double total_vencidos = Double.parseDouble(jTFTotalDocsVencidos.getText().trim().replace(",", ""));
+        double total_interes = Double.parseDouble(jTFTotalInteres.getText().trim().replace(",", ""));
+        double docs_a_vencer = Double.parseDouble(jTFTotalDocsAVencer.getText().trim().replace(",", ""));
+        double saldo_sin_interes = Double.parseDouble(jTFSaldoSinInteres.getText().trim().replace(",", ""));
+        double saldo_mas_interes = Double.parseDouble(jTFSaldoConInteres.getText().trim().replace(",", ""));
+        
+        try{
+            String sql = "INSERT INTO inform_cta_clientes_cab (cod_empresa, cod_local, pct_interes, total_credito, total_vencidos, total_interes, "
+                       + "docs_a_vencer, saldo_sin_interes, saldo_mas_interes) "
+                       + "VALUES (" + cod_empresa + ", " + cod_local + ", " + pct_interes + ", " + total_credito + ", " + total_vencidos + ", "
+                       + total_interes + ", " + docs_a_vencer + ", " + saldo_sin_interes + ", " + saldo_mas_interes + ");" ;
+            System.out.println("INSERT EN TABLA INFORME: " + sql);
+            DBManager.ejecutarDML(sql);
+            DBManager.conn.commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            InfoErrores.errores(ex);
+        }
+    }
+
+    private void insertTablaInformeDet(){
+        try{
+            for(int i = 0; i < jTSaldoCuenta.getRowCount(); i++){
+                String cod_cliente = jTSaldoCuenta.getValueAt(i, 0).toString();
+                String razon_soc = jTSaldoCuenta.getValueAt(i, 1).toString();
+                double limite_credito = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 2).toString());
+                String fec_ultimo_pago = jTSaldoCuenta.getValueAt(i, 3).toString();
+                double credito = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 4).toString());
+                double docs_vencidos = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 5).toString());
+                double interes = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 6).toString());
+                double docs_a_vencer = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 7).toString());
+                double saldo_mas_interes = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 8).toString());
+                
+                String sql = "INSERT INTO inform_cta_clientes_det (cod_cliente, razon_soc, limite_credito, fec_ultimo_pago, credito, docs_vencidos, "
+                           + "interes, docs_a_vencer, saldo_mas_interes) "
+                           + "VALUES (" + cod_cliente + ", '" + razon_soc + "', " + limite_credito + ", '" + fec_ultimo_pago + "'::date, "
+                           + credito + ", " + docs_vencidos + ", " + interes + ", " + docs_a_vencer + ", " + saldo_mas_interes + ")";
+                
+                DBManager.ejecutarDML(sql);
+                DBManager.conn.commit();
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+            InfoErrores.errores(ex);
+        }
+    }
+    
+    private void generarReporte() {
+        
+        String sql = "SELECT d.cod_cliente, d.razon_soc, d.limite_credito, to_char(d.fec_ultimo_pago, 'dd/MM/yyyy') AS fec_ultimo_pago, "
+                   + "d.credito, d.docs_vencidos, d.interes, d.docs_a_vencer, d.saldo_mas_interes, c.cod_empresa, c.cod_local, c.pct_interes, "
+                   + "c.total_credito, c.total_vencidos, c.total_interes, c.docs_a_vencer AS total_docs_a_vencer, c.saldo_sin_interes, c.saldo_mas_interes AS total_mas_interes "
+                   + "FROM inform_cta_clientes_cab c, inform_cta_clientes_det d";
+        String empresa = jLNombreEmpresa.getText().trim();
+        String local = jLNombreLocal.getText().trim();
+        try{
+            LibReportes.parameters.put("pEmpresa", empresa);
+            LibReportes.parameters.put("pLocal", local);
+            LibReportes.parameters.put("pOperador", FormMain.codUsuario + " " + FormMain.nombreUsuario);
+            LibReportes.parameters.put("pFecActual", utiles.Utiles.getSysDateTimeString());
+            LibReportes.parameters.put("REPORT_CONNECTION", DBManager.conn);
+            LibReportes.generarReportes(sql, "informe_cuenta_clientes_resumido");
+        }catch(SQLException sqlex){
+            sqlex.printStackTrace();
+            InfoErrores.errores(sqlex);
+        }catch(JRException jrex){
+            jrex.printStackTrace();
+            InfoErrores.errores(jrex);
+        }
     }
     
     /**
@@ -856,6 +952,11 @@ public class CuentasClientes extends javax.swing.JDialog {
 
         jBImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imprimir24.png"))); // NOI18N
         jBImprimir.setText("Imprimir");
+        jBImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBImprimirActionPerformed(evt);
+            }
+        });
 
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/salir24.png"))); // NOI18N
         jBSalir.setText("Salir");
@@ -1267,6 +1368,17 @@ public class CuentasClientes extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
+        if(jTSaldoCuenta.getRowCount() > 0){
+            if(jRBResumido.isSelected()){
+                deleteTablaInforme();
+                insertTablaInformeCab();
+                insertTablaInformeDet();
+                generarReporte();
+            }
+        }
+    }//GEN-LAST:event_jBImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1363,4 +1475,5 @@ public class CuentasClientes extends javax.swing.JDialog {
     private javax.swing.JTable jTSaldoDetallado;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+    
 }
