@@ -24,7 +24,7 @@ import utiles.StatementManager;
  */
 public class BuscaCobroCliente extends javax.swing.JDialog {
 
-    public static DefaultTableModel dtmPagos; 
+    private static DefaultTableModel dtmPagos; 
     private static JTextField jText;
     
     public BuscaCobroCliente(java.awt.Frame parent, boolean modal) {

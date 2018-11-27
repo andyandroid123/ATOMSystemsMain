@@ -5,6 +5,7 @@
  */
 package principal;
 
+import ModFinanciero.AnulacionCobroCliente;
 import ModFinanciero.ModificarVencimientos;
 import ModFinanciero.ReDefinicionCuotas;
 import ModFinanciero.informes.CuentasClientes;
@@ -54,6 +55,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuOperaciones = new javax.swing.JMenu();
         jMnuIModificarVencimiento = new javax.swing.JMenuItem();
         jMnuIRedefinicionCuotas = new javax.swing.JMenuItem();
+        jMnuIAnulacionCobroClientes = new javax.swing.JMenuItem();
         jMnuMantenimiento = new javax.swing.JMenu();
         jMnuInformes = new javax.swing.JMenu();
         jMnuICobroClientes = new javax.swing.JMenuItem();
@@ -99,6 +101,16 @@ public class FormFinanciero extends javax.swing.JFrame {
             }
         });
         jMnuOperaciones.add(jMnuIRedefinicionCuotas);
+
+        jMnuIAnulacionCobroClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIAnulacionCobroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancelar24.png"))); // NOI18N
+        jMnuIAnulacionCobroClientes.setText("Anulación de Cobro de Clientes");
+        jMnuIAnulacionCobroClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIAnulacionCobroClientesActionPerformed(evt);
+            }
+        });
+        jMnuOperaciones.add(jMnuIAnulacionCobroClientes);
 
         jMenuBar1.add(jMnuOperaciones);
 
@@ -172,6 +184,12 @@ public class FormFinanciero extends javax.swing.JFrame {
         cuentas.setVisible(true);
     }//GEN-LAST:event_jMnuICuentasClientesActionPerformed
 
+    private void jMnuIAnulacionCobroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIAnulacionCobroClientesActionPerformed
+        AnulacionCobroCliente anulacion = new AnulacionCobroCliente(new JFrame(), true);
+        anulacion.pack();
+        anulacion.setVisible(true);
+    }//GEN-LAST:event_jMnuIAnulacionCobroClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,6 +227,7 @@ public class FormFinanciero extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMnuIAnulacionCobroClientes;
     private javax.swing.JMenuItem jMnuICobroClientes;
     private javax.swing.JMenuItem jMnuICuentasClientes;
     private javax.swing.JMenuItem jMnuIModificarVencimiento;
