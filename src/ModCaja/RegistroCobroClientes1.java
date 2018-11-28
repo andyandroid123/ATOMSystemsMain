@@ -99,6 +99,7 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
         
         System.out.println("RESULT DEL IF 1: " + (modulo.equalsIgnoreCase("COBRANZAS")));
         System.out.println("RESULT DEL IF 2: " + (modulo.equalsIgnoreCase("CONSULTA-COBRO")));
+        jTFEstado.setBackground(new Color(240,240,240));
     }
 
     private void configCampos(){
@@ -440,7 +441,7 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
         int pct_interes = Integer.parseInt(jTFInteres.getText().trim());
         double total_cuenta = 0;
         
-        String sql = "SELECT DISTINCT nro_comprob, tip_comprob, nro_cuota, can_cuota, to_char(fec_comprob, 'dd/MM/yyyy') AS fec_emision, "
+        String sql = "SELECT nro_comprob, tip_comprob, nro_cuota, can_cuota, to_char(fec_comprob, 'dd/MM/yyyy') AS fec_emision, "
                    + "to_char(fec_vencimiento, 'dd/MM/yyyy') AS fec_vencimiento, cod_caja, "
                    + "CASE WHEN current_date - fec_vencimiento::date <= 0 THEN 0 ELSE current_date - fec_vencimiento::date END AS dias_vencidos, monto_cuota "
                    + "FROM venta_det_cuotas "
@@ -1461,7 +1462,17 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
                     jTFNroPago.setText(sm_cab.TheResultSet.getString("nro_pago"));
                     jTFNroRecibo.setText(sm_cab.TheResultSet.getString("nro_recibo"));
                     jTFComentarios.setText(sm_cab.TheResultSet.getString("observacion"));
-                    jTFEstado.setText(sm_cab.TheResultSet.getString("estado"));
+                    String estado = sm_cab.TheResultSet.getString("estado");
+                    jTFEstado.setText(estado);
+                    
+                    if(estado.equals("V")){
+                        jLEstado.setText("VIGENTE");
+                        jTFEstado.setBackground(new Color(240,240,240));
+                    }else{
+                        jTFEstado.setBackground(new Color(255,153,153));
+                        jLEstado.setText("ANULADO");
+                    }
+                    
                     jTFNroTurno.setText(sm_cab.TheResultSet.getString("nro_turno"));
                     jTFCodCaja.setText(sm_cab.TheResultSet.getString("cod_caja"));
                     

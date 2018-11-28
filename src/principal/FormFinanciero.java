@@ -9,6 +9,7 @@ import ModFinanciero.AnulacionCobroCliente;
 import ModFinanciero.ModificarVencimientos;
 import ModFinanciero.ReDefinicionCuotas;
 import ModFinanciero.informes.CuentasClientes;
+import ModFinanciero.informes.ImpresionRecibosPagares;
 import ModFinanciero.informes.InfCobranzasClientes;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -60,6 +61,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuInformes = new javax.swing.JMenu();
         jMnuICobroClientes = new javax.swing.JMenuItem();
         jMnuICuentasClientes = new javax.swing.JMenuItem();
+        jMnuIImpresionReciboPagare = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ATOMSystems|Main - Módulo Financiero");
@@ -141,6 +143,16 @@ public class FormFinanciero extends javax.swing.JFrame {
         });
         jMnuInformes.add(jMnuICuentasClientes);
 
+        jMnuIImpresionReciboPagare.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIImpresionReciboPagare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recibos_pagares24.png"))); // NOI18N
+        jMnuIImpresionReciboPagare.setText("Impresión de Recibos / Pagaré");
+        jMnuIImpresionReciboPagare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIImpresionReciboPagareActionPerformed(evt);
+            }
+        });
+        jMnuInformes.add(jMnuIImpresionReciboPagare);
+
         jMenuBar1.add(jMnuInformes);
 
         setJMenuBar(jMenuBar1);
@@ -190,6 +202,12 @@ public class FormFinanciero extends javax.swing.JFrame {
         anulacion.setVisible(true);
     }//GEN-LAST:event_jMnuIAnulacionCobroClientesActionPerformed
 
+    private void jMnuIImpresionReciboPagareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIImpresionReciboPagareActionPerformed
+        ImpresionRecibosPagares impresion = new ImpresionRecibosPagares(new JFrame(), true);
+        impresion.pack();
+        impresion.setVisible(true);
+    }//GEN-LAST:event_jMnuIImpresionReciboPagareActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +248,7 @@ public class FormFinanciero extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuIAnulacionCobroClientes;
     private javax.swing.JMenuItem jMnuICobroClientes;
     private javax.swing.JMenuItem jMnuICuentasClientes;
+    private javax.swing.JMenuItem jMnuIImpresionReciboPagare;
     private javax.swing.JMenuItem jMnuIModificarVencimiento;
     private javax.swing.JMenuItem jMnuIRedefinicionCuotas;
     private javax.swing.JMenu jMnuInformes;

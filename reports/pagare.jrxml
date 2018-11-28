@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pagare" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="004dddb4-87a5-4038-9eb4-8d215f5bf2b7">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pVencimiento" class="java.lang.String"/>
+	<parameter name="pCiudadFecha" class="java.lang.String"/>
+	<parameter name="pMontoMoneda" class="java.lang.String"/>
+	<parameter name="pMontoLetra" class="java.lang.String"/>
+	<parameter name="pAliasMoneda" class="java.lang.String"/>
+	<parameter name="pDeudor" class="java.lang.String"/>
+	<parameter name="pDireccionDeudor" class="java.lang.String"/>
+	<parameter name="pDocDeudor" class="java.lang.String"/>
+	<parameter name="pInteres" class="java.lang.String"/>
+	<parameter name="pDia" class="java.lang.String"/>
+	<parameter name="pMesLetras" class="java.lang.String"/>
+	<parameter name="pAnho" class="java.lang.String"/>
+	<parameter name="pBeneficiario" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM cliente WHERE cod_cliente = 1]]>
+	</queryString>
+	<field name="cod_cliente" class="java.math.BigDecimal"/>
+	<field name="razon_soc" class="java.lang.String"/>
+	<field name="contacto" class="java.lang.String"/>
+	<field name="ci_contacto" class="java.lang.String"/>
+	<field name="ruc_cliente" class="java.lang.String"/>
+	<field name="es_juridica" class="java.lang.String"/>
+	<field name="cod_ciudad" class="java.math.BigDecimal"/>
+	<field name="cod_barrio" class="java.math.BigDecimal"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="cod_dpto" class="java.math.BigDecimal"/>
+	<field name="cond_pago" class="java.math.BigDecimal"/>
+	<field name="limite_credito" class="java.math.BigDecimal"/>
+	<field name="cod_usuario" class="java.math.BigDecimal"/>
+	<field name="fec_vigencia" class="java.sql.Timestamp"/>
+	<field name="acepta_cheque" class="java.lang.String"/>
+	<field name="activo" class="java.lang.String"/>
+	<field name="cod_pcuenta" class="java.lang.String"/>
+	<field name="pct_max_dcto" class="java.math.BigDecimal"/>
+	<field name="cod_lista_precio" class="java.lang.Integer"/>
+	<field name="cod_zona" class="java.lang.Integer"/>
+	<field name="apodo" class="java.lang.String"/>
+	<field name="fec_nacimiento" class="java.sql.Date"/>
+	<field name="celular" class="java.lang.String"/>
+	<field name="cod_pais" class="java.math.BigDecimal"/>
+	<field name="ci_origen" class="java.lang.String"/>
+	<field name="doc_inmigracion" class="java.lang.String"/>
+	<field name="vive_alquiler" class="java.lang.String"/>
+	<field name="cod_representante" class="java.math.BigDecimal"/>
+	<field name="cod_garante" class="java.math.BigDecimal"/>
+	<field name="dependientes" class="java.math.BigDecimal"/>
+	<field name="giro" class="java.math.BigDecimal"/>
+	<field name="cod_clasificacion" class="java.lang.String"/>
+	<field name="cod_local_pref" class="java.lang.Integer"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="estado_civil" class="java.lang.String"/>
+	<field name="es_contribuyente" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="302" splitType="Stretch">
+			<rectangle>
+				<reportElement x="9" y="5" width="539" height="271" uuid="89278edc-1282-4b7b-b554-616e11240a5f"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="206" y="10" width="112" height="16" uuid="0099e4ba-e27e-4a69-a28e-50c8a5f911fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAGARÉ A LA ORDEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="34" width="31" height="16" uuid="12273312-f037-4d16-9a3c-79d1582acbf1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<text><![CDATA[Nro.:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="63" y="34" width="100" height="16" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="2b094023-1c28-4898-b925-70e148131f3d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="29" y="54" width="74" height="16" uuid="df28fa62-6519-4d88-bd02-ad478b2f587a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<text><![CDATA[Vencimiento:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="434" y="34" width="100" height="16" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="c76cf8b2-0db0-4528-b3b3-714b46d493fe"/>
+			</rectangle>
+			<textField>
+				<reportElement x="284" y="54" width="250" height="16" uuid="f8f57cea-33c8-4f58-9851-cc33381b060f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pCiudadFecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="54" width="100" height="16" uuid="7523c444-6b2a-46d1-8781-5e4542e06988"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pVencimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="34" width="57" height="16" uuid="f7d6ed0d-2042-4331-825c-a56cdee54221"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pAliasMoneda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="74" width="31" height="14" uuid="162fc4ff-13e6-4ccf-85a4-b5722cad6c7c"/>
+				<text><![CDATA[El día]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="74" width="43" height="14" uuid="148687ed-f7a7-4bf3-84dc-9689a41329b9"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pDia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="103" y="74" width="15" height="14" uuid="3f774c38-70fd-4b55-a7b3-e67416985429"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="118" y="74" width="136" height="14" uuid="2b34e942-1a44-49a2-8a2b-d5ac63e346f3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pMesLetras}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="254" y="74" width="15" height="14" uuid="7edc6171-a269-4396-8076-1b1457df84d7"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="269" y="74" width="60" height="14" uuid="7845971c-ce1a-4741-b8e5-10df48790751"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pAnho}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="88" width="59" height="14" uuid="107f1ad9-cff8-45ee-a3fa-e831e05ffca0"/>
+				<text><![CDATA[pagaré(mos)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="88" y="88" width="387" height="14" uuid="7eab1fb1-8458-47a0-8165-6127589b7276"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pBeneficiario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="475" y="88" width="59" height="14" uuid="e16d8aed-f5e9-46a4-9366-7535c9bebf53"/>
+				<text><![CDATA[o a su orden]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="105" width="59" height="14" uuid="9aa129ee-cdaa-4eba-a423-ad8e840d5cbc"/>
+				<text><![CDATA[La suma de ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="92" y="105" width="442" height="48" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="d6c8e6dc-209a-42b7-a305-8bb0f8206f9c"/>
+			</rectangle>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="92" y="105" width="442" height="48" uuid="9bcf0ce9-0450-48cf-891c-76bde4a34c0b"/>
+				<textFieldExpression><![CDATA[$P{pMontoLetra}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="153" width="505" height="14" uuid="1c7a2518-7272-4006-a62b-d0fd25ad90f7"/>
+				<text><![CDATA[Por igual valor recibido en __________________________________ a ______________ entera satisfacción.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="243" y="171" width="35" height="10" uuid="9f43d601-cf35-4bde-8c7f-e781a8c68995"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{pInteres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="29" y="170" width="505" height="44" uuid="97537940-9bc8-4345-b015-d9222eea0cac"/>
+				<text><![CDATA[Este pagaré a la orden, devengará un interés de ______ % mensual, más comisión de ______ % mensual desde la fecha de su (                        ) hasta el día del pago efectivo, en caso de retardo o incumplimiento total o parcial a la fecha de su vencimiento quedará constituida la mora automática, sin necesidad de interpelación alguna. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="219" width="59" height="16" uuid="1774f7bf-80ac-4b93-b176-a8e097ed9f17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<text><![CDATA[Deudor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="235" width="59" height="16" uuid="5a6cf5ce-314a-45c8-985f-f2b349b70b5f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<text><![CDATA[Domicilio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="219" width="59" height="16" uuid="57e217a7-541d-4022-a06c-275f915a4d16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<text><![CDATA[Firma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="235" width="59" height="16" uuid="61c39ee9-adde-4dbd-bc12-e759a2e04b05"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<text><![CDATA[C.I.Nro.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="219" width="157" height="16" uuid="6df5b030-b069-4491-b56a-15d85999bd44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[______________________________]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="219" width="211" height="16" uuid="5ca25b0c-7b1e-4da5-9f75-5714976af9ee"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pDeudor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="235" width="211" height="16" uuid="10820cce-2fda-4a1f-80aa-8719c22c5958"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pDireccionDeudor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="235" width="154" height="16" uuid="db5bcd96-9f36-454d-af4e-510c2f2fc155"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pDocDeudor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="34" width="98" height="16" uuid="9bc9cd26-1aad-45be-9d4c-fa1e8d0b5f65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pMontoMoneda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

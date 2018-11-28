@@ -266,11 +266,11 @@ public class NumeroATexto {
         }
         if (numero > 100000000 && numero < 200000000) {
             flag = 1;
-            num_letradmm = centena(numero / 1000000).concat("millones ").concat(millon(numero % 1000000));
+            num_letradmm = centena(numero / 1000000).concat(" millones ").concat(millon(numero % 1000000));
         }
         if (numero >= 200000000 && numero < 1000000000) {
             flag = 1;
-            num_letradmm = centena(numero / 1000000).concat(" milllones ").concat(decmillon(numero % 1000000));
+            num_letradmm = centena(numero / 1000000).concat(" millones ").concat(decmillon(numero % 1000000));
         }
 
         if (numero < 100000000) {
@@ -280,7 +280,7 @@ public class NumeroATexto {
     }
 
     public String convertirLetras(long numero) {     
-        num_letras = decmillon(numero);
+        num_letras = cienmillon(numero);
         return num_letras;
     }
 }
