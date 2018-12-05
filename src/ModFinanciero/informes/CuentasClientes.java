@@ -111,7 +111,7 @@ public class CuentasClientes extends javax.swing.JDialog {
         jTSaldoCuenta.getColumnModel().getColumn(2).setPreferredWidth(60); // límite
         jTSaldoCuenta.getColumnModel().getColumn(2).setCellRenderer(new DecimalCellRender(0));
         jTSaldoCuenta.getColumnModel().getColumn(3).setPreferredWidth(40); // fec último pago 
-        jTSaldoCuenta.getColumnModel().getColumn(3).setCellRenderer(new DateCellRender());
+        //jTSaldoCuenta.getColumnModel().getColumn(3).setCellRenderer(new DateCellRender());
         jTSaldoCuenta.getColumnModel().getColumn(4).setPreferredWidth(60); // crédito
         jTSaldoCuenta.getColumnModel().getColumn(4).setCellRenderer(new DecimalCellRender(0));
         jTSaldoCuenta.getColumnModel().getColumn(5).setPreferredWidth(60); // docs vencidos
@@ -565,23 +565,30 @@ public class CuentasClientes extends javax.swing.JDialog {
     }
 
     private void insertTablaInformeDet(){
+        String fec_ultimo_pago = "01/01/1990";
         try{
             for(int i = 0; i < jTSaldoCuenta.getRowCount(); i++){
                 String cod_cliente = jTSaldoCuenta.getValueAt(i, 0).toString();
                 String razon_soc = jTSaldoCuenta.getValueAt(i, 1).toString();
                 double limite_credito = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 2).toString());
-                String fec_ultimo_pago = jTSaldoCuenta.getValueAt(i, 3).toString();
+                fec_ultimo_pago = jTSaldoCuenta.getValueAt(i, 3).toString();
                 double credito = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 4).toString());
                 double docs_vencidos = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 5).toString());
                 double interes = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 6).toString());
                 double docs_a_vencer = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 7).toString());
                 double saldo_mas_interes = Double.parseDouble(jTSaldoCuenta.getValueAt(i, 8).toString());
                 
+                if(fec_ultimo_pago.equals("")){
+                    fec_ultimo_pago = "01/01/1990";
+                }
+                System.out.println("FECHA DE ULTIMO PAGO: " + fec_ultimo_pago);
+                
                 String sql = "INSERT INTO inform_cta_clientes_det (cod_cliente, razon_soc, limite_credito, fec_ultimo_pago, credito, docs_vencidos, "
                            + "interes, docs_a_vencer, saldo_mas_interes) "
                            + "VALUES (" + cod_cliente + ", '" + razon_soc + "', " + limite_credito + ", '" + fec_ultimo_pago + "'::date, "
                            + credito + ", " + docs_vencidos + ", " + interes + ", " + docs_a_vencer + ", " + saldo_mas_interes + ")";
                 
+                System.out.println("SQL INSERT DETALLE INFORME: " + sql);
                 DBManager.ejecutarDML(sql);
                 DBManager.conn.commit();
             }

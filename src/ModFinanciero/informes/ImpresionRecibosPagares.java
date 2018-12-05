@@ -188,11 +188,18 @@ public class ImpresionRecibosPagares extends javax.swing.JDialog {
         String interes = jTFPctInteres.getText().trim();
         String beneficiario = jTFBeneficiarioPagare.getText().trim();
         
-        String dia = vencimiento.substring(0, fecha.length() - 8);
-        String mes1 = vencimiento.substring(3, fecha.length() - 5);
-        String anho = vencimiento.substring(6);
+        String dia = fecha.substring(0, fecha.length() - 8);
+        String mes1 = fecha.substring(3, fecha.length() - 5);
+        String anho = fecha.substring(6);
         String mesLetras = getNombreMes(mes1);
         String fecha_impresion = nombreCiudad + ", " + dia + " de " + mesLetras + " del " + anho;
+        
+        // -- para la fecha de vencimiento 
+        
+        String dia_vencimiento = vencimiento.substring(0, fecha.length() - 8);
+        String mes_vencimiento = vencimiento.substring(3, fecha.length() - 5);
+        String anho_vencimiento = vencimiento.substring(6);
+        String mesLetras_vencimiento = getNombreMes(mes_vencimiento);
         
         // -- Convertir en texto el monto
             String mon;
@@ -206,7 +213,7 @@ public class ImpresionRecibosPagares extends javax.swing.JDialog {
             }
             int monto_entero = Integer.parseInt(mon); // valor entero
             NumeroATexto numero = new NumeroATexto(); // clase conversora
-            String montoTxt = jLNombreMoneda.getText().trim().toLowerCase() + " " + numero.convertirLetras(monto_entero);
+            String montoTxt = jLNombreMonedaPagare.getText().trim().toLowerCase() + " " + numero.convertirLetras(monto_entero);
         // -- Fin de convertir en texto el monto
         
         try{
@@ -219,9 +226,9 @@ public class ImpresionRecibosPagares extends javax.swing.JDialog {
             LibReportes.parameters.put("pDireccionDeudor", direccionDeudor);
             LibReportes.parameters.put("pDocDeudor", docDeudor);
             LibReportes.parameters.put("pInteres", interes);
-            LibReportes.parameters.put("pDia", dia);
-            LibReportes.parameters.put("pMesLetras", mesLetras);
-            LibReportes.parameters.put("pAnho", anho);
+            LibReportes.parameters.put("pDia", dia_vencimiento);
+            LibReportes.parameters.put("pMesLetras", mesLetras_vencimiento);
+            LibReportes.parameters.put("pAnho", anho_vencimiento);
             LibReportes.parameters.put("pBeneficiario", beneficiario);
             LibReportes.parameters.put("REPORT_CONNECTION", DBManager.conn);
             LibReportes.generarReportes(sql, "pagare");

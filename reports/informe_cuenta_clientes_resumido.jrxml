@@ -226,7 +226,7 @@ FROM inform_cta_clientes_cab c, inform_cta_clientes_det d]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{limite_credito}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="212" y="0" width="54" height="11" uuid="f7e3ac77-a09f-4bfd-b316-09f2abdf1706"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>

@@ -54,15 +54,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIAnulacionCobroClientesActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMnuIRegistroDebCre">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/resources/modificar24.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Registro de DEB/CRE a Clientes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRegistroDebCreActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMnuMantenimiento">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Mantenimiento"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMnuInformes">
           <Properties>

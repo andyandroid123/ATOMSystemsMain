@@ -8,6 +8,7 @@ package principal;
 import ModFinanciero.AnulacionCobroCliente;
 import ModFinanciero.ModificarVencimientos;
 import ModFinanciero.ReDefinicionCuotas;
+import ModFinanciero.RegistroDebCre;
 import ModFinanciero.informes.CuentasClientes;
 import ModFinanciero.informes.ImpresionRecibosPagares;
 import ModFinanciero.informes.InfCobranzasClientes;
@@ -57,7 +58,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIModificarVencimiento = new javax.swing.JMenuItem();
         jMnuIRedefinicionCuotas = new javax.swing.JMenuItem();
         jMnuIAnulacionCobroClientes = new javax.swing.JMenuItem();
-        jMnuMantenimiento = new javax.swing.JMenu();
+        jMnuIRegistroDebCre = new javax.swing.JMenuItem();
         jMnuInformes = new javax.swing.JMenu();
         jMnuICobroClientes = new javax.swing.JMenuItem();
         jMnuICuentasClientes = new javax.swing.JMenuItem();
@@ -114,11 +115,17 @@ public class FormFinanciero extends javax.swing.JFrame {
         });
         jMnuOperaciones.add(jMnuIAnulacionCobroClientes);
 
-        jMenuBar1.add(jMnuOperaciones);
+        jMnuIRegistroDebCre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIRegistroDebCre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png"))); // NOI18N
+        jMnuIRegistroDebCre.setText("Registro de DEB/CRE a Clientes");
+        jMnuIRegistroDebCre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIRegistroDebCreActionPerformed(evt);
+            }
+        });
+        jMnuOperaciones.add(jMnuIRegistroDebCre);
 
-        jMnuMantenimiento.setText("Mantenimiento");
-        jMnuMantenimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuBar1.add(jMnuMantenimiento);
+        jMenuBar1.add(jMnuOperaciones);
 
         jMnuInformes.setText("Informes");
         jMnuInformes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -208,6 +215,12 @@ public class FormFinanciero extends javax.swing.JFrame {
         impresion.setVisible(true);
     }//GEN-LAST:event_jMnuIImpresionReciboPagareActionPerformed
 
+    private void jMnuIRegistroDebCreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIRegistroDebCreActionPerformed
+        RegistroDebCre registro = new RegistroDebCre(new JFrame(), true);
+        registro.pack();
+        registro.setVisible(true);
+    }//GEN-LAST:event_jMnuIRegistroDebCreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -251,8 +264,8 @@ public class FormFinanciero extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuIImpresionReciboPagare;
     private javax.swing.JMenuItem jMnuIModificarVencimiento;
     private javax.swing.JMenuItem jMnuIRedefinicionCuotas;
+    private javax.swing.JMenuItem jMnuIRegistroDebCre;
     private javax.swing.JMenu jMnuInformes;
-    private javax.swing.JMenu jMnuMantenimiento;
     private javax.swing.JMenu jMnuOperaciones;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

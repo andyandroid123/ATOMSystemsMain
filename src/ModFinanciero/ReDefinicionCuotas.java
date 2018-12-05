@@ -459,7 +459,7 @@ public class ReDefinicionCuotas extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jPanel5.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder(0));
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("RE DEFINICIÓN DE CUOTAS");
@@ -536,7 +536,7 @@ public class ReDefinicionCuotas extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTDocsPendientes);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos del doc a modificar", 0, 0, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Datos del doc a modificar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
 
         jLabel4.setText("No. Doc:");
 
@@ -925,19 +925,19 @@ public class ReDefinicionCuotas extends javax.swing.JDialog {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         if(grabarCuotas()){
-                JOptionPane.showMessageDialog(this, "Cuotas grabadas!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                limpiarTablaRedefinicion();
-                jBGuardar.setEnabled(false);
-                jTFNroDoc.setText("0");
-                jTFMontoTotal.setText("0,00");
-                jTFCantCuotas.setText("");
-                jTFMontoCuota.setText("0,00");
-                jTFVencimiento.setText(fecVigencia);
-                jBBuscar.doClick();
-                jTFCodCliente.grabFocus();
-            }else{
-                JOptionPane.showMessageDialog(this, "Error grabando cuotas", "Éxito", JOptionPane.WARNING_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(this, "Cuotas grabadas!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarTablaRedefinicion();
+            jBGuardar.setEnabled(false);
+            jTFNroDoc.setText("0");
+            jTFMontoTotal.setText("0,00");
+            jTFCantCuotas.setText("");
+            jTFMontoCuota.setText("0,00");
+            jTFVencimiento.setText(fecVigencia);
+            jBBuscar.doClick();
+            jTFCodCliente.grabFocus();
+        }else{
+            JOptionPane.showMessageDialog(this, "Error grabando cuotas", "Éxito", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     /**

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vale_debcre_cliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b61ee7aa-b4d6-42bb-ab60-ecb40ac1bc21">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pNroVale" class="java.lang.String"/>
+	<parameter name="pMontoValeNumero" class="java.lang.String"/>
+	<parameter name="pMontoValeLetras" class="java.lang.String"/>
+	<parameter name="pFechaVale" class="java.lang.String"/>
+	<parameter name="pNombreCliente" class="java.lang.String"/>
+	<parameter name="pRucCliente" class="java.lang.String"/>
+	<parameter name="pNombreEmpresa" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM cliente WHERE cod_cliente = 1]]>
+	</queryString>
+	<field name="cod_cliente" class="java.math.BigDecimal"/>
+	<field name="razon_soc" class="java.lang.String"/>
+	<field name="contacto" class="java.lang.String"/>
+	<field name="ci_contacto" class="java.lang.String"/>
+	<field name="ruc_cliente" class="java.lang.String"/>
+	<field name="es_juridica" class="java.lang.String"/>
+	<field name="cod_ciudad" class="java.math.BigDecimal"/>
+	<field name="cod_barrio" class="java.math.BigDecimal"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="cod_dpto" class="java.math.BigDecimal"/>
+	<field name="cond_pago" class="java.math.BigDecimal"/>
+	<field name="limite_credito" class="java.math.BigDecimal"/>
+	<field name="cod_usuario" class="java.math.BigDecimal"/>
+	<field name="fec_vigencia" class="java.sql.Timestamp"/>
+	<field name="acepta_cheque" class="java.lang.String"/>
+	<field name="activo" class="java.lang.String"/>
+	<field name="cod_pcuenta" class="java.lang.String"/>
+	<field name="pct_max_dcto" class="java.math.BigDecimal"/>
+	<field name="cod_lista_precio" class="java.lang.Integer"/>
+	<field name="cod_zona" class="java.lang.Integer"/>
+	<field name="apodo" class="java.lang.String"/>
+	<field name="fec_nacimiento" class="java.sql.Date"/>
+	<field name="celular" class="java.lang.String"/>
+	<field name="cod_pais" class="java.math.BigDecimal"/>
+	<field name="ci_origen" class="java.lang.String"/>
+	<field name="doc_inmigracion" class="java.lang.String"/>
+	<field name="vive_alquiler" class="java.lang.String"/>
+	<field name="cod_representante" class="java.math.BigDecimal"/>
+	<field name="cod_garante" class="java.math.BigDecimal"/>
+	<field name="dependientes" class="java.math.BigDecimal"/>
+	<field name="giro" class="java.math.BigDecimal"/>
+	<field name="cod_clasificacion" class="java.lang.String"/>
+	<field name="cod_local_pref" class="java.lang.Integer"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="estado_civil" class="java.lang.String"/>
+	<field name="es_contribuyente" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="256" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="555" height="256" uuid="442d6f72-c2ed-4aef-a6cd-22f677d7fcb8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="207" y="15" width="100" height="20" uuid="bae99d22-5785-4eba-aed5-e24acf949d70"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vale - compra]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="21" y="15" width="100" height="20" uuid="8dabc93c-2077-4a5d-836c-f35dc0865f95"/>
+			</rectangle>
+			<rectangle radius="10">
+				<reportElement x="406" y="15" width="100" height="40" uuid="20a69e64-00f9-468e-8703-36d84d97e7a3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="446" y="17" width="25" height="11" uuid="4ea11243-118d-443f-ad98-1c0e7291d3c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="33" width="21" height="14" uuid="1a76b37e-cf9a-4c5b-b8c3-353522fa0dca"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gs.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="18" width="21" height="14" uuid="94405528-7234-40cd-9bf5-7e30c37e916b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="73" width="150" height="14" uuid="56e0f758-0b39-4267-b1db-5a30dd11a8b4"/>
+				<text><![CDATA[Este vale de compra por valor de:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="171" y="73" width="335" height="44" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="2811a5a1-aff8-4539-b754-e48f17ffa15c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="21" y="117" width="59" height="14" uuid="7b2599a5-541d-48ea-8931-ada8a8b2d7a2"/>
+				<text><![CDATA[Pertenece a:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="160" width="44" height="14" uuid="0ef93a19-ec2c-43fd-b4fe-5db088e91410"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="174" width="72" height="14" uuid="02a595af-716b-40ba-bdc4-db557d18a75c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC / C.I. Nro :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="46" width="102" height="14" uuid="bbcb5c4d-e32e-44ea-899e-01a7991978d5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de expedición:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="385" y="202" width="100" height="1" uuid="b3313dfe-5d59-4230-9c60-a77e74a8cb0e"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="51" y="18" width="66" height="14" uuid="d9a5e184-9394-4870-827e-bd52b4f31ccf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pNroVale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="33" width="70" height="14" uuid="0b71b966-681e-4c97-8104-7e391c2bf432"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pMontoValeNumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="46" width="100" height="14" uuid="b8680502-59ec-4130-80ae-548003f7bd0b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pFechaVale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="171" y="73" width="335" height="44" uuid="83f3028a-1ba3-4529-afd6-e831348fe0cc"/>
+				<textFieldExpression><![CDATA[$P{pMontoValeLetras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="160" width="177" height="14" uuid="eb511ac5-3214-4ccc-b55f-15a3ade5c605"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pNombreCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="174" width="149" height="14" uuid="7a825e6e-4248-40f2-bae5-a7aa990b04f5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pRucCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="203" width="142" height="20" uuid="47990f2b-d7fd-42ba-81b2-b71ae2c91b2b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{pNombreEmpresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
