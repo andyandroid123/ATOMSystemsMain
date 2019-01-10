@@ -30,7 +30,7 @@ public class TurnoVentas extends javax.swing.JDialog {
 
     private final DecimalFormat decimalFormat = new DecimalFormat("###,###,###.00");
     String fecVigencia = "";
-    String nroTurno = "", fecCierreTurno = "";
+    private String nroTurno = "", fecCierreTurno = "";
     
     
     public TurnoVentas(java.awt.Frame parent, boolean modal) {

@@ -15,6 +15,8 @@ ON forma_pago.cod_cuenta = cuenta.cod_cuenta
 WHERE forma_pago.nro_turno = $P{pNroTurno} AND forma_pago.cod_caja = $P{pTerminal}
 AND venta_cab.nro_turno = $P{pNroTurno} AND venta_cab.cod_caja = $P{pTerminal}
 AND forma_pago.cod_cuenta IN (SELECT cod_cuenta FROM cuenta WHERE tipo_cuenta NOT IN ('CHE', 'TCR', 'CRF', 'BON', 'CRE') AND cod_cuenta != 1)
+AND forma_pago.estado = 'V'
+AND venta_cab.estado = 'V'
 GROUP BY cuenta.denominacion_cta, forma_pago.tip_cambio]]>
 	</queryString>
 	<field name="denominacion_cta" class="java.lang.String"/>

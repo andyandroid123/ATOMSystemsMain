@@ -149,18 +149,11 @@ FROM inform_cta_clientes_cab c, inform_cta_clientes_det d]]>
 				<text><![CDATA[Cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="154" y="3" width="58" height="11" uuid="12e24258-39a6-48fd-9778-d61e782e2d1e"/>
+				<reportElement x="208" y="3" width="58" height="11" uuid="12e24258-39a6-48fd-9778-d61e782e2d1e"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Límite Crédito]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="212" y="3" width="54" height="11" uuid="dbd740c4-5068-47c7-8620-aa50a603676b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fec. Últ. Pago]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="266" y="3" width="52" height="11" uuid="9fd6749f-2ec2-45f8-bc1e-71154540ff5e"/>
@@ -222,18 +215,6 @@ FROM inform_cta_clientes_cab c, inform_cta_clientes_det d]]>
 				<textFieldExpression><![CDATA[$F{razon_soc}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="154" y="0" width="58" height="11" uuid="b4d82144-7fe2-4afc-a7d2-96cc4603817a"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{limite_credito}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="212" y="0" width="54" height="11" uuid="f7e3ac77-a09f-4bfd-b316-09f2abdf1706"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{fec_ultimo_pago}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
 				<reportElement x="266" y="0" width="52" height="11" uuid="d5e6ac37-8339-4cf3-9475-4613322153b3"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
@@ -267,6 +248,13 @@ FROM inform_cta_clientes_cab c, inform_cta_clientes_det d]]>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{saldo_mas_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="208" y="0" width="58" height="11" uuid="a56075c9-1dbe-4fc1-acba-22a3cfab8c05"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{limite_credito}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

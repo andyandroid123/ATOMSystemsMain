@@ -1,0 +1,180 @@
+Dec 06, 2018 1:45:13 PM null
+OFF: null
+Dec 06, 2018 1:45:13 PM null
+ALL: ModFinanciero.informes.CuentasClientes.insertTablaInformeDet(CuentasClientes.java:574)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: ModFinanciero.informes.CuentasClientes.jBImprimirActionPerformed(CuentasClientes.java:1383)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: ModFinanciero.informes.CuentasClientes.access$800(CuentasClientes.java:37)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: ModFinanciero.informes.CuentasClientes$8.actionPerformed(CuentasClientes.java:964)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.AbstractButton.fireActionPerformed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.DefaultButtonModel.setPressed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: org.jvnet.substance.utils.RolloverButtonListener.mouseReleased(RolloverButtonListener.java:110)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.processMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.JComponent.processMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.processEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Container.processEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Container.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Container.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Window.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue.access$500(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$4.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$4.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.WaitDispatchSupport$2.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.WaitDispatchSupport$4.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.WaitDispatchSupport$4.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.WaitDispatchSupport.enter(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Dialog.show(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.show(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.setVisible(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Window.setVisible(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Dialog.setVisible(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: principal.FormFinanciero.jMnuICuentasClientesActionPerformed(FormFinanciero.java:203)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: principal.FormFinanciero.access$500(FormFinanciero.java:24)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: principal.FormFinanciero$7.actionPerformed(FormFinanciero.java:148)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.AbstractButton.fireActionPerformed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.DefaultButtonModel.setPressed(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.AbstractButton.doClick(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.plaf.basic.BasicMenuItemUI.doClick(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.processMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: javax.swing.JComponent.processMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.processEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Container.processEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Container.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Container.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Window.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.Component.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue.dispatchEventImpl(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue.access$500(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$4.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue$4.run(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventQueue.dispatchEvent(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpEvents(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.pumpEvents(Unknown Source)ok
+Dec 06, 2018 1:45:13 PM null
+ALL: java.awt.EventDispatchThread.run(Unknown Source)ok

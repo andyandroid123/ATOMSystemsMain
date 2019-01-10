@@ -69,13 +69,14 @@ public class Ventas extends javax.swing.JFrame {
     private double montoRecibido;
     private String vCodigoArticulo, vBarrasArticulo, VSiglaVenta;
     private String fecVigencia;
-    String vNroComprob = "", nroTurno = "", codCajero = "";
+    private String vNroComprob = "", nroTurno, codCajero = "";
     
     // ** DATOS REPORT **
     String actividadEmpresa, direccionEmpresa, ciudadEmpresa, telEmpresa;
     
     public Ventas() {
         initComponents();
+        nroTurno = "";
         jTabbedPane1.setSelectedIndex(jTabbedPane1.indexOfComponent(jPVentas));
         cerrarVentana();
         configCampos();
@@ -1175,18 +1176,18 @@ public class Ventas extends javax.swing.JFrame {
                    + "" + codLocal + ", "
                    + "" + codArticulo + ", "
                    + "'now()', "
-                   + "" + cantVenta + ", "
-                   + "" + pctIva + ", "
-                   + "" + montoCosto + ", "
-                   + "" + montoMargen + ", "
-                   + "" + montoIva + ", "
-                   + "" + montoTotalVenta + ", "
-                   + "" + codSubgrupo + ", "
-                   + "" + codProveedor + ", "
-                   + "" + codMarca + ", "
-                   + "" + codGrupo + ", "
-                   + "" + codSector + ", 'N', 'now()', 0, "
-                   + "'" + tipoComprob + "', 0)";
+                   +  cantVenta + ", "
+                   +  pctIva + ", "
+                   +  montoCosto + ", "
+                   +  montoMargen + ", "
+                   +  montoIva + ", "
+                   +  montoTotalVenta + ", "
+                   +  codSubgrupo + ", "
+                   +  codProveedor + ", "
+                   +  codMarca + ", "
+                   +  codGrupo + ", "
+                   +  codSector + ", 'N', 'now()', 0, '"
+                   +  tipoComprob + "', 0)";
         System.out.println("INSERT HISTORICO VENTAS: " + sql);
         return (grabarPrevioCommit(sql));
     }
@@ -2342,7 +2343,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1KeyPressed
 
     private void jTFCodArticuloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodArticuloKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
+            if(evt.getKeyCode() == KeyEvent.VK_ESCAPE){
             if(dtmDetallesVenta.getRowCount() > 0){
                 jTabbedPane1.setSelectedIndex(jTabbedPane1.indexOfComponent(jPFormaPago));
                 jTabbedPane1.setEnabledAt(0, false);
@@ -2370,6 +2371,7 @@ public class Ventas extends javax.swing.JFrame {
         }
         
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            getDatosTurnoAbierto(); // estoy asegurando que grabe en el turno abierto correcto
             if(!jTFCodArticulo.getText().trim().equals("")){
                 jTFCantVenta.requestFocus();
                 jTFCantVenta.setText("1");

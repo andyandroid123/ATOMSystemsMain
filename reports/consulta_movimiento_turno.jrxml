@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="consulta_movimiento_turno" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3e8c16a-1c7a-45c4-8146-5ee2cd2390bb">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="17"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="pNroTurno" class="java.math.BigDecimal"/>
 	<parameter name="pSaldoInicial" class="java.math.BigDecimal"/>
 	<parameter name="pTerminal" class="java.math.BigDecimal"/>
@@ -22,7 +22,9 @@ FROM venta_cab
 INNER JOIN forma_pago
 ON venta_cab.nro_ticket = forma_pago.nro_ticket
 WHERE venta_cab.nro_turno = $P{pNroTurno} AND venta_cab.cod_caja = $P{pTerminal} AND forma_pago.tipo_cuenta = 'EFE'
-AND forma_pago.nro_turno = $P{pNroTurno} AND forma_pago.cod_caja = $P{pTerminal} AND forma_pago.cod_cuenta = 1]]>
+AND forma_pago.nro_turno = $P{pNroTurno} AND forma_pago.cod_caja = $P{pTerminal} AND forma_pago.cod_cuenta = 1
+AND forma_pago.estado = 'V'
+AND venta_cab.estado = 'V']]>
 	</queryString>
 	<field name="total_venta_efectivo" class="java.math.BigDecimal"/>
 	<background>

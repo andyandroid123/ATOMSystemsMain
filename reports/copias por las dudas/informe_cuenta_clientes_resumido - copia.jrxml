@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informe_cuenta_clientes_resumido" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aea7576f-6e9f-47c3-9d61-5c31cf50933a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pOperador" class="java.lang.String"/>
+	<parameter name="pFecActual" class="java.lang.String"/>
+	<parameter name="pEmpresa" class="java.lang.String"/>
+	<parameter name="pLocal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT d.cod_cliente, d.razon_soc, d.limite_credito,
+to_char(d.fec_ultimo_pago, 'dd/MM/yyyy') AS fec_ultimo_pago,
+d.credito, d.docs_vencidos, d.interes, d.docs_a_vencer AS total_docs_a_vencer, d.saldo_mas_interes, c.cod_empresa, c.cod_local, c.pct_interes,
+c.total_credito, c.total_vencidos, c.total_interes, c.docs_a_vencer, c.saldo_sin_interes, c.saldo_mas_interes AS total_mas_interes
+FROM inform_cta_clientes_cab c, inform_cta_clientes_det d]]>
+	</queryString>
+	<field name="cod_cliente" class="java.math.BigDecimal"/>
+	<field name="razon_soc" class="java.lang.String"/>
+	<field name="limite_credito" class="java.math.BigDecimal"/>
+	<field name="fec_ultimo_pago" class="java.lang.String"/>
+	<field name="credito" class="java.math.BigDecimal"/>
+	<field name="docs_vencidos" class="java.math.BigDecimal"/>
+	<field name="interes" class="java.math.BigDecimal"/>
+	<field name="total_docs_a_vencer" class="java.math.BigDecimal"/>
+	<field name="saldo_mas_interes" class="java.math.BigDecimal"/>
+	<field name="cod_empresa" class="java.math.BigDecimal"/>
+	<field name="cod_local" class="java.math.BigDecimal"/>
+	<field name="pct_interes" class="java.math.BigDecimal"/>
+	<field name="total_credito" class="java.math.BigDecimal"/>
+	<field name="total_vencidos" class="java.math.BigDecimal"/>
+	<field name="total_interes" class="java.math.BigDecimal"/>
+	<field name="docs_a_vencer" class="java.math.BigDecimal"/>
+	<field name="saldo_sin_interes" class="java.math.BigDecimal"/>
+	<field name="total_mas_interes" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="0" width="259" height="20" uuid="7e39cbb2-6fa2-46d3-b860-46e8d6070e4c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE CUENTAS DE CLIENTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="20" width="79" height="12" uuid="f5de48ac-9d43-4b8d-95fd-9895e8139291"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Informe resumido)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="35" width="530" height="1" uuid="2bfbf915-d9df-41b1-bcfe-63f533542869"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="4" width="47" height="14" uuid="c54d33e9-49ed-496f-b198-581d0cf6a5e5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Empresa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="18" width="47" height="14" uuid="9f1e0a06-21f0-4e31-a6b3-7f9e2ac19942"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Local:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="32" width="79" height="12" uuid="7a975da8-40ff-4611-86bb-993375df8c09"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Todos los clientes)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="4" width="71" height="14" uuid="c2a57526-0b84-4428-92b4-1d74e818eb63"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha & hora:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="18" width="71" height="14" uuid="fe8d2e42-3eb2-4097-a942-0c8934a1cc7f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="18" width="145" height="14" uuid="14d550e3-c4da-4c00-8396-68f5de4498b2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pOperador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="4" width="145" height="14" uuid="1b1b7abf-0de7-45d6-aaf9-f6185116ea5a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFecActual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="4" width="136" height="14" uuid="09b636f9-f389-49f3-b987-2e1e37fe3123"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="19" width="136" height="13" uuid="6819228d-dd3f-47c1-b0cc-9e64fbcb3ff8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pLocal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<line>
+				<reportElement x="7" y="2" width="530" height="1" uuid="75e699c7-1f9f-41fc-8d25-bc7f12a9a4c5"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="7" y="3" width="47" height="11" uuid="bf0d0897-3aea-4d33-897c-2ecadb7fec07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="3" width="100" height="11" uuid="1696f699-3776-4141-a23b-e8b5847924a3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="3" width="58" height="11" uuid="12e24258-39a6-48fd-9778-d61e782e2d1e"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Límite Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="3" width="54" height="11" uuid="dbd740c4-5068-47c7-8620-aa50a603676b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fec. Últ. Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="3" width="52" height="11" uuid="9fd6749f-2ec2-45f8-bc1e-71154540ff5e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="3" width="52" height="11" uuid="18d0d808-7e8c-4b4f-ab37-afe2a23e4dd8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vencidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="3" width="52" height="11" uuid="5d33bd4a-2e78-4878-94a7-24d13a45ff68"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Interés]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="3" width="52" height="11" uuid="3ac01e0c-f9d6-42bc-9050-cef60cd369e8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A vencer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="3" width="63" height="11" uuid="14b24601-2d60-4950-8e91-6891417ba416"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo + interés]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="17" width="530" height="1" uuid="3c9e90ba-3a95-4dd4-a44b-4ccef8f9d987"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="7" y="0" width="47" height="11" uuid="cf849c7f-566e-4cad-ab0d-98cf80c57c93"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="0" width="100" height="11" uuid="c9105c16-3889-4f35-9748-45142e9e59c3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razon_soc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="154" y="0" width="58" height="11" uuid="b4d82144-7fe2-4afc-a7d2-96cc4603817a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{limite_credito}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="0" width="54" height="11" uuid="f7e3ac77-a09f-4bfd-b316-09f2abdf1706"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fec_ultimo_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="266" y="0" width="52" height="11" uuid="d5e6ac37-8339-4cf3-9475-4613322153b3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="318" y="0" width="52" height="11" uuid="b5282b23-cf4e-4de2-8504-95f42b51768e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docs_vencidos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="370" y="0" width="52" height="11" uuid="bab9f802-4b0b-4d5d-8afe-6880bb523af5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="422" y="0" width="52" height="11" uuid="f7f9ef4c-b4e4-4203-8344-5f1e8c9af468"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docs_a_vencer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="474" y="0" width="63" height="11" uuid="0d61f9f2-eb08-4ce4-ac76-859a44520f5c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo_mas_interes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="76">
+			<rectangle radius="10">
+				<reportElement x="7" y="6" width="530" height="67" uuid="699338ea-d7c8-4cd9-b17b-0d0c3b829db3"/>
+				<graphicElement>
+					<pen lineColor="#CCCCCC"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="17" y="9" width="50" height="18" uuid="364f77a5-0328-42fa-bdf9-e9375b6094ee"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="23" width="36" height="11" uuid="8e730f85-462c-4f20-af63-e2ef65c94850"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Crédito:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="140" y="23" width="51" height="11" uuid="d01cadb2-5012-4687-b18b-4023780a6143"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_credito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="23" width="71" height="11" uuid="cc1a65c9-d680-47f9-b345-c00d6b5c0e95"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Docs. Vencidos:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="266" y="23" width="54" height="11" uuid="f3365634-4303-4c84-817a-4f443a73d5c1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_vencidos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="23" width="30" height="11" uuid="38a362a2-c594-46bb-8393-bfcf1f1d7924"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Interés:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="352" y="23" width="52" height="11" uuid="6a1dfe9c-12cf-4e24-894e-841001b49649"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_interes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="404" y="23" width="69" height="11" uuid="304b529c-d1b5-4273-89be-25f0299f8c12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Docs. a vencer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="39" width="100" height="13" uuid="a3a2dee2-bd47-4475-99aa-f7a26ca7ab64"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo sin interés:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="358" y="52" width="100" height="13" uuid="cb71a788-2eff-4d7f-805a-b0a31db59113"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo + interés:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="460" y="39" width="67" height="13" uuid="98712b5e-e1a1-45ed-b4a2-7e776e5dca58"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{saldo_sin_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="460" y="52" width="67" height="13" uuid="80b4c8d9-5c69-4e5e-aab5-4391d97fbd12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_mas_interes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="474" y="23" width="53" height="11" uuid="288d26af-ec5b-4ec8-b15b-b7aaf1dd8845"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_docs_a_vencer}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

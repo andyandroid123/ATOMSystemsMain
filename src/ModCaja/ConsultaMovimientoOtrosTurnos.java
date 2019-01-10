@@ -154,7 +154,9 @@ public class ConsultaMovimientoOtrosTurnos extends javax.swing.JDialog {
                    + "INNER JOIN forma_pago "
                    + "ON venta_cab.nro_ticket = forma_pago.nro_ticket "
                    + "WHERE venta_cab.nro_turno = " + turno + " AND venta_cab.cod_caja = " + nroCaja + " AND forma_pago.tipo_cuenta = 'EFE' "
-                   + "AND forma_pago.nro_turno = " + turno + " AND forma_pago.cod_caja = " + nroCaja + " AND forma_pago.cod_cuenta = 1";
+                   + "AND forma_pago.nro_turno = " + turno + " AND forma_pago.cod_caja = " + nroCaja + " AND forma_pago.cod_cuenta = 1"
+                   + "AND forma_pago.estado = 'V' " 
+                   + "AND venta_cab.estado = 'V' ";
         
         System.out.println("SQL RESUMEN ULTIMO TURNO: " + sql);
         
@@ -233,10 +235,10 @@ public class ConsultaMovimientoOtrosTurnos extends javax.swing.JDialog {
         int total = 0;
         try{
             String sql1 = "SELECT (SUM(mon_total) - SUM(mon_descuento)) AS total "
-                       + "FROM venta_cab WHERE nro_turno = " + nroTurno + " AND cod_caja = " + nroTerminal;
+                       + "FROM venta_cab WHERE nro_turno = " + nroTurno + " AND cod_caja = " + nroTerminal + " AND estado = 'V'";
             
             String sql = "SELECT SUM(mon_total) AS total "
-                       + "FROM venta_cab WHERE nro_turno = " + nroTurno + " AND cod_caja = " + nroTerminal;
+                       + "FROM venta_cab WHERE nro_turno = " + nroTurno + " AND cod_caja = " + nroTerminal + " AND estado = 'V'";
             
             ResultSet rs = DBManager.ejecutarDSL(sql);
             if(rs != null){

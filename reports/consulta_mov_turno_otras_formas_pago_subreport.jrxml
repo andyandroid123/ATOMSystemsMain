@@ -12,6 +12,8 @@ INNER JOIN forma_pago
 ON venta_cab.nro_ticket = forma_pago.nro_ticket
 WHERE venta_cab.nro_turno = $P{pNroTurno} AND venta_cab.cod_caja = $P{pTerminal} AND forma_pago.tipo_cuenta <> 'CRE' AND forma_pago.tipo_cuenta <> 'EFE'
 AND forma_pago.nro_turno = $P{pNroTurno} AND forma_pago.cod_caja = $P{pTerminal}
+AND venta_cab.estado = 'V'
+AND forma_pago.estado = 'V'
 GROUP BY forma_pago.nom_librador]]>
 	</queryString>
 	<field name="nom_librador" class="java.lang.String"/>

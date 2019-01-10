@@ -5,6 +5,8 @@
  */
 package principal;
 
+import ModCaja.AnulacionDocVenta;
+import ModCaja.ConsultaMovimientoOtrosTurnos;
 import ModCaja.ReImpresionDocVenta;
 import ModCaja.RegistroCobroClientes1;
 import ModCaja.TurnoVentas;
@@ -13,12 +15,15 @@ import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 import utiles.DBManager;
 import utiles.InfoErrores;
+import utiles.LibReportes;
 
 /**
  *
@@ -37,6 +42,12 @@ public class CajaMain extends javax.swing.JFrame {
     public static boolean resultExitCobroCuentas = false; 
     public static boolean resultExitTurnos = false; 
     
+    // para los resúmenes de ventas
+    int nroTerminal = FormMain.codCaja;
+    String nroTurno = "", fecHabTurno = "", fecCierreTurno = "", cajero = "";
+    double salInicialTurno = 0;
+    
+    
     Ventas ventas = null;
     RegistroCobroClientes1 cobroClientes = null;
     
@@ -46,7 +57,7 @@ public class CajaMain extends javax.swing.JFrame {
         labelBotones();
         startTitleAnimation();
     }
-
+    
     private void msgDesarrollo(){
         JOptionPane.showMessageDialog(this, "Módulo en desarrollo!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -160,6 +171,11 @@ public class CajaMain extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMnuOperaciones = new javax.swing.JMenu();
+        jMnuIAnulacionDocVenta = new javax.swing.JMenuItem();
+        jMnuInformeDeMovimientos = new javax.swing.JMenu();
+        jMnuIOtrosTurnos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ATOMSystems|Main - Módulo de Ventas");
@@ -268,7 +284,7 @@ public class CajaMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBTurnoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBReImpresionDocs)
@@ -288,6 +304,38 @@ public class CajaMain extends javax.swing.JFrame {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBCobroClientes, jBReImpresionDocs, jBTurnoVenta, jBVentas});
+
+        jMnuOperaciones.setText("Operaciones ");
+        jMnuOperaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMnuIAnulacionDocVenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIAnulacionDocVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar24.png"))); // NOI18N
+        jMnuIAnulacionDocVenta.setText("Anulación de doc de venta");
+        jMnuIAnulacionDocVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIAnulacionDocVentaActionPerformed(evt);
+            }
+        });
+        jMnuOperaciones.add(jMnuIAnulacionDocVenta);
+
+        jMenuBar1.add(jMnuOperaciones);
+
+        jMnuInformeDeMovimientos.setText("Informes de movimientos");
+        jMnuInformeDeMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMnuIOtrosTurnos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIOtrosTurnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seleccionar24_1.png"))); // NOI18N
+        jMnuIOtrosTurnos.setText("Resumen por turno de ventas");
+        jMnuIOtrosTurnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIOtrosTurnosActionPerformed(evt);
+            }
+        });
+        jMnuInformeDeMovimientos.add(jMnuIOtrosTurnos);
+
+        jMenuBar1.add(jMnuInformeDeMovimientos);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -347,6 +395,18 @@ public class CajaMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBCobroClientesActionPerformed
 
+    private void jMnuIAnulacionDocVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIAnulacionDocVentaActionPerformed
+        AnulacionDocVenta anulacion = new AnulacionDocVenta(new JFrame(), true);
+        anulacion.pack();
+        anulacion.setVisible(true);
+    }//GEN-LAST:event_jMnuIAnulacionDocVentaActionPerformed
+
+    private void jMnuIOtrosTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIOtrosTurnosActionPerformed
+        ConsultaMovimientoOtrosTurnos consulta = new ConsultaMovimientoOtrosTurnos(new JFrame(), true);
+        consulta.pack();
+        consulta.setVisible(true);
+    }//GEN-LAST:event_jMnuIOtrosTurnosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -392,6 +452,11 @@ public class CajaMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMnuIAnulacionDocVenta;
+    private javax.swing.JMenuItem jMnuIOtrosTurnos;
+    private javax.swing.JMenu jMnuInformeDeMovimientos;
+    private javax.swing.JMenu jMnuOperaciones;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFSubTitulo;
     private javax.swing.JTextField jTFTitulo;
