@@ -14,6 +14,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -280,9 +282,9 @@ public class DlgLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jTFPasswordKeyPressed
 
     private void jBEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBEntrarKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jBEntrar.doClick();
-        }
+//        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+//            jBEntrar.doClick();
+//        }
     }//GEN-LAST:event_jBEntrarKeyPressed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
@@ -349,15 +351,25 @@ public class DlgLogin extends javax.swing.JDialog {
                     InfoErrores.errores(ex);
                     JOptionPane.showMessageDialog(this, "Usuario no habilitado en el sistema!", "Atención...", JOptionPane.WARNING_MESSAGE);
                 }
+                
+                
+                // Cierra el socket en el caso de nuevo login sin salir del sistema
+                /*try{
+                    FormMain.serverSocket.close();
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }*/
+                
                                 
             }else{
-                jTFUsuario.grabFocus();
+                jTFUsuario.requestFocus();
                 DBManager.cerrarBD();
                 FormMain.jLNombreUsuario.setText("USER");
                 FormMain.nombreUsuario = "";
-                JOptionPane.showMessageDialog(this, "Login denegado! Verifique usuario y Contraseña!", "Atención...", JOptionPane.WARNING_MESSAGE);
-                jTFUsuario.grabFocus();
+                jTFUsuario.requestFocus();
                 jTFUsuario.selectAll();
+                JOptionPane.showMessageDialog(this, "Login denegado! Verifique usuario y Contraseña!", "Atención...", JOptionPane.WARNING_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_jBEntrarActionPerformed
@@ -451,10 +463,11 @@ public class DlgLogin extends javax.swing.JDialog {
             if(FormMain.empresaBean != null){
                 FormMain.jTFCodEmpresa.setText(String.valueOf(FormMain.empresaBean.getCodEmpresa()));
                 FormMain.jTFNombreEmpresa.setText(FormMain.empresaBean.getDescripcion());
-                
+                FormMain.jLNombreEmpresa.setText(FormMain.empresaBean.getDescripcion());
             }else{
                 FormMain.jTFCodEmpresa.setText("0");
                 FormMain.jTFNombreEmpresa.setText("*");
+                FormMain.jLNombreEmpresa.setText("***");
                 FormMain.empresaBean = null;
                 FormMain.listBeanEmpresa = null;
                 result = false;
@@ -482,9 +495,11 @@ public class DlgLogin extends javax.swing.JDialog {
             if (FormMain.localBean != null) {
                 FormMain.jTFCodLocal.setText(String.valueOf(FormMain.localBean.getCodLocal()));
                 FormMain.jTFNombreLocal.setText(FormMain.localBean.getDescripcion());
+                FormMain.jLDescLocal.setText(FormMain.localBean.getDescripcion());
             } else {
                 FormMain.jTFCodLocal.setText("0");
                 FormMain.jTFNombreLocal.setText("*");
+                FormMain.jLDescLocal.setText("***");
                 FormMain.localBean     = null;
                 FormMain.listBeanLocal = null;
                 result = false;
@@ -493,6 +508,21 @@ public class DlgLogin extends javax.swing.JDialog {
             result = false;
             ex.printStackTrace();
             InfoErrores.errores(ex);
+        }
+        return result;
+    }
+    
+    // Rutina para Abrir una solo instancia del Sistema        
+    private boolean abreSocket(int idSkt) {
+        boolean result = true;
+        try {
+            FormMain.serverSocket = new ServerSocket(idSkt); //4440
+            initComponents();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            result = false;
+            InfoErrores.errores(e);
         }
         return result;
     }

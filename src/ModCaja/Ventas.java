@@ -34,7 +34,7 @@ import principal.FormMain;
 import utiles.DBManager;
 import utiles.Focus;
 import utiles.InfoErrores;
-import utiles.LibReportes;
+import utiles.LibReportesBoletaVenta;
 import utiles.MaxLength;
 import utiles.StatementManager;
 import utiles.Utiles;
@@ -1311,21 +1311,21 @@ public class Ventas extends javax.swing.JFrame {
         }
         
         try{
-            LibReportes.parameters.put("pRazonSocEmpresa", utiles.Utiles.getRazonSocialEmpresa(utiles.Utiles.getCodEmpresaDefault()));
-            LibReportes.parameters.put("pActividadEmpresa", actividadEmpresa);
-            LibReportes.parameters.put("pDireccionEmpresa", direccionEmpresa);
-            LibReportes.parameters.put("pCiudadEmpresa", ciudadEmpresa);
-            LibReportes.parameters.put("pTelEmpresa", telEmpresa);
-            LibReportes.parameters.put("pNroTicket", Integer.parseInt(vNroComprob));
-            LibReportes.parameters.put("pCajero", getNombreCajero(codCajero));
-            LibReportes.parameters.put("pMsgPieBoleta", getMsgPieBoleta());
-            LibReportes.parameters.put("pNombreCliente", jTFNombreCliente.getText().trim());
-            LibReportes.parameters.put("pTerminal", FormMain.codCaja);
-            LibReportes.parameters.put("pFecVigencia", fecVigencia);
-            LibReportes.parameters.put("pNroTurno", Integer.parseInt(nroTurno));
-            LibReportes.parameters.put("REPORT_CONNECTION", DBManager.conn);
-            LibReportes.generarReportes(sql, tipo_impresion);
-            //LibReportes.generarReportes(sql, "boletaVenta");
+            LibReportesBoletaVenta.parameters.put("pRazonSocEmpresa", utiles.Utiles.getRazonSocialEmpresa(utiles.Utiles.getCodEmpresaDefault()));
+            LibReportesBoletaVenta.parameters.put("pActividadEmpresa", actividadEmpresa);
+            LibReportesBoletaVenta.parameters.put("pDireccionEmpresa", direccionEmpresa);
+            LibReportesBoletaVenta.parameters.put("pCiudadEmpresa", ciudadEmpresa);
+            LibReportesBoletaVenta.parameters.put("pTelEmpresa", telEmpresa);
+            LibReportesBoletaVenta.parameters.put("pNroTicket", Integer.parseInt(vNroComprob));
+            LibReportesBoletaVenta.parameters.put("pCajero", getNombreCajero(codCajero));
+            LibReportesBoletaVenta.parameters.put("pMsgPieBoleta", getMsgPieBoleta());
+            LibReportesBoletaVenta.parameters.put("pNombreCliente", jTFNombreCliente.getText().trim());
+            LibReportesBoletaVenta.parameters.put("pTerminal", FormMain.codCaja);
+            LibReportesBoletaVenta.parameters.put("pFecVigencia", fecVigencia);
+            LibReportesBoletaVenta.parameters.put("pNroTurno", Integer.parseInt(nroTurno));
+            LibReportesBoletaVenta.parameters.put("REPORT_CONNECTION", DBManager.conn);
+            LibReportesBoletaVenta.generarReportes(sql, tipo_impresion);
+            //LibReportesBoletaVenta.generarReportes(sql, "boletaVenta");
         }catch(SQLException sqlex){
             sqlex.printStackTrace();
             InfoErrores.errores(sqlex);
@@ -2427,12 +2427,16 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jTFCodArticuloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodArticuloFocusLost
         if(!jTFCodArticulo.getText().trim().equals("")){
-            String codigo = getCodArticulo(jTFCodArticulo.getText().trim());
-            vCodigoArticulo = codigo;
-            vBarrasArticulo = getBarrasArticulo(jTFCodArticulo.getText().trim());
-            jTFCodArticulo.setText(codigo);
-            cargaDatosArticulo(codigo, jTFSVta.getText());
-            jTFSVta.setText("");
+            if(jTFCodArticulo.getText().trim().length() > 0){
+                jTFCodArticulo.setText(utiles.Utiles.padLeft(13, "0", jTFCodArticulo.getText()));
+                
+                String codigo = getCodArticulo(jTFCodArticulo.getText().trim());
+                vCodigoArticulo = codigo;
+                vBarrasArticulo = getBarrasArticulo(jTFCodArticulo.getText().trim());
+                jTFCodArticulo.setText(codigo);
+                cargaDatosArticulo(codigo, jTFSVta.getText());
+                jTFSVta.setText("");
+            }
         }
     }//GEN-LAST:event_jTFCodArticuloFocusLost
 
@@ -2689,7 +2693,13 @@ public class Ventas extends javax.swing.JFrame {
                 DlgFinVenta venta = new DlgFinVenta(new JFrame(), true, Double.parseDouble(jTFVueltoTotal.getText().trim().replace(",", "")));
                 venta.pack();
                 venta.setVisible(true);
-                imprimirBoletaVenta();
+                
+                int imprimir = JOptionPane.showConfirmDialog(this, "¿Imprimir ticket?", "Impresión de ticket", JOptionPane.YES_NO_OPTION);
+                if(imprimir == 0){
+                    imprimirBoletaVenta();
+                }
+                                
+                
                 jTabbedPane1.setSelectedIndex(jTabbedPane1.indexOfComponent(jPVentas));
                 jTFCodArticulo.requestFocus();
                 setComponentesGrabado();

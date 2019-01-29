@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informCompras" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a27d486c-3c5b-4342-8901-e3dc5c0454ba">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="3"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="pFiltro" class="java.lang.String"/>
 	<parameter name="pEmpresa" class="java.lang.String"/>
 	<parameter name="pLocal" class="java.lang.String"/>
@@ -25,7 +25,7 @@ ON compra_cab.cod_proveedor = proveedor.cod_proveedor
 INNER JOIN tipo_mercaderia
 ON tipo_mercaderia.cod_tipomerc = compra_cab.cod_tipomerc
 WHERE fec_comprob >= '01/06/2018' AND fec_comprob <= '30/06/2018'
-AND cod_empresa = 1 AND cod_local = 1 AND cod_sector = 1
+AND cod_empresa = 1 AND cod_local = 1 AND cod_sector = 1 AND compra_cab.estado = 'V'
 GROUP BY compra_cab.fec_vigencia, compra_cab.fec_comprob, compra_cab.nro_comprob, compra_cab.tip_comprob, compra_cab.nro_timbrado, proveedor,
 compra_cab.total_grava10, compra_cab.total_grava05, compra_cab.total_exento, compra_cab.cod_tipomerc, tipo_mercaderia.descripcion
 ORDER BY compra_cab.fec_comprob, proveedor]]>

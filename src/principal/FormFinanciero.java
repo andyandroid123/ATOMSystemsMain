@@ -10,6 +10,7 @@ import ModFinanciero.ModificarVencimientos;
 import ModFinanciero.ReDefinicionCuotas;
 import ModFinanciero.RegistroDebCre;
 import ModFinanciero.informes.CuentasClientes;
+import ModFinanciero.informes.DocsVentasAnulados;
 import ModFinanciero.informes.ImpresionRecibosPagares;
 import ModFinanciero.informes.InfCobranzasClientes;
 import java.awt.event.WindowAdapter;
@@ -61,6 +62,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIRegistroDebCre = new javax.swing.JMenuItem();
         jMnuInformes = new javax.swing.JMenu();
         jMnuICobroClientes = new javax.swing.JMenuItem();
+        jMnuIAnulacionesDocsVentas = new javax.swing.JMenuItem();
         jMnuICuentasClientes = new javax.swing.JMenuItem();
         jMnuIImpresionReciboPagare = new javax.swing.JMenuItem();
 
@@ -132,13 +134,23 @@ public class FormFinanciero extends javax.swing.JFrame {
 
         jMnuICobroClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICobroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
-        jMnuICobroClientes.setText("Cobro de Clientes");
+        jMnuICobroClientes.setText("Cobros y Anulaciones de cobro de Clientes");
         jMnuICobroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICobroClientesActionPerformed(evt);
             }
         });
         jMnuInformes.add(jMnuICobroClientes);
+
+        jMnuIAnulacionesDocsVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIAnulacionesDocsVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
+        jMnuIAnulacionesDocsVentas.setText("Anulaciones de docs de ventas");
+        jMnuIAnulacionesDocsVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIAnulacionesDocsVentasActionPerformed(evt);
+            }
+        });
+        jMnuInformes.add(jMnuIAnulacionesDocsVentas);
 
         jMnuICuentasClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICuentasClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cuenta_cliente24.png"))); // NOI18N
@@ -221,6 +233,12 @@ public class FormFinanciero extends javax.swing.JFrame {
         registro.setVisible(true);
     }//GEN-LAST:event_jMnuIRegistroDebCreActionPerformed
 
+    private void jMnuIAnulacionesDocsVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIAnulacionesDocsVentasActionPerformed
+        DocsVentasAnulados anulados = new DocsVentasAnulados(new JFrame(), true);
+        anulados.pack();
+        anulados.setVisible(true);
+    }//GEN-LAST:event_jMnuIAnulacionesDocsVentasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +277,7 @@ public class FormFinanciero extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMnuIAnulacionCobroClientes;
+    private javax.swing.JMenuItem jMnuIAnulacionesDocsVentas;
     private javax.swing.JMenuItem jMnuICobroClientes;
     private javax.swing.JMenuItem jMnuICuentasClientes;
     private javax.swing.JMenuItem jMnuIImpresionReciboPagare;

@@ -6,6 +6,7 @@
 package principal;
 
 import ModAbastecimiento.AjusteStock;
+import ModAbastecimiento.AnulacionDocCompraGasto;
 import ModAbastecimiento.RecepcionDirectaMercaderias;
 import ModAbastecimiento.RegistroCompraMercaderias;
 import ModAbastecimiento.RegistroComprobanteGastos;
@@ -61,6 +62,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIRecepcionMercaderias = new javax.swing.JMenuItem();
         jMnuIRegistroCompraMercaderias = new javax.swing.JMenuItem();
         jMnuIRegistroComprobantesGastos = new javax.swing.JMenuItem();
+        jMnuIAnulacionDocCompra = new javax.swing.JMenuItem();
         jMnuStock = new javax.swing.JMenu();
         jMnuIAjusteStock = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -121,6 +123,16 @@ public class FormAbastecimiento extends javax.swing.JFrame {
             }
         });
         jMnuOperaciones.add(jMnuIRegistroComprobantesGastos);
+
+        jMnuIAnulacionDocCompra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIAnulacionDocCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar24.png"))); // NOI18N
+        jMnuIAnulacionDocCompra.setText("Anulación de doc de compras/gastos");
+        jMnuIAnulacionDocCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIAnulacionDocCompraActionPerformed(evt);
+            }
+        });
+        jMnuOperaciones.add(jMnuIAnulacionDocCompra);
 
         jMenuBar1.add(jMnuOperaciones);
 
@@ -270,6 +282,12 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         articulos.setVisible(true);
     }//GEN-LAST:event_jMnuIListadoArticulosActionPerformed
 
+    private void jMnuIAnulacionDocCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIAnulacionDocCompraActionPerformed
+        AnulacionDocCompraGasto anulacion = new AnulacionDocCompraGasto(new JFrame(), true);
+        anulacion.pack();
+        anulacion.setVisible(true);
+    }//GEN-LAST:event_jMnuIAnulacionDocCompraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,6 +328,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMnuIAjusteStock;
+    private javax.swing.JMenuItem jMnuIAnulacionDocCompra;
     private javax.swing.JMenuItem jMnuIArticulos;
     private javax.swing.JMenuItem jMnuIComprasGastos;
     private javax.swing.JMenuItem jMnuIListadoArticulos;

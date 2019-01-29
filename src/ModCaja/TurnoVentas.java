@@ -171,7 +171,7 @@ public class TurnoVentas extends javax.swing.JDialog {
         jTFEstado.setText("***");
         jTFNroTicketFinal.setText("");
         jTFFecCierre.setText("");
-        jTFCodCajero.setText("");
+        jTFCodCajero.setText("1");
         jLNombreCajero.setText("***");
         jTFSaldoInicial.setText("0");
     }

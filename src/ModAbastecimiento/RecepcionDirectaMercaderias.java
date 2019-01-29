@@ -1407,10 +1407,12 @@ public class RecepcionDirectaMercaderias extends javax.swing.JDialog {
                 codArticulo = "";
             }else {
                 jTFMensajes.setText("DEBE INGRESAR LA CANTIDAD RECIBIDA!");
+                jTFCantidadRecibida.selectAll();
             }
             
             if(jTFCantidadRecibida.getText().equals("0")){
                 jTFMensajes.setText("DEBE INGRESAR LA CANTIDAD RECIBIDA!");
+                jTFCantidadRecibida.selectAll();
             }
         }
     }//GEN-LAST:event_jTFCantidadRecibidaKeyPressed
@@ -1418,7 +1420,7 @@ public class RecepcionDirectaMercaderias extends javax.swing.JDialog {
     private void jTFCantidadRecibidaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCantidadRecibidaFocusLost
         if(jTFCantidadRecibida.getText().equals("")){
             jTFMensajes.setText("DEBE INGRESAR LA CANTIDAD RECIBIDA!");
-            jTFMensajes.requestFocus();
+            jTFCantidadRecibida.selectAll();
         }
     }//GEN-LAST:event_jTFCantidadRecibidaFocusLost
 
@@ -1430,7 +1432,10 @@ public class RecepcionDirectaMercaderias extends javax.swing.JDialog {
             if(dtmDetallesRecepcion.getRowCount() > 0){
                 if(grabarDatos()){
                     JOptionPane.showMessageDialog(this,"ATENCION: Datos grabados correctamente!",     "EXITO",  JOptionPane.INFORMATION_MESSAGE);
-                    imprimirRecepcion();
+                    int question = JOptionPane.showConfirmDialog(this, "Impresión", "¿Desea imprimir el resumen?", JOptionPane.YES_NO_OPTION);
+                    if(question == 0){
+                        imprimirRecepcion();
+                    }
                     componentesGrabado();
                 }else{
                     JOptionPane.showMessageDialog(this,"ATENCION: Error al grabando Recepción!",     "ATENCION",  JOptionPane.WARNING_MESSAGE);

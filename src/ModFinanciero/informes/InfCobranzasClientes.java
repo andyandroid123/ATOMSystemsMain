@@ -184,7 +184,7 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
                        + "ON cab.nro_pago = det.nro_pago "
                        + "LEFT OUTER JOIN cliente cli "
                        + "ON cab.cod_cliente = cli.cod_cliente "
-                       + "WHERE cab.fec_pago::date >= '" + fecDesde + "'::date AND cab.fec_pago::date <= '" + fecHasta + "'::date "
+                       + "WHERE cab.fec_vigencia::date >= '" + fecDesde + "'::date AND cab.fec_vigencia::date <= '" + fecHasta + "'::date "
                        + estado + " "
                        + "GROUP BY cab.cod_caja, cab.nro_turno, cab.nro_pago, cab.nro_recibo, cab.fec_pago, cli.razon_soc, cab.monto_pago, "
                        + "cab.estado, cab.cod_cobrador, cab.observacion, cab.monto_vuelto "
@@ -200,7 +200,7 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
                        + "ON cab.nro_pago = det.nro_pago "
                        + "LEFT OUTER JOIN cliente cli "
                        + "ON cab.cod_cliente = cli.cod_cliente "
-                       + "WHERE cab.cod_cliente = " + cod_cliente + " AND cab.fec_pago::date >= '" + fecDesde + "'::date AND cab.fec_pago::date <= '" + fecHasta + "'::date "
+                       + "WHERE cab.cod_cliente = " + cod_cliente + " AND cab.fec_pago::vigencia >= '" + fecDesde + "'::date AND cab.fec_vigenciao::date <= '" + fecHasta + "'::date "
                        + estado + " "
                        + "GROUP BY cab.cod_caja, cab.nro_turno, cab.nro_pago, cab.nro_recibo, cab.fec_pago, cli.razon_soc, cab.monto_pago, "
                        + "cab.estado, cab.cod_cobrador, cab.observacion, cab.monto_vuelto "
@@ -228,18 +228,21 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
         String local = jLNombreLocal.getText().trim();
         String fecDesde = jTFFecDesde.getText().trim();
         String fecHasta = jTFFecHasta.getText().trim();
-        String filtro = "", sql = "";
+        String filtro = "", sql = "", estado = "";
         
         if(jRBAnulados.isSelected()){
             filtro = "(Anulados)";
+            estado = "('A')";
         }
         
         if(jRBTodos.isSelected()){
             filtro = "(Todos)";
+            estado = "('V', 'A')";
         }
         
         if(jRBVigentes.isSelected()){
             filtro = "(Vigentes)";
+            estado = "('V')";
         }
         
         if(jTFCodCliente.getText().trim().equals("0")){
@@ -252,7 +255,7 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
                 + "ON cab.nro_pago = det.nro_pago "
                 + "LEFT OUTER JOIN cliente cli "
                 + "ON cab.cod_cliente = cli.cod_cliente "
-                + "WHERE cab.fec_pago::date >= '" + fecDesde + "'::date AND cab.fec_pago::date <= '" + fecHasta + "'::date AND cab.estado = 'V' "
+                + "WHERE cab.fec_vigencia::date >= '" + fecDesde + "'::date AND cab.fec_vigencia::date <= '" + fecHasta + "'::date AND cab.estado IN " + estado + " "
                 + "GROUP BY cab.cod_caja, cab.nro_turno, cab.nro_pago, cab.nro_recibo, cab.fec_pago, cli.razon_soc, cab.monto_pago, cab.estado, "
                 + "cab.cod_cobrador, cab.observacion, cab.monto_vuelto "
                 + "ORDER BY cab.fec_pago, cab.nro_pago";
@@ -267,7 +270,7 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
                 + "ON cab.nro_pago = det.nro_pago "
                 + "LEFT OUTER JOIN cliente cli "
                 + "ON cab.cod_cliente = cli.cod_cliente "
-                + "WHERE cab.fec_pago::date >= '" + fecDesde + "'::date AND cab.fec_pago::date <= '" + fecHasta + "'::date AND cab.estado = 'V' "
+                + "WHERE cab.fec_vigencia::date >= '" + fecDesde + "'::date AND cab.fec_vigencia::date <= '" + fecHasta + "'::date AND cab.estado IN " + estado + " "
                 + "AND cab.cod_cliente = " + codCliente + " "
                 + "GROUP BY cab.cod_caja, cab.nro_turno, cab.nro_pago, cab.nro_recibo, cab.fec_pago, cli.razon_soc, cab.monto_pago, cab.estado, "
                 + "cab.cod_cobrador, cab.observacion, cab.monto_vuelto "
@@ -377,16 +380,31 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
         jRBVigentes.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jRBVigentes.setSelected(true);
         jRBVigentes.setText("Vigentes");
+        jRBVigentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBVigentesActionPerformed(evt);
+            }
+        });
 
         jRBAnulados.setBackground(new java.awt.Color(204, 255, 204));
         bGPagos.add(jRBAnulados);
         jRBAnulados.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jRBAnulados.setText("Anulados");
+        jRBAnulados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBAnuladosActionPerformed(evt);
+            }
+        });
 
         jRBTodos.setBackground(new java.awt.Color(204, 255, 204));
         bGPagos.add(jRBTodos);
         jRBTodos.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jRBTodos.setText("Todos");
+        jRBTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBTodosActionPerformed(evt);
+            }
+        });
 
         jTFFecDesde.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTFFecDesde.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -719,6 +737,18 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
             imprimirResumen();
         }
     }//GEN-LAST:event_jBImprimirActionPerformed
+
+    private void jRBTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBTodosActionPerformed
+        jBImprimir.setEnabled(false);
+    }//GEN-LAST:event_jRBTodosActionPerformed
+
+    private void jRBAnuladosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBAnuladosActionPerformed
+        jBImprimir.setEnabled(true);
+    }//GEN-LAST:event_jRBAnuladosActionPerformed
+
+    private void jRBVigentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBVigentesActionPerformed
+        jBImprimir.setEnabled(true);
+    }//GEN-LAST:event_jRBVigentesActionPerformed
 
     /**
      * @param args the command line arguments

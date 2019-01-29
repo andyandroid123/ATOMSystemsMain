@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
+import principal.FormMain;
 import utiles.DBManager;
 import utiles.Focus;
 import utiles.InfoErrores;
@@ -48,9 +49,11 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
     }
     
     private boolean anulacionVenta(String codCaja, String tipoDocumento, String nroDoc, String codEmpresa, String codLocal){
-        String sql = "BEGIN; "
+        String sql =    "BEGIN; "
                        + ""
-                       + "UPDATE venta_cab SET estado = 'A' "
+                       + "UPDATE venta_cab SET estado = 'A', "
+                       + "fec_vigencia = 'now()', "
+                       + "cod_usuario = " + FormMain.codUsuario + " "
                        + "WHERE cod_caja = " + codCaja + " "
                        + "AND tip_comprob = '" + tipoDocumento + "' "
                        + "AND nro_ticket = " + nroDoc + " "
@@ -58,7 +61,8 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
                        + "AND cod_local = " + codLocal + "; "
                        + ""
                        + ""
-                       + "UPDATE venta_det SET estado = 'A' "
+                       + "UPDATE venta_det SET estado = 'A', "
+                       + "fec_vigencia = 'now()' "
                        + "WHERE cod_caja = " + codCaja + " "
                        + "AND tip_comprob = '" + tipoDocumento + "' "
                        + "AND nro_ticket = " + nroDoc + " "
@@ -66,7 +70,9 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
                        + "AND cod_local = " + codLocal + "; "
                        + ""
                        + ""
-                       + "UPDATE forma_pago SET estado = 'A'"
+                       + "UPDATE forma_pago SET estado = 'A', "
+                       + "fec_vigencia = 'now()', "
+                       + "cod_usuario = " + FormMain.codUsuario + " "
                        + "WHERE cod_caja = " + codCaja + " "
                        + "AND tip_comprob = '" + tipoDocumento + "' "
                        + "AND nro_ticket = " + nroDoc + " "
@@ -115,7 +121,7 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
     }
     
     private void updateStockArtSum(String codArticulo, double canVenta){
-        String sql = "UPDATE stockart SET stock = (stock + " + canVenta + ") WHERE cod_articulo = " + codArticulo;
+        String sql = "UPDATE stockart SET stock = (stock + " + canVenta + "), fec_vigencia = 'now()' WHERE cod_articulo = " + codArticulo;
         grabarPrevioCommit(sql);
     }
     

@@ -1457,7 +1457,10 @@ public class AjusteStock extends javax.swing.JDialog {
             if(dtmDetallesAjuste.getRowCount() > 0){
                 if(grabarDatos()){
                     JOptionPane.showMessageDialog(this,"ATENCION: Datos grabados correctamente!",     "EXITO",  JOptionPane.INFORMATION_MESSAGE);
-                    imprimirAjuste();
+                    int question = JOptionPane.showConfirmDialog(this, "Impresión", "¿Desea imprimir el resumen?", JOptionPane.YES_NO_OPTION);
+                    if(question == 0){
+                        imprimirAjuste();
+                    }
                     componentesGrabado();
                 }else{
                     JOptionPane.showMessageDialog(this,"ATENCION: Error grabando Recepción!",     "ATENCION",  JOptionPane.WARNING_MESSAGE);

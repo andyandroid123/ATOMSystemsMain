@@ -1,0 +1,19 @@
+Jan 24, 2019 8:45:44 AM null
+OFF: ERROR: la referencia a la columna «estado» es ambigua
+  Position: 860
+Jan 24, 2019 8:45:44 AM null
+ALL: org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2310)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2023)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:217)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: org.postgresql.jdbc.PgStatement.execute(PgStatement.java:421)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:318)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: org.postgresql.jdbc.PgStatement.executeQuery(PgStatement.java:281)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: utiles.LibReportes$1.run(LibReportes.java:55)ok
+Jan 24, 2019 8:45:44 AM null
+ALL: java.lang.Thread.run(Thread.java:748)ok

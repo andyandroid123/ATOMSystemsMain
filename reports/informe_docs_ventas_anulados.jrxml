@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="informe_docs_ventas_anulados" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e9743598-c94d-4ace-a9cd-c2cfb17c8814">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pEmpresa" class="java.lang.String"/>
+	<parameter name="pLocal" class="java.lang.String"/>
+	<parameter name="pFecDesde" class="java.lang.String"/>
+	<parameter name="pFecHasta" class="java.lang.String"/>
+	<parameter name="pOperador" class="java.lang.String"/>
+	<parameter name="pFecActual" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT v.nro_ticket, v.cod_caja, v.cod_cliente || ' - ' || v.nom_cliente AS cliente, v.mon_total,
+v.cod_usuario || ' - ' || u.nombre AS anulado_por
+FROM venta_cab v
+INNER JOIN usuario u
+ON v.cod_usuario = u.cod_usuario
+WHERE v.fec_vigencia::date >= '$P{pFecDesde}'::date
+AND v.fec_vigencia::date <= '$P{pFecHasta}'::date
+AND v.estado = 'A'
+AND v.cod_empresa = $P{pEmpresa}
+AND v.cod_local = $P{pLocal}
+order by v.fec_vigencia desc ]]>
+	</queryString>
+	<field name="nro_ticket" class="java.math.BigDecimal"/>
+	<field name="cod_caja" class="java.math.BigDecimal"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="mon_total" class="java.math.BigDecimal"/>
+	<field name="anulado_por" class="java.lang.String"/>
+	<variable name="mon_total_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{mon_total}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="0" width="309" height="20" uuid="de401217-c34d-474d-8c97-2c0ee2d7b48a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE DOCS DE VENTAS ANULADOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="10" width="47" height="14" uuid="4ee00cff-868a-4742-a277-649b575d6436"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Empresa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="24" width="43" height="14" uuid="cc0d7655-a6d8-4500-8ce0-a96e6e093341"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Local:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="436" y="10" width="114" height="14" uuid="5fd5843e-42e0-4e6a-aefd-779b96ec963d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFecActual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="24" width="100" height="14" uuid="44f172b2-17e9-4f98-91c9-780cbec66aeb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pLocal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="24" width="41" height="14" uuid="b6c8c573-1599-4e0c-afeb-185c745e5d87"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="24" width="37" height="14" uuid="1b0f776f-0f07-4a18-a7ca-1a4a3932caeb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="24" width="33" height="14" uuid="305af1a4-73cb-4e5d-9878-ce5661998070"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="10" width="100" height="14" uuid="b4b79062-edd1-4d8a-a519-c32267c91630"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="24" width="55" height="14" uuid="7d2beacf-cc5f-4762-96e2-81003d99dc5d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFecDesde}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="10" width="33" height="14" uuid="a52b29ad-e835-4c5d-bb2f-d6548821ef11"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="317" y="24" width="58" height="14" uuid="921addce-71d4-4745-afd2-a8020c563228"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pFecHasta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="24" width="114" height="14" uuid="0ab35912-3e4c-4a58-99df-86131970cdb1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pOperador}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="4" y="42" width="546" height="1" uuid="865e1f5f-df55-428f-ad6f-30afaaacc310"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="4" y="4" width="546" height="1" uuid="4b6105e6-bf68-4716-8e73-fee58a5e617b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="373" y="3" width="57" height="12" uuid="ffbb0398-22a3-4630-b4c8-535abda61467"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto cobro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="3" width="48" height="12" uuid="0df1557c-71b0-4602-bab5-146523e807d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod. Caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="3" width="105" height="12" uuid="23093779-b823-46da-871e-8f5e575831e7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="3" width="48" height="12" uuid="312a3940-b5c9-4e05-9e3d-39c5a9c64bc4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Doc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="3" width="57" height="12" uuid="36b7d70f-6af0-4598-ac6e-eaf1d72f0187"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anulado por]]></text>
+			</staticText>
+			<line>
+				<reportElement x="4" y="17" width="546" height="1" uuid="70504b35-4e85-4ad8-bb24-90cf10e7a300"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Immediate">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="162" y="0" width="48" height="13" uuid="612d9f54-08c7-439b-bb55-535f83a92fd8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nro_ticket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="48" height="13" uuid="f1981cbb-e084-4eed-bdbc-9bf8bf61b138"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_caja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="105" height="13" uuid="189a5739-6db0-4bee-a113-6885659770a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="373" y="0" width="57" height="13" uuid="f1aa57df-d839-408c-a20f-eaf5dbd0660e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mon_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="0" width="112" height="13" uuid="d2e9fc08-e330-4863-8f15-8ee38c137786"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anulado_por}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<line>
+				<reportElement x="162" y="4" width="388" height="1" uuid="65d2f218-112d-49ef-834b-74982f88f01a"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="393" y="21" width="100" height="13" uuid="f8db88a9-60cf-42d6-b6ef-e8142a45f233"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Total anulados:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="493" y="21" width="57" height="13" uuid="5298323f-7d5f-477f-8a44-95cf89ab2b10"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{mon_total_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="402" y="43" width="148" height="1" uuid="d12169d7-fe07-421f-bd71-4f8442855f41"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

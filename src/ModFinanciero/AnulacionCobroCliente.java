@@ -160,10 +160,10 @@ public class AnulacionCobroCliente extends javax.swing.JDialog {
                     String nroPago = jTCobrosDelCliente.getValueAt(i, 0).toString();
                     String codCliente = jTCobrosDelCliente.getValueAt(i, 3).toString();
                     sql =     "BEGIN; "
-                            + "UPDATE pagocli_cab SET estado = 'A' WHERE nro_pago = " + nroPago + " AND cod_cliente = " + codCliente + "; "
-                            + "UPDATE pagocli_det SET estado = 'A' WHERE nro_pago = " + nroPago + " AND cod_cliente = " + codCliente + "; "
-                            + "UPDATE venta_det_cuotas SET estado = 'A' WHERE nro_comprob = " + nroPago + " AND cod_caja = 99 AND cod_cliente = " + codCliente + "; "
-                            + "UPDATE venta_det_cuotas SET nro_pago = 0, nro_recibo = 0, fec_recibo = null WHERE nro_pago = " + nroPago + " AND cod_cliente = "
+                            + "UPDATE pagocli_cab SET estado = 'A', fec_vigencia = 'now()' WHERE nro_pago = " + nroPago + " AND cod_cliente = " + codCliente + "; "
+                            + "UPDATE pagocli_det SET estado = 'A', fec_vigencia = 'now()' WHERE nro_pago = " + nroPago + " AND cod_cliente = " + codCliente + "; "
+                            + "UPDATE venta_det_cuotas SET estado = 'A', fec_vigencia = 'now()' WHERE nro_comprob = " + nroPago + " AND cod_caja = 99 AND cod_cliente = " + codCliente + "; "
+                            + "UPDATE venta_det_cuotas SET nro_pago = 0, nro_recibo = 0, fec_recibo = null, fec_vigencia = 'now()' WHERE nro_pago = " + nroPago + " AND cod_cliente = "
                             + codCliente + "; "
                             + "COMMIT;";
                     System.out.println("SQL ANULACION DE COBRO DE CLIENTE: " + sql);

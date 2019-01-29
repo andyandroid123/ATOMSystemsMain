@@ -117,7 +117,8 @@ public class InformeComprasGastos extends javax.swing.JDialog {
                      "INNER JOIN tipo_mercaderia " +
                      "ON tipo_mercaderia.cod_tipomerc = compra_cab.cod_tipomerc " +
                      "WHERE " + nombreCampoFecha + " >= " + vFecDesde + " AND " + nombreCampoFecha + " <= " + vFecHasta + " " +
-                     "AND cod_empresa = " + codEmpresa + " AND cod_local = " + codLocal + " AND cod_sector = " + codSector + " " + condicion + " " +
+                     "AND cod_empresa = " + codEmpresa + " AND cod_local = " + codLocal + " AND cod_sector = " + codSector + " " + condicion + " "
+                   + "AND compra_cab.estado = 'V' " +
                      "GROUP BY compra_cab.fec_vigencia, compra_cab.fec_comprob, compra_cab.nro_comprob, compra_cab.tip_comprob, compra_cab.nro_timbrado, proveedor, " +
                      "compra_cab.total_grava10, compra_cab.total_grava05, compra_cab.total_exento, compra_cab.cod_tipomerc, tipo_mercaderia.descripcion " +
                      "ORDER BY compra_cab.fec_comprob, proveedor";

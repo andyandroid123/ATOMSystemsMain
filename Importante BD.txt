@@ -1,0 +1,24 @@
+==============================================
+TABLAS A LIMPIAR Y DATOS QUE DEJAR 
+Init ATOMSystems
+==============================================
+
+1. Articulos:
+   - Dejar el articulo generico (cod 1)
+2. costoart
+3. preciosart
+4. barras
+5. stockart
+6. usuarios (dejar el de TEST)
+7. cliente (dejar solo GENERICO)
+
+
+truncate pagocli_cab
+truncate pagocli_det
+truncate venta_cab
+truncate venta_det
+truncate venta_det_cuotas
+truncate compra_cab
+truncate venta_det
+truncate venta_det_cuotas
+truncate hismovi_articulo

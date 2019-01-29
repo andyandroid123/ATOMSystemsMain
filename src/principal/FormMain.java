@@ -17,8 +17,11 @@ import javax.swing.JOptionPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.net.ServerSocket;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JDialog;
 import utiles.DBManager;
 import utiles.SetAppearance;
@@ -27,11 +30,18 @@ import utiles.SetAppearance;
  *
  * @author Andres
  */
-public class FormMain extends javax.swing.JFrame {
+public class FormMain extends javax.swing.JFrame implements Runnable{
+    
+    // MOSTRAR HORA ACTUAL DEL SO 
+    private String hora, minutos, segundos;
+    Thread thread;
 
     SetAppearance appearance;
     public static int codUsuario = 0;
     public static int codCaja = 0;
+    public static ServerSocket serverSocket;
+    public static int idSocket = 0;
+    public static boolean conectadoServer = false;
     public static EmpresaBean empresaBean = null;
     public static LocalBean localBean      = null;
     public static SectorBean sectorBean    = null;
@@ -53,7 +63,7 @@ public class FormMain extends javax.swing.JFrame {
     public static boolean resultExitVentas = false; //redundante (para entender)
     public static boolean resultExitCajaMain = false; //redundante (para entender)
     public static boolean resultExitFinanciero = false; 
-    
+
     /**
      * Creates new form FormMain
      */
@@ -70,15 +80,47 @@ public class FormMain extends javax.swing.JFrame {
         inicio();
         String caja = jLEstacion.getText().trim();
         caja = jLEstacion.getText().substring(caja.length() - 2, caja.length());
-        codCaja = Integer.parseInt(caja);   
-        jBPagos.setEnabled(false);
+        codCaja = 1; // Dejar esta variable ACTIVA en para clientes con una sola caja
+        //codCaja = Integer.parseInt(caja);   
+        //jBPagos.setVisible(false);
+        //jBRRHH.setVisible(false);
+        thread = new Thread(this);
+        thread.start();
+        setVisible(true);
     }
 
+    private void cerrarSocket() {
+        try {
+            serverSocket.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "ATENCION: Error al cerrar Socket !!!", "Error...", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
+    public void run(){
+        Thread current = Thread.currentThread();
+        
+        while(current == thread){
+            time();
+            jLHoraActual.setText(hora + ":" + minutos + ":" + segundos);
+        }
+    }
+    
+    private void time(){
+        Calendar calendario = new GregorianCalendar();
+        Date currentTime = new Date();
+        calendario.setTime(currentTime);
+        hora = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY): "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE): "0" + calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND): "0" + calendario.get(Calendar.SECOND);
+    }
+    
     private void inicio(){
         jLEstacion.setText(utiles.Utiles.getIPAdress());
         jLVersionSistema.setText(getFechaSystema());
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-        jLHoraActual.setText(sdf.format(new Date()));
+        //jLHoraActual.setText(sdf.format(new Date()));
     }
     
     public static String getFechaSystema() {
@@ -129,7 +171,7 @@ public class FormMain extends javax.swing.JFrame {
         jBLogOut = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelEmpresaLocal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTFCodEmpresa = new javax.swing.JTextField();
@@ -158,6 +200,8 @@ public class FormMain extends javax.swing.JFrame {
         jLEstacion = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLVersionSistema = new javax.swing.JLabel();
+        jLNombreEmpresa = new javax.swing.JLabel();
+        jLDescLocal = new javax.swing.JLabel();
         jMnuBar = new javax.swing.JMenuBar();
         jMnuSistema = new javax.swing.JMenu();
         jMnuIAcerca = new javax.swing.JMenuItem();
@@ -216,7 +260,7 @@ public class FormMain extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanelEmpresaLocal.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Empresa:");
@@ -232,35 +276,35 @@ public class FormMain extends javax.swing.JFrame {
 
         jTFNombreLocal.setEnabled(false);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelEmpresaLocalLayout = new javax.swing.GroupLayout(jPanelEmpresaLocal);
+        jPanelEmpresaLocal.setLayout(jPanelEmpresaLocalLayout);
+        jPanelEmpresaLocalLayout.setHorizontalGroup(
+            jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEmpresaLocalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFCodLocal)
                     .addComponent(jTFCodEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFNombreEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                     .addComponent(jTFNombreLocal))
                 .addGap(40, 40, 40))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelEmpresaLocalLayout.setVerticalGroup(
+            jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEmpresaLocalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTFCodEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFNombreEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelEmpresaLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTFCodLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFNombreLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,14 +317,14 @@ public class FormMain extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(597, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelEmpresaLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelEmpresaLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -493,6 +537,14 @@ public class FormMain extends javax.swing.JFrame {
         jLVersionSistema.setForeground(new java.awt.Color(102, 102, 102));
         jLVersionSistema.setText("***");
 
+        jLNombreEmpresa.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLNombreEmpresa.setForeground(new java.awt.Color(153, 153, 153));
+        jLNombreEmpresa.setText("***");
+
+        jLDescLocal.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLDescLocal.setForeground(new java.awt.Color(153, 153, 153));
+        jLDescLocal.setText("***");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -504,19 +556,22 @@ public class FormMain extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLEstacion)
-                        .addGap(218, 218, 218)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLVersionSistema))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLDescLocal)
+                    .addComponent(jLNombreEmpresa)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLEstacion)
+                            .addGap(218, 218, 218)
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLVersionSistema))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -525,7 +580,11 @@ public class FormMain extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLNombreEmpresa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLDescLocal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -601,6 +660,7 @@ public class FormMain extends javax.swing.JFrame {
                 setEstadoMenus(false);
                 setEstadoBotonesMenus(false);
                 FormMain.jLNombreUsuario.setText("*");
+                conectadoServer = false;
             }
         }
         
@@ -631,19 +691,6 @@ public class FormMain extends javax.swing.JFrame {
             resultExitAbastecimiento = true;
         }
     }//GEN-LAST:event_jBAbastecimientoActionPerformed
-
-    private void jBRRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRRHHActionPerformed
-        if (formRRHH == null){
-            formRRHH = new FormRRHH();
-            formRRHH.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            formRRHH.setVisible(true);
-            resultExitRRHH = true;
-        }else{
-            formRRHH.setState(Frame.NORMAL);
-            formRRHH.setVisible(true);
-            resultExitRRHH = true;
-        }
-    }//GEN-LAST:event_jBRRHHActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Soporte soporte = new Soporte(new JFrame(), true);
@@ -680,10 +727,6 @@ public class FormMain extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_jBVentasActionPerformed
 
-    private void jBPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPagosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBPagosActionPerformed
-
     private void jBFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinancieroActionPerformed
         if (formFinanciero == null){
             formFinanciero = new FormFinanciero();
@@ -695,6 +738,23 @@ public class FormMain extends javax.swing.JFrame {
             resultExitFinanciero = true;
         }
     }//GEN-LAST:event_jBFinancieroActionPerformed
+
+    private void jBPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPagosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBPagosActionPerformed
+
+    private void jBRRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRRHHActionPerformed
+        if (formRRHH == null){
+            formRRHH = new FormRRHH();
+            formRRHH.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            formRRHH.setVisible(true);
+            resultExitRRHH = true;
+        }else{
+            formRRHH.setState(Frame.NORMAL);
+            formRRHH.setVisible(true);
+            resultExitRRHH = true;
+        }
+    }//GEN-LAST:event_jBRRHHActionPerformed
 
     private void salirDelSistema()
     {
@@ -712,7 +772,7 @@ public class FormMain extends javax.swing.JFrame {
     
     private boolean controlForms(){
         boolean result = true;
-        if(resultExitAbastecimiento == false && resultExitRegistros == false && resultExitRRHH == false && resultExitCajaMain == false){
+        if(resultExitAbastecimiento == false && resultExitRegistros == false && resultExitRRHH == false && resultExitCajaMain == false && resultExitFinanciero == false){
             result = false;
         }
         
@@ -792,8 +852,10 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     public static javax.swing.JLabel jLAlias;
     public static javax.swing.JLabel jLConectadoDesde;
+    public static javax.swing.JLabel jLDescLocal;
     private javax.swing.JLabel jLEstacion;
     public static javax.swing.JLabel jLHoraActual;
+    public static javax.swing.JLabel jLNombreEmpresa;
     public static javax.swing.JLabel jLNombreUsuario;
     private javax.swing.JLabel jLVersionSistema;
     private javax.swing.JLabel jLabel1;
@@ -809,9 +871,9 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMnuSistema;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelEmpresaLocal;
     public static javax.swing.JTextField jTFCodEmpresa;
     public static javax.swing.JTextField jTFCodLocal;
     public static javax.swing.JTextField jTFNombreEmpresa;

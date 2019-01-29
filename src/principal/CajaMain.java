@@ -15,15 +15,12 @@ import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
 import utiles.DBManager;
 import utiles.InfoErrores;
-import utiles.LibReportes;
 
 /**
  *
@@ -53,6 +50,7 @@ public class CajaMain extends javax.swing.JFrame {
     
     public CajaMain() {
         initComponents();
+        this.setTitle("ATOMSystems|Main - Módulo de Ventas - (CAJA " + nroTerminal + ")");
         cerrarVentana();
         labelBotones();
         startTitleAnimation();

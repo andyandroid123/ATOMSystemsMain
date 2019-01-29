@@ -1861,7 +1861,7 @@ public final class Articulos extends javax.swing.JDialog {
     private void setValuesField(){
         jTFCodArticulo.setText("0");
         jTFCodGrupo.setText("1");
-        jTFCodSubgrupo.setText("1");
+        jTFCodSubgrupo.setText("101");
         jTFCodMarca.setText("1");
         jTFCodProveedor.setText("1");
         jTFDesCorta.setText("");
@@ -1870,6 +1870,7 @@ public final class Articulos extends javax.swing.JDialog {
         jTFNombreGrupo.setText("");
         jTFNombreSubgrupo.setText("");
         jTFRazonSocProveedor.setText("");
+        jTFStock.setText("0");
     }
     
     public static void cargaLineasCosto(){
