@@ -2,3 +2,13 @@ PENDIENTES
 
 FormRRHH
 - Anulacion descuentos beneficios: 1. No está haciendo el recorrido para la verificación de elementos seleccionados para eliminar - 23/05/2018
+
+NUEVAS ACTUALIZACIONES 
+Fecha: 30/01/2019
+
+1. Grupos de usuarios 
+   Incluir en BD las tablas:
+
+   - modulo_menu
+   - modulo_menuitem
+   - perfil_usuario

@@ -64,7 +64,7 @@ public class FormRRHH extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMnuConceptos = new javax.swing.JMenu();
+        jMnuRegistrosRRHH = new javax.swing.JMenu();
         jMnuIEmpleados = new javax.swing.JMenuItem();
         jMnuIProfesion = new javax.swing.JMenuItem();
         jMnuISeccion = new javax.swing.JMenuItem();
@@ -74,13 +74,13 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIConceptos = new javax.swing.JMenuItem();
         jMnuIHorarios = new javax.swing.JMenuItem();
         jMnuIMotivoLiquidacion = new javax.swing.JMenuItem();
-        jMnuMantenimiento = new javax.swing.JMenu();
-        jMnuIRegistro = new javax.swing.JMenu();
+        jMnuMantenimientoRRHH = new javax.swing.JMenu();
+        jMnuIDescBenef = new javax.swing.JMenu();
         jMnuIAnticipo = new javax.swing.JMenuItem();
-        jMnuIDescuentoBeneficio = new javax.swing.JMenuItem();
+        jMnuIRegistroDescuentoBeneficio = new javax.swing.JMenuItem();
         jMnuIAnulacionDescBen = new javax.swing.JMenuItem();
         jMnuIRegModDiasHoras = new javax.swing.JMenuItem();
-        jMnuInformes = new javax.swing.JMenu();
+        jMnuInformesRRHH = new javax.swing.JMenu();
         jMnuIDescBen = new javax.swing.JMenuItem();
         jMnuILiqSalarios = new javax.swing.JMenuItem();
         jMnuIRecibos = new javax.swing.JMenuItem();
@@ -106,8 +106,8 @@ public class FormRRHH extends javax.swing.JFrame {
             .addGap(0, 739, Short.MAX_VALUE)
         );
 
-        jMnuConceptos.setText("Registros");
-        jMnuConceptos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuRegistrosRRHH.setText("Registros");
+        jMnuRegistrosRRHH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/empleado24.png"))); // NOI18N
@@ -117,7 +117,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIEmpleadosActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuIEmpleados);
+        jMnuRegistrosRRHH.add(jMnuIEmpleados);
 
         jMnuIProfesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIProfesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/profesion24.png"))); // NOI18N
@@ -127,7 +127,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIProfesionActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuIProfesion);
+        jMnuRegistrosRRHH.add(jMnuIProfesion);
 
         jMnuISeccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuISeccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seccion24.png"))); // NOI18N
@@ -137,7 +137,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuISeccionActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuISeccion);
+        jMnuRegistrosRRHH.add(jMnuISeccion);
 
         jMnuICargo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cargo24.png"))); // NOI18N
@@ -147,7 +147,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuICargoActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuICargo);
+        jMnuRegistrosRRHH.add(jMnuICargo);
 
         jMnuICiudad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ciudades24.png"))); // NOI18N
@@ -157,7 +157,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuICiudadActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuICiudad);
+        jMnuRegistrosRRHH.add(jMnuICiudad);
 
         jMnuIBarrio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIBarrio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/barrios24.png"))); // NOI18N
@@ -167,7 +167,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIBarrioActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuIBarrio);
+        jMnuRegistrosRRHH.add(jMnuIBarrio);
 
         jMnuIConceptos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIConceptos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/conceptos24.png"))); // NOI18N
@@ -177,7 +177,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIConceptosActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuIConceptos);
+        jMnuRegistrosRRHH.add(jMnuIConceptos);
 
         jMnuIHorarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/horarios24.png"))); // NOI18N
@@ -187,7 +187,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIHorariosActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuIHorarios);
+        jMnuRegistrosRRHH.add(jMnuIHorarios);
 
         jMnuIMotivoLiquidacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIMotivoLiquidacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/motivoLiquidacion24.png"))); // NOI18N
@@ -197,16 +197,16 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIMotivoLiquidacionActionPerformed(evt);
             }
         });
-        jMnuConceptos.add(jMnuIMotivoLiquidacion);
+        jMnuRegistrosRRHH.add(jMnuIMotivoLiquidacion);
 
-        jMenuBar1.add(jMnuConceptos);
+        jMenuBar1.add(jMnuRegistrosRRHH);
 
-        jMnuMantenimiento.setText("Mantenimiento");
-        jMnuMantenimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuMantenimientoRRHH.setText("Mantenimiento");
+        jMnuMantenimientoRRHH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMnuIRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/descuentoBeneficios24.png"))); // NOI18N
-        jMnuIRegistro.setText("Registro de Descuento/Beneficios");
-        jMnuIRegistro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIDescBenef.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/descuentoBeneficios24.png"))); // NOI18N
+        jMnuIDescBenef.setText("Registro de Descuento/Beneficios");
+        jMnuIDescBenef.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIAnticipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnticipo.setText("Anticipo");
@@ -215,18 +215,18 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIAnticipoActionPerformed(evt);
             }
         });
-        jMnuIRegistro.add(jMnuIAnticipo);
+        jMnuIDescBenef.add(jMnuIAnticipo);
 
-        jMnuIDescuentoBeneficio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuIDescuentoBeneficio.setText("Otros descuentos/beneficios");
-        jMnuIDescuentoBeneficio.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIRegistroDescuentoBeneficio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIRegistroDescuentoBeneficio.setText("Otros descuentos/beneficios");
+        jMnuIRegistroDescuentoBeneficio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuIDescuentoBeneficioActionPerformed(evt);
+                jMnuIRegistroDescuentoBeneficioActionPerformed(evt);
             }
         });
-        jMnuIRegistro.add(jMnuIDescuentoBeneficio);
+        jMnuIDescBenef.add(jMnuIRegistroDescuentoBeneficio);
 
-        jMnuMantenimiento.add(jMnuIRegistro);
+        jMnuMantenimientoRRHH.add(jMnuIDescBenef);
 
         jMnuIAnulacionDescBen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionDescBen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/anulacion24.png"))); // NOI18N
@@ -236,7 +236,7 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIAnulacionDescBenActionPerformed(evt);
             }
         });
-        jMnuMantenimiento.add(jMnuIAnulacionDescBen);
+        jMnuMantenimientoRRHH.add(jMnuIAnulacionDescBen);
 
         jMnuIRegModDiasHoras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegModDiasHoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
@@ -246,12 +246,12 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIRegModDiasHorasActionPerformed(evt);
             }
         });
-        jMnuMantenimiento.add(jMnuIRegModDiasHoras);
+        jMnuMantenimientoRRHH.add(jMnuIRegModDiasHoras);
 
-        jMenuBar1.add(jMnuMantenimiento);
+        jMenuBar1.add(jMnuMantenimientoRRHH);
 
-        jMnuInformes.setText("Informes");
-        jMnuInformes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesRRHH.setText("Informes");
+        jMnuInformesRRHH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIDescBen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIDescBen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/descuentoBeneficios24.png"))); // NOI18N
@@ -261,19 +261,19 @@ public class FormRRHH extends javax.swing.JFrame {
                 jMnuIDescBenActionPerformed(evt);
             }
         });
-        jMnuInformes.add(jMnuIDescBen);
+        jMnuInformesRRHH.add(jMnuIDescBen);
 
         jMnuILiqSalarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuILiqSalarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/liquidacion_definitiva24.png"))); // NOI18N
         jMnuILiqSalarios.setText("Liquidación de Salarios");
-        jMnuInformes.add(jMnuILiqSalarios);
+        jMnuInformesRRHH.add(jMnuILiqSalarios);
 
         jMnuIRecibos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRecibos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recibo24.png"))); // NOI18N
         jMnuIRecibos.setText("Recibos de Salarios");
-        jMnuInformes.add(jMnuIRecibos);
+        jMnuInformesRRHH.add(jMnuIRecibos);
 
-        jMenuBar1.add(jMnuInformes);
+        jMenuBar1.add(jMnuInformesRRHH);
 
         jMnuProcesos.setText("Procesos");
         jMnuProcesos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -397,7 +397,7 @@ public class FormRRHH extends javax.swing.JFrame {
 
     RegistroDescBeneficios regDescBen;
     
-    private void jMnuIDescuentoBeneficioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIDescuentoBeneficioActionPerformed
+    private void jMnuIRegistroDescuentoBeneficioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIRegistroDescuentoBeneficioActionPerformed
         if(regDescBen == null){
             regDescBen = new RegistroDescBeneficios(new JFrame(), true);
             regDescBen.pack();
@@ -405,7 +405,7 @@ public class FormRRHH extends javax.swing.JFrame {
         }else{
             regDescBen.setVisible(true);
         }
-    }//GEN-LAST:event_jMnuIDescuentoBeneficioActionPerformed
+    }//GEN-LAST:event_jMnuIRegistroDescuentoBeneficioActionPerformed
 
     private void jMnuIAnulacionDescBenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIAnulacionDescBenActionPerformed
         AnulacionDescBeneficio anulacion = new AnulacionDescBeneficio(new JFrame(), true);
@@ -486,7 +486,6 @@ public class FormRRHH extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMnuConceptos;
     private javax.swing.JMenuItem jMnuIAnticipo;
     private javax.swing.JMenuItem jMnuIAnulacionDescBen;
     private javax.swing.JMenuItem jMnuIBarrio;
@@ -495,7 +494,7 @@ public class FormRRHH extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuICiudad;
     private javax.swing.JMenuItem jMnuIConceptos;
     private javax.swing.JMenuItem jMnuIDescBen;
-    private javax.swing.JMenuItem jMnuIDescuentoBeneficio;
+    private javax.swing.JMenu jMnuIDescBenef;
     private javax.swing.JMenuItem jMnuIEmpleados;
     private javax.swing.JMenuItem jMnuIHorarios;
     private javax.swing.JMenuItem jMnuILiqSalarios;
@@ -505,11 +504,12 @@ public class FormRRHH extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuIProfesion;
     private javax.swing.JMenuItem jMnuIRecibos;
     private javax.swing.JMenuItem jMnuIRegModDiasHoras;
-    private javax.swing.JMenu jMnuIRegistro;
+    private javax.swing.JMenuItem jMnuIRegistroDescuentoBeneficio;
     private javax.swing.JMenuItem jMnuISeccion;
-    private javax.swing.JMenu jMnuInformes;
-    private javax.swing.JMenu jMnuMantenimiento;
+    private javax.swing.JMenu jMnuInformesRRHH;
+    private javax.swing.JMenu jMnuMantenimientoRRHH;
     private javax.swing.JMenu jMnuProcesos;
+    private javax.swing.JMenu jMnuRegistrosRRHH;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

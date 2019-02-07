@@ -15,7 +15,7 @@ import ModRegistros.Marcas;
 import ModRegistros.Monedas;
 import ModRegistros.Parametros;
 import ModRegistros.Proveedores;
-import ModRegistros.Usuarios;
+import ModRegistros.Usuarios1;
 import ModRegistros.informes.InformeVentas;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -60,17 +60,17 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnuRegistros = new javax.swing.JMenu();
-        jMnuArticulos = new javax.swing.JMenuItem();
-        jMnuGruposSub = new javax.swing.JMenuItem();
-        jMnuMarcas = new javax.swing.JMenuItem();
-        jMnuCiudades = new javax.swing.JMenuItem();
-        jMnuBarrios = new javax.swing.JMenuItem();
-        jMnuProveedores = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMnuIArticulos = new javax.swing.JMenuItem();
+        jMnuIGruposSub = new javax.swing.JMenuItem();
+        jMnuIMarcas = new javax.swing.JMenuItem();
+        jMnuICiudades = new javax.swing.JMenuItem();
+        jMnuIBarrios = new javax.swing.JMenuItem();
+        jMnuIProveedores = new javax.swing.JMenuItem();
+        jMnuIMonedas = new javax.swing.JMenuItem();
         jMnuIClientes = new javax.swing.JMenuItem();
         jMnuSistema = new javax.swing.JMenu();
-        jMnuUsuarios = new javax.swing.JMenuItem();
-        jMnuParametros = new javax.swing.JMenuItem();
+        jMnuIUsuarios = new javax.swing.JMenuItem();
+        jMnuIParametros = new javax.swing.JMenuItem();
         jMnuInformes = new javax.swing.JMenu();
         jMnuIInformVentas = new javax.swing.JMenuItem();
 
@@ -97,75 +97,75 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuRegistros.setText("Registros");
         jMnuRegistros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMnuArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
-        jMnuArticulos.setText("Artículos");
-        jMnuArticulos.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
+        jMnuIArticulos.setText("Artículos");
+        jMnuIArticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuArticulosActionPerformed(evt);
+                jMnuIArticulosActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMnuArticulos);
+        jMnuRegistros.add(jMnuIArticulos);
 
-        jMnuGruposSub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuGruposSub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/grupos24.png"))); // NOI18N
-        jMnuGruposSub.setText("Grupos");
-        jMnuGruposSub.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIGruposSub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIGruposSub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/grupos24.png"))); // NOI18N
+        jMnuIGruposSub.setText("Grupos");
+        jMnuIGruposSub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuGruposSubActionPerformed(evt);
+                jMnuIGruposSubActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMnuGruposSub);
+        jMnuRegistros.add(jMnuIGruposSub);
 
-        jMnuMarcas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/marcas24.png"))); // NOI18N
-        jMnuMarcas.setText("Marcas");
-        jMnuMarcas.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIMarcas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/marcas24.png"))); // NOI18N
+        jMnuIMarcas.setText("Marcas");
+        jMnuIMarcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuMarcasActionPerformed(evt);
+                jMnuIMarcasActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMnuMarcas);
+        jMnuRegistros.add(jMnuIMarcas);
 
-        jMnuCiudades.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuCiudades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ciudades24.png"))); // NOI18N
-        jMnuCiudades.setText("Ciudades");
-        jMnuCiudades.addActionListener(new java.awt.event.ActionListener() {
+        jMnuICiudades.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuICiudades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ciudades24.png"))); // NOI18N
+        jMnuICiudades.setText("Ciudades");
+        jMnuICiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuCiudadesActionPerformed(evt);
+                jMnuICiudadesActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMnuCiudades);
+        jMnuRegistros.add(jMnuICiudades);
 
-        jMnuBarrios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuBarrios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/barrios24.png"))); // NOI18N
-        jMnuBarrios.setText("Barrios");
-        jMnuBarrios.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIBarrios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIBarrios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/barrios24.png"))); // NOI18N
+        jMnuIBarrios.setText("Barrios");
+        jMnuIBarrios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuBarriosActionPerformed(evt);
+                jMnuIBarriosActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMnuBarrios);
+        jMnuRegistros.add(jMnuIBarrios);
 
-        jMnuProveedores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/proveedores24.png"))); // NOI18N
-        jMnuProveedores.setText("Proveedores");
-        jMnuProveedores.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIProveedores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/proveedores24.png"))); // NOI18N
+        jMnuIProveedores.setText("Proveedores");
+        jMnuIProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuProveedoresActionPerformed(evt);
+                jMnuIProveedoresActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMnuProveedores);
+        jMnuRegistros.add(jMnuIProveedores);
 
-        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/moneda24.png"))); // NOI18N
-        jMenuItem1.setText("Monedas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIMonedas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIMonedas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/moneda24.png"))); // NOI18N
+        jMnuIMonedas.setText("Monedas");
+        jMnuIMonedas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMnuIMonedasActionPerformed(evt);
             }
         });
-        jMnuRegistros.add(jMenuItem1);
+        jMnuRegistros.add(jMnuIMonedas);
 
         jMnuIClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cliente24.png"))); // NOI18N
@@ -182,25 +182,25 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuSistema.setText("Sistema");
         jMnuSistema.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMnuUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/usuarios24.png"))); // NOI18N
-        jMnuUsuarios.setText("Usuarios del sistema");
-        jMnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/usuarios24.png"))); // NOI18N
+        jMnuIUsuarios.setText("Usuarios del sistema");
+        jMnuIUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuUsuariosActionPerformed(evt);
+                jMnuIUsuariosActionPerformed(evt);
             }
         });
-        jMnuSistema.add(jMnuUsuarios);
+        jMnuSistema.add(jMnuIUsuarios);
 
-        jMnuParametros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuParametros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/parametros24.png"))); // NOI18N
-        jMnuParametros.setText("Parámetros del sistema");
-        jMnuParametros.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIParametros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIParametros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/parametros24.png"))); // NOI18N
+        jMnuIParametros.setText("Parámetros del sistema");
+        jMnuIParametros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuParametrosActionPerformed(evt);
+                jMnuIParametrosActionPerformed(evt);
             }
         });
-        jMnuSistema.add(jMnuParametros);
+        jMnuSistema.add(jMnuIParametros);
 
         jMenuBar1.add(jMnuSistema);
 
@@ -236,55 +236,55 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMnuArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuArticulosActionPerformed
+    private void jMnuIArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIArticulosActionPerformed
         Articulos.callFromArticulo = true;
         Articulos articulos = new Articulos(new JFrame(), true, "", "");
         articulos.pack();
         articulos.setVisible(true);
-    }//GEN-LAST:event_jMnuArticulosActionPerformed
+    }//GEN-LAST:event_jMnuIArticulosActionPerformed
 
-    private void jMnuGruposSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuGruposSubActionPerformed
+    private void jMnuIGruposSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIGruposSubActionPerformed
         Articulos.callFromArticulo = false;
         Grupos grupo = new Grupos(new JFrame(), true);
         grupo.pack();
         grupo.setVisible(true);
-    }//GEN-LAST:event_jMnuGruposSubActionPerformed
+    }//GEN-LAST:event_jMnuIGruposSubActionPerformed
 
-    private void jMnuMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuMarcasActionPerformed
+    private void jMnuIMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIMarcasActionPerformed
         Marcas marcas = new Marcas(new JFrame(), true);
         marcas.pack();
         marcas.setVisible(true);
-    }//GEN-LAST:event_jMnuMarcasActionPerformed
+    }//GEN-LAST:event_jMnuIMarcasActionPerformed
 
-    private void jMnuCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuCiudadesActionPerformed
+    private void jMnuICiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuICiudadesActionPerformed
         Ciudades ciudades = new Ciudades(new JFrame(), true);
         ciudades.pack();
         ciudades.setVisible(true);
-    }//GEN-LAST:event_jMnuCiudadesActionPerformed
+    }//GEN-LAST:event_jMnuICiudadesActionPerformed
 
-    private void jMnuBarriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuBarriosActionPerformed
+    private void jMnuIBarriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIBarriosActionPerformed
         Barrios barrios = new Barrios(new JFrame(), true);
         barrios.pack();
         barrios.setVisible(true);
-    }//GEN-LAST:event_jMnuBarriosActionPerformed
+    }//GEN-LAST:event_jMnuIBarriosActionPerformed
 
-    private void jMnuProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProveedoresActionPerformed
+    private void jMnuIProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIProveedoresActionPerformed
         Proveedores proveedores = new Proveedores(new JFrame(), true);
         proveedores.pack();
         proveedores.setVisible(true);
-    }//GEN-LAST:event_jMnuProveedoresActionPerformed
+    }//GEN-LAST:event_jMnuIProveedoresActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMnuIMonedasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIMonedasActionPerformed
         Monedas monedas = new Monedas(new JFrame(), true);
         monedas.pack();
         monedas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMnuIMonedasActionPerformed
 
-    private void jMnuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuariosActionPerformed
-        Usuarios usuarios = new Usuarios(new JFrame(), true);
+    private void jMnuIUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIUsuariosActionPerformed
+        Usuarios1 usuarios = new Usuarios1(new JFrame(), true);
         usuarios.pack();
         usuarios.setVisible(true);
-    }//GEN-LAST:event_jMnuUsuariosActionPerformed
+    }//GEN-LAST:event_jMnuIUsuariosActionPerformed
 
     private void jMnuIClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIClientesActionPerformed
         Clientes clientes = new Clientes(new JFrame(), true);
@@ -298,11 +298,11 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         informeVtas.setVisible(true);
     }//GEN-LAST:event_jMnuIInformVentasActionPerformed
 
-    private void jMnuParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuParametrosActionPerformed
+    private void jMnuIParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIParametrosActionPerformed
         Parametros params = new Parametros(new JFrame(), true);
         params.pack();
         params.setVisible(true);
-    }//GEN-LAST:event_jMnuParametrosActionPerformed
+    }//GEN-LAST:event_jMnuIParametrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,20 +342,20 @@ public class FormRegistrosBase extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMnuArticulos;
-    private javax.swing.JMenuItem jMnuBarrios;
-    private javax.swing.JMenuItem jMnuCiudades;
-    private javax.swing.JMenuItem jMnuGruposSub;
+    private javax.swing.JMenuItem jMnuIArticulos;
+    private javax.swing.JMenuItem jMnuIBarrios;
+    private javax.swing.JMenuItem jMnuICiudades;
     private javax.swing.JMenuItem jMnuIClientes;
+    private javax.swing.JMenuItem jMnuIGruposSub;
     private javax.swing.JMenuItem jMnuIInformVentas;
+    private javax.swing.JMenuItem jMnuIMarcas;
+    private javax.swing.JMenuItem jMnuIMonedas;
+    private javax.swing.JMenuItem jMnuIParametros;
+    private javax.swing.JMenuItem jMnuIProveedores;
+    private javax.swing.JMenuItem jMnuIUsuarios;
     private javax.swing.JMenu jMnuInformes;
-    private javax.swing.JMenuItem jMnuMarcas;
-    private javax.swing.JMenuItem jMnuParametros;
-    private javax.swing.JMenuItem jMnuProveedores;
     private javax.swing.JMenu jMnuRegistros;
     private javax.swing.JMenu jMnuSistema;
-    private javax.swing.JMenuItem jMnuUsuarios;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

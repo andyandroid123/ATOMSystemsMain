@@ -58,16 +58,16 @@ public class FormAbastecimiento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMnuOperaciones = new javax.swing.JMenu();
+        jMnuOperacionesAbastecimiento = new javax.swing.JMenu();
         jMnuIRecepcionMercaderias = new javax.swing.JMenuItem();
         jMnuIRegistroCompraMercaderias = new javax.swing.JMenuItem();
         jMnuIRegistroComprobantesGastos = new javax.swing.JMenuItem();
         jMnuIAnulacionDocCompra = new javax.swing.JMenuItem();
         jMnuStock = new javax.swing.JMenu();
         jMnuIAjusteStock = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jMnuConsultas = new javax.swing.JMenu();
         jMnuIArticulos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMnuInformesAbastecimiento = new javax.swing.JMenu();
         jMnuIReImpresionRecepcion = new javax.swing.JMenuItem();
         jMnuIReImpresionAjuste = new javax.swing.JMenuItem();
         jMnuIComprasGastos = new javax.swing.JMenuItem();
@@ -91,8 +91,8 @@ public class FormAbastecimiento extends javax.swing.JFrame {
             .addGap(0, 746, Short.MAX_VALUE)
         );
 
-        jMnuOperaciones.setText("Operaciones");
-        jMnuOperaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuOperacionesAbastecimiento.setText("Operaciones");
+        jMnuOperacionesAbastecimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIRecepcionMercaderias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRecepcionMercaderias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recepcion_mercaderias24.png"))); // NOI18N
@@ -102,7 +102,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIRecepcionMercaderiasActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIRecepcionMercaderias);
+        jMnuOperacionesAbastecimiento.add(jMnuIRecepcionMercaderias);
 
         jMnuIRegistroCompraMercaderias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroCompraMercaderias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/registro_compra24.png"))); // NOI18N
@@ -112,7 +112,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIRegistroCompraMercaderiasActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIRegistroCompraMercaderias);
+        jMnuOperacionesAbastecimiento.add(jMnuIRegistroCompraMercaderias);
 
         jMnuIRegistroComprobantesGastos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroComprobantesGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/gastos24.png"))); // NOI18N
@@ -122,7 +122,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIRegistroComprobantesGastosActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIRegistroComprobantesGastos);
+        jMnuOperacionesAbastecimiento.add(jMnuIRegistroComprobantesGastos);
 
         jMnuIAnulacionDocCompra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionDocCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar24.png"))); // NOI18N
@@ -132,9 +132,9 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIAnulacionDocCompraActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIAnulacionDocCompra);
+        jMnuOperacionesAbastecimiento.add(jMnuIAnulacionDocCompra);
 
-        jMenuBar1.add(jMnuOperaciones);
+        jMenuBar1.add(jMnuOperacionesAbastecimiento);
 
         jMnuStock.setText("Stock");
         jMnuStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -151,8 +151,8 @@ public class FormAbastecimiento extends javax.swing.JFrame {
 
         jMenuBar1.add(jMnuStock);
 
-        jMenu1.setText("Consultas");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuConsultas.setText("Consultas");
+        jMnuConsultas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
@@ -162,12 +162,12 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIArticulosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMnuIArticulos);
+        jMnuConsultas.add(jMnuIArticulos);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMnuConsultas);
 
-        jMenu2.setText("Informes ");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesAbastecimiento.setText("Informes ");
+        jMnuInformesAbastecimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIReImpresionRecepcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIReImpresionRecepcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recepcion_mercaderias24.png"))); // NOI18N
@@ -177,7 +177,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIReImpresionRecepcionActionPerformed(evt);
             }
         });
-        jMenu2.add(jMnuIReImpresionRecepcion);
+        jMnuInformesAbastecimiento.add(jMnuIReImpresionRecepcion);
 
         jMnuIReImpresionAjuste.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIReImpresionAjuste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ajuste_stock24.png"))); // NOI18N
@@ -187,7 +187,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIReImpresionAjusteActionPerformed(evt);
             }
         });
-        jMenu2.add(jMnuIReImpresionAjuste);
+        jMnuInformesAbastecimiento.add(jMnuIReImpresionAjuste);
 
         jMnuIComprasGastos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIComprasGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/inf_comprasgastos24.png"))); // NOI18N
@@ -197,7 +197,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIComprasGastosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMnuIComprasGastos);
+        jMnuInformesAbastecimiento.add(jMnuIComprasGastos);
 
         jMnuIListadoArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIListadoArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/listado_articulos24.png"))); // NOI18N
@@ -207,9 +207,9 @@ public class FormAbastecimiento extends javax.swing.JFrame {
                 jMnuIListadoArticulosActionPerformed(evt);
             }
         });
-        jMenu2.add(jMnuIListadoArticulos);
+        jMnuInformesAbastecimiento.add(jMnuIListadoArticulos);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMnuInformesAbastecimiento);
 
         setJMenuBar(jMenuBar1);
 
@@ -324,9 +324,8 @@ public class FormAbastecimiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMnuConsultas;
     private javax.swing.JMenuItem jMnuIAjusteStock;
     private javax.swing.JMenuItem jMnuIAnulacionDocCompra;
     private javax.swing.JMenuItem jMnuIArticulos;
@@ -337,7 +336,8 @@ public class FormAbastecimiento extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuIRecepcionMercaderias;
     private javax.swing.JMenuItem jMnuIRegistroCompraMercaderias;
     private javax.swing.JMenuItem jMnuIRegistroComprobantesGastos;
-    private javax.swing.JMenu jMnuOperaciones;
+    private javax.swing.JMenu jMnuInformesAbastecimiento;
+    private javax.swing.JMenu jMnuOperacionesAbastecimiento;
     private javax.swing.JMenu jMnuStock;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMnuConceptos">
+        <Menu class="javax.swing.JMenu" name="jMnuRegistrosRRHH">
           <Properties>
             <Property name="text" type="java.lang.String" value="Registros"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -140,7 +140,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMnuMantenimiento">
+        <Menu class="javax.swing.JMenu" name="jMnuMantenimientoRRHH">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mantenimiento"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -148,7 +148,7 @@
             </Property>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMnuIRegistro">
+            <Menu class="javax.swing.JMenu" name="jMnuIDescBenef">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/resources/descuentoBeneficios24.png"/>
@@ -170,7 +170,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIAnticipoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMnuIDescuentoBeneficio">
+                <MenuItem class="javax.swing.JMenuItem" name="jMnuIRegistroDescuentoBeneficio">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
@@ -178,7 +178,7 @@
                     <Property name="text" type="java.lang.String" value="Otros descuentos/beneficios"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIDescuentoBeneficioActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRegistroDescuentoBeneficioActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -213,7 +213,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMnuInformes">
+        <Menu class="javax.swing.JMenu" name="jMnuInformesRRHH">
           <Properties>
             <Property name="text" type="java.lang.String" value="Informes"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

@@ -55,12 +55,12 @@ public class FormFinanciero extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMnuOperaciones = new javax.swing.JMenu();
+        jMnuOperacionesFinanciero = new javax.swing.JMenu();
         jMnuIModificarVencimiento = new javax.swing.JMenuItem();
         jMnuIRedefinicionCuotas = new javax.swing.JMenuItem();
         jMnuIAnulacionCobroClientes = new javax.swing.JMenuItem();
         jMnuIRegistroDebCre = new javax.swing.JMenuItem();
-        jMnuInformes = new javax.swing.JMenu();
+        jMnuInformesFinanciero = new javax.swing.JMenu();
         jMnuICobroClientes = new javax.swing.JMenuItem();
         jMnuIAnulacionesDocsVentas = new javax.swing.JMenuItem();
         jMnuICuentasClientes = new javax.swing.JMenuItem();
@@ -84,8 +84,8 @@ public class FormFinanciero extends javax.swing.JFrame {
             .addGap(0, 739, Short.MAX_VALUE)
         );
 
-        jMnuOperaciones.setText("Operaciones");
-        jMnuOperaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuOperacionesFinanciero.setText("Operaciones");
+        jMnuOperacionesFinanciero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIModificarVencimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIModificarVencimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/calculo_dias_horas24.png"))); // NOI18N
@@ -95,7 +95,7 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuIModificarVencimientoActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIModificarVencimiento);
+        jMnuOperacionesFinanciero.add(jMnuIModificarVencimiento);
 
         jMnuIRedefinicionCuotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRedefinicionCuotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png"))); // NOI18N
@@ -105,7 +105,7 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuIRedefinicionCuotasActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIRedefinicionCuotas);
+        jMnuOperacionesFinanciero.add(jMnuIRedefinicionCuotas);
 
         jMnuIAnulacionCobroClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionCobroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancelar24.png"))); // NOI18N
@@ -115,7 +115,7 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuIAnulacionCobroClientesActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIAnulacionCobroClientes);
+        jMnuOperacionesFinanciero.add(jMnuIAnulacionCobroClientes);
 
         jMnuIRegistroDebCre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroDebCre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png"))); // NOI18N
@@ -125,12 +125,12 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuIRegistroDebCreActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIRegistroDebCre);
+        jMnuOperacionesFinanciero.add(jMnuIRegistroDebCre);
 
-        jMenuBar1.add(jMnuOperaciones);
+        jMenuBar1.add(jMnuOperacionesFinanciero);
 
-        jMnuInformes.setText("Informes");
-        jMnuInformes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesFinanciero.setText("Informes");
+        jMnuInformesFinanciero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuICobroClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICobroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
@@ -140,7 +140,7 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuICobroClientesActionPerformed(evt);
             }
         });
-        jMnuInformes.add(jMnuICobroClientes);
+        jMnuInformesFinanciero.add(jMnuICobroClientes);
 
         jMnuIAnulacionesDocsVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionesDocsVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
@@ -150,7 +150,7 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuIAnulacionesDocsVentasActionPerformed(evt);
             }
         });
-        jMnuInformes.add(jMnuIAnulacionesDocsVentas);
+        jMnuInformesFinanciero.add(jMnuIAnulacionesDocsVentas);
 
         jMnuICuentasClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICuentasClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cuenta_cliente24.png"))); // NOI18N
@@ -160,7 +160,7 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuICuentasClientesActionPerformed(evt);
             }
         });
-        jMnuInformes.add(jMnuICuentasClientes);
+        jMnuInformesFinanciero.add(jMnuICuentasClientes);
 
         jMnuIImpresionReciboPagare.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIImpresionReciboPagare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recibos_pagares24.png"))); // NOI18N
@@ -170,9 +170,9 @@ public class FormFinanciero extends javax.swing.JFrame {
                 jMnuIImpresionReciboPagareActionPerformed(evt);
             }
         });
-        jMnuInformes.add(jMnuIImpresionReciboPagare);
+        jMnuInformesFinanciero.add(jMnuIImpresionReciboPagare);
 
-        jMenuBar1.add(jMnuInformes);
+        jMenuBar1.add(jMnuInformesFinanciero);
 
         setJMenuBar(jMenuBar1);
 
@@ -284,8 +284,8 @@ public class FormFinanciero extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuIModificarVencimiento;
     private javax.swing.JMenuItem jMnuIRedefinicionCuotas;
     private javax.swing.JMenuItem jMnuIRegistroDebCre;
-    private javax.swing.JMenu jMnuInformes;
-    private javax.swing.JMenu jMnuOperaciones;
+    private javax.swing.JMenu jMnuInformesFinanciero;
+    private javax.swing.JMenu jMnuOperacionesFinanciero;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

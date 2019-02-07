@@ -170,7 +170,7 @@ public class CajaMain extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMnuOperaciones = new javax.swing.JMenu();
+        jMnuOperacionesCaja = new javax.swing.JMenu();
         jMnuIAnulacionDocVenta = new javax.swing.JMenuItem();
         jMnuInformeDeMovimientos = new javax.swing.JMenu();
         jMnuIOtrosTurnos = new javax.swing.JMenuItem();
@@ -303,8 +303,8 @@ public class CajaMain extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBCobroClientes, jBReImpresionDocs, jBTurnoVenta, jBVentas});
 
-        jMnuOperaciones.setText("Operaciones ");
-        jMnuOperaciones.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuOperacionesCaja.setText("Operaciones ");
+        jMnuOperacionesCaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jMnuIAnulacionDocVenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionDocVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar24.png"))); // NOI18N
@@ -314,9 +314,9 @@ public class CajaMain extends javax.swing.JFrame {
                 jMnuIAnulacionDocVentaActionPerformed(evt);
             }
         });
-        jMnuOperaciones.add(jMnuIAnulacionDocVenta);
+        jMnuOperacionesCaja.add(jMnuIAnulacionDocVenta);
 
-        jMenuBar1.add(jMnuOperaciones);
+        jMenuBar1.add(jMnuOperacionesCaja);
 
         jMnuInformeDeMovimientos.setText("Informes de movimientos");
         jMnuInformeDeMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -454,7 +454,7 @@ public class CajaMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuIAnulacionDocVenta;
     private javax.swing.JMenuItem jMnuIOtrosTurnos;
     private javax.swing.JMenu jMnuInformeDeMovimientos;
-    private javax.swing.JMenu jMnuOperaciones;
+    private javax.swing.JMenu jMnuOperacionesCaja;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFSubTitulo;
     private javax.swing.JTextField jTFTitulo;

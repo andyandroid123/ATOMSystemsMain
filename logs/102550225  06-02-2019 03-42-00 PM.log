@@ -1,0 +1,170 @@
+Feb 06, 2019 3:42:00 PM null
+OFF: The connection attempt failed.
+Feb 06, 2019 3:42:00 PM null
+ALL: org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:280)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:67)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:212)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: org.postgresql.Driver.makeConnection(Driver.java:407)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: org.postgresql.Driver.connect(Driver.java:275)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.sql.DriverManager.getConnection(DriverManager.java:664)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.sql.DriverManager.getConnection(DriverManager.java:247)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: utiles.DBManager.conectar(DBManager.java:33)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.DlgLogin.jBEntrarActionPerformed(DlgLogin.java:302)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.DlgLogin.access$800(DlgLogin.java:39)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.DlgLogin$9.actionPerformed(DlgLogin.java:185)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.plaf.basic.BasicButtonListener$Actions.actionPerformed(BasicButtonListener.java:303)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.SwingUtilities.notifyAction(SwingUtilities.java:1663)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.JComponent.processKeyBinding(JComponent.java:2882)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.JComponent.processKeyBindings(JComponent.java:2929)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.JComponent.processKeyEvent(JComponent.java:2845)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.processEvent(Component.java:6310)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Container.processEvent(Container.java:2237)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.dispatchEventImpl(Component.java:4889)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Container.dispatchEventImpl(Container.java:2295)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.dispatchEvent(Component.java:4711)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1954)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.dispatchKeyEvent(DefaultKeyboardFocusManager.java:806)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.preDispatchKeyEvent(DefaultKeyboardFocusManager.java:1074)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:945)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:771)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.dispatchEventImpl(Component.java:4760)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Container.dispatchEventImpl(Container.java:2295)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Window.dispatchEventImpl(Window.java:2746)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.dispatchEvent(Component.java:4711)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue.access$500(EventQueue.java:97)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue$3.run(EventQueue.java:709)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue$3.run(EventQueue.java:703)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:90)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue$4.run(EventQueue.java:731)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue$4.run(EventQueue.java:729)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue.dispatchEvent(EventQueue.java:728)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:109)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.WaitDispatchSupport$2.run(WaitDispatchSupport.java:190)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.WaitDispatchSupport$4.run(WaitDispatchSupport.java:235)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.WaitDispatchSupport$4.run(WaitDispatchSupport.java:233)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.WaitDispatchSupport.enter(WaitDispatchSupport.java:233)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Dialog.show(Dialog.java:1084)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.show(Component.java:1671)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Component.setVisible(Component.java:1623)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Window.setVisible(Window.java:1014)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.Dialog.setVisible(Dialog.java:1005)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.FormMain.jBLoginActionPerformed(FormMain.java:643)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.FormMain.access$000(FormMain.java:33)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.FormMain$2.actionPerformed(FormMain.java:229)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.AbstractButton.doClick(AbstractButton.java:376)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: javax.swing.AbstractButton.doClick(AbstractButton.java:356)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.FormMain.<init>(FormMain.java:78)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: principal.FormMain$13.run(FormMain.java:845)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue.access$500(EventQueue.java:97)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue$3.run(EventQueue.java:709)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue$3.run(EventQueue.java:703)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:80)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventQueue.dispatchEvent(EventQueue.java:726)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)ok
+Feb 06, 2019 3:42:00 PM null
+ALL: java.awt.EventDispatchThread.run(EventDispatchThread.java:82)ok

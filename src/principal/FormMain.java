@@ -49,6 +49,7 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     public static List<EmpresaBean> listBeanEmpresa = null;
     public static List<LocalBean> listBeanLocal = null;
     public static String nombreUsuario = "";
+    public static String nombreServidor = "";
     FormAbastecimiento formAbast = null;
     FormRegistrosBase formRegBase = null;
     Ventas formVENTAS = null;
@@ -633,6 +634,10 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
+        if(FormMain.conectadoServer){
+            cerrarSocket();
+            FormMain.conectadoServer = false;
+        }
         DlgLogin login = new DlgLogin(this, true);
         login.pack();
         login.setVisible(true);
@@ -649,18 +654,18 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLogOutActionPerformed
-        
         if(controlForms()){
             JOptionPane.showMessageDialog(this, "Existen formularios abiertos" , "ATENCION", JOptionPane.WARNING_MESSAGE);
-        }else{
+        }else{            
             int exit = JOptionPane.showConfirmDialog(this, "¿Desloguearse?", "CERRAR CONEXION", JOptionPane.YES_NO_OPTION);
-            if(exit == 0){
+            if(exit == 0){                
+                cerrarSocket();
+                conectadoServer = false;
                 jBLogin.setEnabled(true);
                 DBManager.cerrarBD();
                 setEstadoMenus(false);
                 setEstadoBotonesMenus(false);
                 FormMain.jLNombreUsuario.setText("*");
-                conectadoServer = false;
             }
         }
         
@@ -760,8 +765,11 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     {
         int exit = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir del sistema", JOptionPane.YES_NO_OPTION);
         if(exit == 0){
+            if(FormMain.conectadoServer){
+                cerrarSocket();
+                FormMain.conectadoServer = false;
+            }
             DBManager.cerrarBD();
-    
             FormMain.empresaBean     = null;
             FormMain.listBeanEmpresa = null;
             FormMain.localBean       = null;

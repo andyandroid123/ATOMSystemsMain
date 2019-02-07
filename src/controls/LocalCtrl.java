@@ -16,7 +16,7 @@ import utiles.InfoErrores;
 
 /**
  *
- * @author Claudio Kunnen
+ * @author Andrés 
  */
 
 public class LocalCtrl {
@@ -30,7 +30,7 @@ public class LocalCtrl {
        " telefono, fax, activo, cod_usuario, "+
        " to_char(fec_catastro, 'dd/MM/yyyy') AS fec_catastro, "+
        " to_char(fec_vigencia, 'dd/MM/yyyy') AS fec_vigencia, "+
-       " cod_sector_default, punto_exp_fac, ip_servidor, nombre_servidor, punto_exp_remision "+
+       " cod_sector_default, punto_exp_fac, ip_servidor, nombre_servidor, punto_exp_remision, id_socket "+
        " FROM local "+
        " WHERE cod_empresa = ? "+
        "   AND es_localdefault LIKE ?";
@@ -91,6 +91,7 @@ public class LocalCtrl {
                 bean.setFecCatastro(rs.getString("fec_catastro"));
                 bean.setFecVigencia(rs.getString("fec_vigencia"));
                 bean.setCodUsuario(rs.getInt("cod_usuario"));
+                bean.setIdSocket(rs.getInt("id_socket"));
                 listLocalBean.add(bean);
             }
         } catch(Exception e){

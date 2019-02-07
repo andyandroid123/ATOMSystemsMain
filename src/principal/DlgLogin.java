@@ -294,14 +294,14 @@ public class DlgLogin extends javax.swing.JDialog {
         FormMain.nombreUsuario = "";
         if(jTFUsuario.getText().trim().equals("")){
             jTFUsuario.grabFocus();
-            JOptionPane.showMessageDialog(this, "Debe llenar el campo de usuario!", "Atención...", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe llenar el campo de usuario!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
         }else if(jTFPassword.getText().trim().equals("")){
             jTFPassword.grabFocus();
-            JOptionPane.showMessageDialog(this, "Debe llenar el campo de password!", "Atención...", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe llenar el campo de password!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
         }else{
             if(DBManager.conectar(jTFUsuario.getText().toLowerCase(), jTFPassword.getText().toUpperCase(), NomServidor, IPServidor, baseDato)){
                 Locale.setDefault(new Locale("es_PY"));
-                System.out.println("CONECTADO A LA BASE DE DATOS!");
+                System.out.println("CONECTADO A LA BASE DE DATOS!");               
                 getEmpresaDefault();
                 getLocalDefault(1);
                 try{
@@ -336,30 +336,45 @@ public class DlgLogin extends javax.swing.JDialog {
                             InfoAppGlobal.setUserNameApp(resultUsuario.getString("nombre"));
                             FormMain.setEstadoMenus(true);
                             FormMain.setEstadoBotonesMenus(true);
+                            FormMain.conectadoServer = true;
                             dispose();
                         }else{
+                            FormMain.conectadoServer = false;
                             JOptionPane.showMessageDialog(this,"Usuario Inactivo!", "Atención...", JOptionPane.WARNING_MESSAGE);
+                            jTFUsuario.grabFocus();
                         }
                     }else{
                         FormMain.codUsuario = 0;
                         FormMain.nombreUsuario = "";
                         FormMain.jLNombreUsuario.setText("***");
-                        JOptionPane.showMessageDialog(this,"Usuario Inexistente!", "Atención...", JOptionPane.WARNING_MESSAGE);
+                        FormMain.conectadoServer = false;
+                        JOptionPane.showMessageDialog(this,"Usuario Inexistente!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
                     }
                 }catch(Exception ex){
                     ex.printStackTrace();
+                    FormMain.conectadoServer = false;
                     InfoErrores.errores(ex);
-                    JOptionPane.showMessageDialog(this, "Usuario no habilitado en el sistema!", "Atención...", JOptionPane.WARNING_MESSAGE);
-                }
-                
+                    JOptionPane.showMessageDialog(this, "Usuario no habilitado en el sistema!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
+                }                                
                 
                 // Cierra el socket en el caso de nuevo login sin salir del sistema
                 /*try{
                     FormMain.serverSocket.close();
-                }catch(Exception ex){
-                    ex.printStackTrace();
+                }catch(IOException ex){
+                    //ex.printStackTrace();
                 }*/
                 
+                
+                if(FormMain.conectadoServer){
+                    if(abreSocket(FormMain.idSocket)){}
+                    else{
+                        FormMain.setEstadoMenus(false);
+                        FormMain.setEstadoBotonesMenus(false);
+                        JOptionPane.showMessageDialog(this, "¡Ya existe una sesión abierta del sistema!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);                        
+                        System.exit(0);
+                    }
+                }else{
+                }                                
                                 
             }else{
                 jTFUsuario.requestFocus();
@@ -368,7 +383,8 @@ public class DlgLogin extends javax.swing.JDialog {
                 FormMain.nombreUsuario = "";
                 jTFUsuario.requestFocus();
                 jTFUsuario.selectAll();
-                JOptionPane.showMessageDialog(this, "Login denegado! Verifique usuario y Contraseña!", "Atención...", JOptionPane.WARNING_MESSAGE);
+                FormMain.conectadoServer = false;
+                JOptionPane.showMessageDialog(this, "Login denegado! Verifique usuario y Contraseña!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
                 
             }
         }
@@ -379,6 +395,7 @@ public class DlgLogin extends javax.swing.JDialog {
         StructuraLocales struSeleccionada = (StructuraLocales)cbAux.getSelectedItem();
         IPServidor = struSeleccionada.getIps();
         NomServidor = struSeleccionada.getServidor();
+        FormMain.nombreServidor = NomServidor.toUpperCase();
         baseDato = struSeleccionada.getBaseDato();
         
         System.out.println("IPServidor: " + IPServidor + ", NomServidor: " + NomServidor + ", baseDato: " + baseDato);
@@ -496,6 +513,7 @@ public class DlgLogin extends javax.swing.JDialog {
                 FormMain.jTFCodLocal.setText(String.valueOf(FormMain.localBean.getCodLocal()));
                 FormMain.jTFNombreLocal.setText(FormMain.localBean.getDescripcion());
                 FormMain.jLDescLocal.setText(FormMain.localBean.getDescripcion());
+                FormMain.idSocket = FormMain.localBean.getIdSocket();
             } else {
                 FormMain.jTFCodLocal.setText("0");
                 FormMain.jTFNombreLocal.setText("*");
