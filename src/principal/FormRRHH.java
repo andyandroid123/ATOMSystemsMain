@@ -26,6 +26,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import utiles.ClassMenu;
 
 /**
  *
@@ -33,12 +34,13 @@ import javax.swing.JFrame;
  */
 public class FormRRHH extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormRRHH
-     */
-    public FormRRHH() {
+    ClassMenu classMenu = new ClassMenu();
+    
+    public FormRRHH(String user, String grupo) {
         initComponents();
         cerrarVentana();
+        jMenuBar1.setVisible(false);
+        classMenu.permisosMenu(user, grupo, jMenuBar1);
     }
 
     private void cerrarVentana()
@@ -49,6 +51,7 @@ public class FormRRHH extends javax.swing.JFrame {
             public void windowClosing(WindowEvent e)
             {
                 FormMain.resultExitRRHH = false;
+                FormMain.formRRHH = null;
             }
         });
     }
@@ -106,12 +109,16 @@ public class FormRRHH extends javax.swing.JFrame {
             .addGap(0, 739, Short.MAX_VALUE)
         );
 
+        jMenuBar1.setName("jMenuBar1"); // NOI18N
+
         jMnuRegistrosRRHH.setText("Registros");
         jMnuRegistrosRRHH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuRegistrosRRHH.setName("jMnuRegistrosRRHH"); // NOI18N
 
         jMnuIEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/empleado24.png"))); // NOI18N
         jMnuIEmpleados.setText("Empleados");
+        jMnuIEmpleados.setName("jMnuIEmpleados"); // NOI18N
         jMnuIEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIEmpleadosActionPerformed(evt);
@@ -122,6 +129,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIProfesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIProfesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/profesion24.png"))); // NOI18N
         jMnuIProfesion.setText("Profesiones");
+        jMnuIProfesion.setName("jMnuIProfesion"); // NOI18N
         jMnuIProfesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIProfesionActionPerformed(evt);
@@ -132,6 +140,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuISeccion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuISeccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seccion24.png"))); // NOI18N
         jMnuISeccion.setText("Secciones");
+        jMnuISeccion.setName("jMnuISeccion"); // NOI18N
         jMnuISeccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuISeccionActionPerformed(evt);
@@ -142,6 +151,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuICargo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICargo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cargo24.png"))); // NOI18N
         jMnuICargo.setText("Cargos");
+        jMnuICargo.setName("jMnuICargo"); // NOI18N
         jMnuICargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICargoActionPerformed(evt);
@@ -152,6 +162,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuICiudad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ciudades24.png"))); // NOI18N
         jMnuICiudad.setText("Ciudades");
+        jMnuICiudad.setName("jMnuICiudad"); // NOI18N
         jMnuICiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICiudadActionPerformed(evt);
@@ -162,6 +173,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIBarrio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIBarrio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/barrios24.png"))); // NOI18N
         jMnuIBarrio.setText("Barrios");
+        jMnuIBarrio.setName("jMnuIBarrio"); // NOI18N
         jMnuIBarrio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIBarrioActionPerformed(evt);
@@ -172,6 +184,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIConceptos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIConceptos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/conceptos24.png"))); // NOI18N
         jMnuIConceptos.setText("Conceptos ");
+        jMnuIConceptos.setName("jMnuIConceptos"); // NOI18N
         jMnuIConceptos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIConceptosActionPerformed(evt);
@@ -182,6 +195,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIHorarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIHorarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/horarios24.png"))); // NOI18N
         jMnuIHorarios.setText("Horarios");
+        jMnuIHorarios.setName("jMnuIHorarios"); // NOI18N
         jMnuIHorarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIHorariosActionPerformed(evt);
@@ -192,6 +206,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIMotivoLiquidacion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIMotivoLiquidacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/motivoLiquidacion24.png"))); // NOI18N
         jMnuIMotivoLiquidacion.setText("Motivo Liquidación");
+        jMnuIMotivoLiquidacion.setName("jMnuIMotivoLiquidacion"); // NOI18N
         jMnuIMotivoLiquidacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIMotivoLiquidacionActionPerformed(evt);
@@ -203,13 +218,16 @@ public class FormRRHH extends javax.swing.JFrame {
 
         jMnuMantenimientoRRHH.setText("Mantenimiento");
         jMnuMantenimientoRRHH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuMantenimientoRRHH.setName("jMnuMantenimientoRRHH"); // NOI18N
 
         jMnuIDescBenef.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/descuentoBeneficios24.png"))); // NOI18N
         jMnuIDescBenef.setText("Registro de Descuento/Beneficios");
         jMnuIDescBenef.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIDescBenef.setName("jMnuIRegistroDescuentoBeneficio"); // NOI18N
 
         jMnuIAnticipo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnticipo.setText("Anticipo");
+        jMnuIAnticipo.setName("jMnuIAnticipo"); // NOI18N
         jMnuIAnticipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAnticipoActionPerformed(evt);
@@ -219,6 +237,7 @@ public class FormRRHH extends javax.swing.JFrame {
 
         jMnuIRegistroDescuentoBeneficio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroDescuentoBeneficio.setText("Otros descuentos/beneficios");
+        jMnuIRegistroDescuentoBeneficio.setName("jMnuIRegistroDescuentoBeneficio"); // NOI18N
         jMnuIRegistroDescuentoBeneficio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRegistroDescuentoBeneficioActionPerformed(evt);
@@ -231,6 +250,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIAnulacionDescBen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionDescBen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/anulacion24.png"))); // NOI18N
         jMnuIAnulacionDescBen.setText("Anulación Descuentos/Beneficios");
+        jMnuIAnulacionDescBen.setName("jMnuIAnulacionDescBen"); // NOI18N
         jMnuIAnulacionDescBen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAnulacionDescBenActionPerformed(evt);
@@ -241,6 +261,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuIRegModDiasHoras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegModDiasHoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
         jMnuIRegModDiasHoras.setText("Registro/Modificación de Dias y Horas Trabajadas");
+        jMnuIRegModDiasHoras.setName("jMnuIRegModDiasHoras"); // NOI18N
         jMnuIRegModDiasHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRegModDiasHorasActionPerformed(evt);
@@ -252,10 +273,12 @@ public class FormRRHH extends javax.swing.JFrame {
 
         jMnuInformesRRHH.setText("Informes");
         jMnuInformesRRHH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesRRHH.setName("jMnuInformesRRHH"); // NOI18N
 
         jMnuIDescBen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIDescBen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/descuentoBeneficios24.png"))); // NOI18N
         jMnuIDescBen.setText("Descuentos y Beneficios");
+        jMnuIDescBen.setName("jMnuIDescBen"); // NOI18N
         jMnuIDescBen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIDescBenActionPerformed(evt);
@@ -266,21 +289,30 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuILiqSalarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuILiqSalarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/liquidacion_definitiva24.png"))); // NOI18N
         jMnuILiqSalarios.setText("Liquidación de Salarios");
+        jMnuILiqSalarios.setName("jMnuILiqSalarios"); // NOI18N
         jMnuInformesRRHH.add(jMnuILiqSalarios);
 
         jMnuIRecibos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRecibos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recibo24.png"))); // NOI18N
         jMnuIRecibos.setText("Recibos de Salarios");
+        jMnuIRecibos.setName("jMnuIRecibos"); // NOI18N
+        jMnuIRecibos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIRecibosActionPerformed(evt);
+            }
+        });
         jMnuInformesRRHH.add(jMnuIRecibos);
 
         jMenuBar1.add(jMnuInformesRRHH);
 
         jMnuProcesos.setText("Procesos");
         jMnuProcesos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuProcesos.setName("jMnuProcesos"); // NOI18N
 
         jMnuIPreLiquidacionSalarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIPreLiquidacionSalarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pre_liquidacion24.png"))); // NOI18N
         jMnuIPreLiquidacionSalarios.setText("Pre Liquidación de Salarios");
+        jMnuIPreLiquidacionSalarios.setName("jMnuIPreLiquidacionSalarios"); // NOI18N
         jMnuIPreLiquidacionSalarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIPreLiquidacionSalariosActionPerformed(evt);
@@ -291,6 +323,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuILiquidacionDefinitivaSalarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuILiquidacionDefinitivaSalarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/liquidacion_definitiva24.png"))); // NOI18N
         jMnuILiquidacionDefinitivaSalarios.setText("Liquidación Definitiva de Salarios");
+        jMnuILiquidacionDefinitivaSalarios.setName("jMnuILiquidacionDefinitivaSalarios"); // NOI18N
         jMnuILiquidacionDefinitivaSalarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuILiquidacionDefinitivaSalariosActionPerformed(evt);
@@ -301,6 +334,7 @@ public class FormRRHH extends javax.swing.JFrame {
         jMnuICalculoDiasHoras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICalculoDiasHoras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/calculo_dias_horas24.png"))); // NOI18N
         jMnuICalculoDiasHoras.setText("Cálculo de Días/Horas Trabajadas");
+        jMnuICalculoDiasHoras.setName("jMnuICalculoDiasHoras"); // NOI18N
         jMnuICalculoDiasHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICalculoDiasHorasActionPerformed(evt);
@@ -449,6 +483,10 @@ public class FormRRHH extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMnuIDescBenActionPerformed
 
+    private void jMnuIRecibosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIRecibosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuIRecibosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -479,7 +517,7 @@ public class FormRRHH extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormRRHH().setVisible(true);
+                //new FormRRHH().setVisible(true);
             }
         });
     }

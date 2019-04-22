@@ -208,6 +208,60 @@ public class DBManager {
         }
     }
 
+    public static String ejecutarConsultaBarras(String tabla, String campoSelec1, 
+            String compoCondi, String valor){
+        try {
+            String sql = "SELECT " + campoSelec1 + " FROM " + tabla +
+                    " WHERE " + compoCondi + " LIKE ?";
+            System.out.println("CONSULTA BARRAS: " + sql);
+            pstmt = conn.prepareStatement(sql);            
+            try {
+
+                boolean esnumerico = true;
+
+                try {
+                    int x = Integer.valueOf(valor);
+                    
+                } catch(NumberFormatException ex) {
+                    esnumerico = false;
+                }
+                
+                if(esnumerico){
+                    pstmt.setInt(1, Integer.valueOf(valor));
+                }else{
+                    pstmt.setString(1, valor);
+                }
+
+                rset = pstmt.executeQuery();
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+                InfoErrores.errores(ex);
+                try {
+                    pstmt.setString(1, valor);
+                    rset = pstmt.executeQuery();
+                } catch(SQLException ex1) {
+                    ex1.printStackTrace();
+                    InfoErrores.errores(ex);
+                }
+            }            
+        } catch (Exception sqlex) {
+            sqlex.printStackTrace();
+            InfoErrores.errores(sqlex);
+            return "ERROR";
+        }
+        String result = "ERROR";
+        try {
+            if (rset.next()) {
+                result = rset.getString(1);
+            }
+            rset.close();
+        } catch (SQLException sex) {
+            sex.printStackTrace();
+            InfoErrores.errores(sex);
+        }
+        return result;
+    }
+    
     public static String ejecutarConsulta(String tabla, String campoSelec1,
             String campoCondi, String valor) {
         /*try {

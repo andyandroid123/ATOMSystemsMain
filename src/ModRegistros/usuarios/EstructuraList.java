@@ -78,5 +78,8 @@ public class EstructuraList {
         this.codMenu = codMenu;
     }
     
+    public String toString() {
+        return this.getDescripcion();
+    }
     
 }

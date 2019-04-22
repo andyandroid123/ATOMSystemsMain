@@ -5,6 +5,7 @@
  */
 package ModRegistros;
 
+import ModRegistros.informes.HistoricoComprasVentasArticulo;
 import beans.ArticuloBean;
 import controls.ArticuloCtrl;
 import controls.GrupoCtrl;
@@ -175,6 +176,8 @@ public final class Articulos extends javax.swing.JDialog {
         jLNombreUsuario = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLFecVigencia = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jBComprasVentas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ATOMSystems|Main - Registro de Artículos");
@@ -204,12 +207,15 @@ public final class Articulos extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTPImagen.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setText("Precio de Costo");
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel22.setText("Precio de Venta");
 
+        jBCostoVenta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBCostoVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/costos24.png"))); // NOI18N
         jBCostoVenta.setMnemonic('C');
         jBCostoVenta.setText("Costo/Venta");
@@ -231,7 +237,7 @@ public final class Articulos extends javax.swing.JDialog {
                     .addComponent(jSPVenta)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jBCostoVenta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
@@ -258,8 +264,9 @@ public final class Articulos extends javax.swing.JDialog {
         jTPImagen.addTab("Precios Costo/Venta", jPanel5);
 
         jPanel8.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Opciones"));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
 
+        jBNuevo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/nuevo24.png"))); // NOI18N
         jBNuevo.setMnemonic('N');
         jBNuevo.setText("Nuevo");
@@ -269,6 +276,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBModificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png"))); // NOI18N
         jBModificar.setMnemonic('M');
         jBModificar.setText("Modificar");
@@ -278,6 +286,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBGuardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/guardar24.png"))); // NOI18N
         jBGuardar.setMnemonic('G');
         jBGuardar.setText("Guardar");
@@ -288,6 +297,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBCancelar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancelar24.png"))); // NOI18N
         jBCancelar.setMnemonic('L');
         jBCancelar.setText("Cancelar");
@@ -298,6 +308,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBBuscarCodigo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBBuscarCodigo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/buscar24.png"))); // NOI18N
         jBBuscarCodigo.setMnemonic('B');
         jBBuscarCodigo.setText("Código");
@@ -307,6 +318,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBBuscarDescripcion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBBuscarDescripcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/buscar24.png"))); // NOI18N
         jBBuscarDescripcion.setMnemonic('D');
         jBBuscarDescripcion.setText("Descripción");
@@ -316,6 +328,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/salir24.png"))); // NOI18N
         jBSalir.setMnemonic('S');
         jBSalir.setText("Salir");
@@ -325,6 +338,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBRegAnterior.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBRegAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/anterior24.png"))); // NOI18N
         jBRegAnterior.setText("Anterior");
         jBRegAnterior.addActionListener(new java.awt.event.ActionListener() {
@@ -333,6 +347,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBRegSiguiente.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBRegSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/siguiente24.png"))); // NOI18N
         jBRegSiguiente.setText("Siguiente");
         jBRegSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -397,7 +412,7 @@ public final class Articulos extends javax.swing.JDialog {
         jPanel8Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBBuscarCodigo, jBBuscarDescripcion, jBCancelar, jBGuardar, jBModificar, jBNuevo, jBRegAnterior, jBRegSiguiente, jBSalir});
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Descripción"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Descripción", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Descripción:");
@@ -503,6 +518,7 @@ public final class Articulos extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("Proveedor:");
 
+        jBRegistroGrupo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBRegistroGrupo.setText("+");
         jBRegistroGrupo.setEnabled(false);
         jBRegistroGrupo.addActionListener(new java.awt.event.ActionListener() {
@@ -511,6 +527,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBRegistroSubGrupo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBRegistroSubGrupo.setText("+");
         jBRegistroSubGrupo.setEnabled(false);
         jBRegistroSubGrupo.addActionListener(new java.awt.event.ActionListener() {
@@ -519,6 +536,7 @@ public final class Articulos extends javax.swing.JDialog {
             }
         });
 
+        jBRegistroProveedor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBRegistroProveedor.setText("+");
         jBRegistroProveedor.setEnabled(false);
         jBRegistroProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -588,6 +606,7 @@ public final class Articulos extends javax.swing.JDialog {
         jTFDescMarca.setEnabled(false);
         jTFDescMarca.setPreferredSize(new java.awt.Dimension(59, 25));
 
+        jBRegistroMarca.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBRegistroMarca.setText("+");
         jBRegistroMarca.setEnabled(false);
         jBRegistroMarca.addActionListener(new java.awt.event.ActionListener() {
@@ -784,7 +803,7 @@ public final class Articulos extends javax.swing.JDialog {
         );
 
         jPanel11.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Cód Barras"));
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Cód Barras", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
 
         jBAgregarCodBarras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/agregar16.png"))); // NOI18N
         jBAgregarCodBarras.addActionListener(new java.awt.event.ActionListener() {
@@ -826,7 +845,7 @@ public final class Articulos extends javax.swing.JDialog {
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Stock"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Stock", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Cantidad en Stock:");
@@ -863,7 +882,7 @@ public final class Articulos extends javax.swing.JDialog {
         );
 
         jPanel10.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Últimas modificaciones"));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Últimas modificaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         jLabel15.setText("Usuario:");
@@ -903,6 +922,35 @@ public final class Articulos extends javax.swing.JDialog {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        jPanel6.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Informaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 3, 11))); // NOI18N
+
+        jBComprasVentas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBComprasVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/buscar24.png"))); // NOI18N
+        jBComprasVentas.setText("Compras/Ventas");
+        jBComprasVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBComprasVentasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBComprasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBComprasVentas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -922,7 +970,9 @@ public final class Articulos extends javax.swing.JDialog {
                         .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTPImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTPImagen)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -939,8 +989,11 @@ public final class Articulos extends javax.swing.JDialog {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTPImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTPImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -961,7 +1014,7 @@ public final class Articulos extends javax.swing.JDialog {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(999, 776));
+        setSize(new java.awt.Dimension(999, 779));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1416,8 +1469,8 @@ public final class Articulos extends javax.swing.JDialog {
                 }
             } else { // es codigo de barras
                 try {
-                    String codInt =
-                            DBManager.ejecutarConsulta("Barras", "cod_articulo", "cod_barras", Utiles.padLeft(13, "0", codImput));
+//                    String codInt = DBManager.ejecutarConsultaBarras("barras", "cod_articulo", "cod_barras", Utiles.padLeft(13, "0",  codImput));
+                      String codInt = getCodInternoArticulo(Utiles.padLeft(13, "0",  codImput));
                     if (!codInt.equals("ERROR")) {
                         jTFCodArticulo.setText(codInt);
                         cargaDatosArticulo(codInt);
@@ -1504,6 +1557,12 @@ public final class Articulos extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jBCostoVentaActionPerformed
+
+    private void jBComprasVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBComprasVentasActionPerformed
+        HistoricoComprasVentasArticulo historico = new HistoricoComprasVentasArticulo(new JFrame(), Long.parseLong(jTFCodArticulo.getText().trim()), true);
+        historico.pack();
+        historico.setVisible(true);
+    }//GEN-LAST:event_jBComprasVentasActionPerformed
 
     public void cargaDatosUltimoArt(){
         cargaArticulo();        
@@ -2192,6 +2251,25 @@ public final class Articulos extends javax.swing.JDialog {
         costo.pack();
         costo.setVisible(true);
     }
+    
+    private String getCodInternoArticulo(String cod_barras){
+        String result = "";
+        ResultSet rs = null;
+        String sql = "SELECT cod_articulo FROM barras WHERE cod_barras = '" + cod_barras + "'";
+        rs = DBManager.ejecutarDSL(sql);
+        try{
+            if(rs != null){
+                if(rs.next()){
+                    result = String.valueOf(rs.getInt("cod_articulo"));
+                }
+            }
+        }catch(Exception ex){
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return result;
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -2239,6 +2317,7 @@ public final class Articulos extends javax.swing.JDialog {
     private javax.swing.JButton jBBuscarCodigo;
     private javax.swing.JButton jBBuscarDescripcion;
     private javax.swing.JButton jBCancelar;
+    private javax.swing.JButton jBComprasVentas;
     private javax.swing.JButton jBCostoVenta;
     private javax.swing.JButton jBEliminarCodBarras;
     private javax.swing.JButton jBGuardar;
@@ -2286,6 +2365,7 @@ public final class Articulos extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jSPCodBarras;
     private javax.swing.JScrollPane jSPCosto;

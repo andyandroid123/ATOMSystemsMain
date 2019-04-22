@@ -31,7 +31,7 @@ public class PerfilGrupo extends javax.swing.JDialog {
         rs = DBManager.ejecutarDSL(sql);
         ItemList proveeDatos = new ItemList(rs, true);
         try{
-            for(EstructuraList stru: proveeDatos.getFuente()){
+            for(StructuraList stru: proveeDatos.getFuente()){
                 model.addElement(stru);
             }
             JListMenus.setModel(model);
@@ -74,7 +74,7 @@ public class PerfilGrupo extends javax.swing.JDialog {
         rs = DBManager.ejecutarDSL(sql);
         ItemList proveeDatos = new ItemList(rs, true);
         try{
-            for(EstructuraList stru: proveeDatos.getFuente()){
+            for(StructuraList stru: proveeDatos.getFuente()){
                 modelAsignacion.addElement(stru);
             }
             JListAsignacion.setModel(modelAsignacion);

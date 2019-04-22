@@ -101,9 +101,10 @@ public class DlgLogin extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Conectarse a:");
 
+        jCBConexion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCBConexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBConexionActionPerformed(evt);
@@ -131,14 +132,14 @@ public class DlgLogin extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jCBConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Usuario:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Password:");
 
         jTFUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -165,6 +166,7 @@ public class DlgLogin extends javax.swing.JDialog {
             }
         });
 
+        jBSalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/salir24.png"))); // NOI18N
         jBSalir.setText("SALIR");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +180,7 @@ public class DlgLogin extends javax.swing.JDialog {
             }
         });
 
+        jBEntrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jBEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/login24.png"))); // NOI18N
         jBEntrar.setText("ENTRAR");
         jBEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -288,6 +291,7 @@ public class DlgLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jBEntrarKeyPressed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
+        int codGrupoUsuario = 0;
         Locale.setDefault(Locale.US);
         FormMain.jLNombreUsuario.setText("");
         FormMain.codUsuario = 0;
@@ -324,7 +328,7 @@ public class DlgLogin extends javax.swing.JDialog {
                 String fecha = sdf.format(new Date());
                 FormMain.jLConectadoDesde.setText(fecha);
                 
-                ResultSet resultUsuario = DBManager.ejecutarDSL("SELECT cod_usuario, nombre, alias, activo FROM usuario WHERE alias = '" + jTFUsuario.getText().trim() + "'");
+                ResultSet resultUsuario = DBManager.ejecutarDSL("SELECT cod_usuario, nombre, alias, cod_grupo_usuario, activo FROM usuario WHERE alias = '" + jTFUsuario.getText().trim() + "'");
                 try{
                     if(resultUsuario.next()){
                         if(resultUsuario.getString("activo").equals("S")){
@@ -334,6 +338,12 @@ public class DlgLogin extends javax.swing.JDialog {
                             FormMain.jLNombreUsuario.setText(resultUsuario.getString("nombre").toUpperCase());
                             InfoAppGlobal.setUserReal(String.valueOf(resultUsuario.getInt("cod_usuario")));
                             InfoAppGlobal.setUserNameApp(resultUsuario.getString("nombre"));
+                            InfoAppGlobal.setUserGroupApp(String.valueOf(resultUsuario.getInt("cod_grupo_usuario")));
+                            
+                            /*codGrupoUsuario = 0;
+                            codGrupoUsuario = resultUsuario.getInt("cod_grupo_usuario");*/
+                            
+                            
                             FormMain.setEstadoMenus(true);
                             FormMain.setEstadoBotonesMenus(true);
                             FormMain.conectadoServer = true;
@@ -366,7 +376,9 @@ public class DlgLogin extends javax.swing.JDialog {
                 
                 
                 if(FormMain.conectadoServer){
-                    if(abreSocket(FormMain.idSocket)){}
+                    if(abreSocket(FormMain.idSocket)){
+                        FormMain.permisosModulos(true, null);
+                    }
                     else{
                         FormMain.setEstadoMenus(false);
                         FormMain.setEstadoBotonesMenus(false);
@@ -385,7 +397,6 @@ public class DlgLogin extends javax.swing.JDialog {
                 jTFUsuario.selectAll();
                 FormMain.conectadoServer = false;
                 JOptionPane.showMessageDialog(this, "Login denegado! Verifique usuario y Contraseña!", "ATENCIÓN", JOptionPane.WARNING_MESSAGE);
-                
             }
         }
     }//GEN-LAST:event_jBEntrarActionPerformed

@@ -84,7 +84,7 @@ public class BuscaCobroCliente extends javax.swing.JDialog {
         String codCliente = jTFCodCliente.getText().trim();
         
         String sql = "SELECT pago.cod_local, pago.nro_pago, pago.nro_recibo, to_char(pago.fec_pago, 'dd/MM/yyyy') as fec_pago, pago.cod_cliente, "
-                   + "cliente.razon_soc, pago.monto_pago, pago.cod_caja, pago.nro_turno, to_char(pago.fec_vigencia, 'dd/MM/yyyy hh:mm:ss') as fec_vigencia, pago.estado "
+                   + "cliente.razon_soc, (pago.monto_pago + pago.monto_vuelto) AS monto_pago, pago.cod_caja, pago.nro_turno, to_char(pago.fec_vigencia, 'dd/MM/yyyy hh:mm:ss') as fec_vigencia, pago.estado "
                    + "FROM pagocli_cab pago "
                    + "INNER JOIN cliente "
                    + "ON pago.cod_cliente = cliente.cod_cliente "

@@ -16,10 +16,13 @@ import ModRegistros.Monedas;
 import ModRegistros.Parametros;
 import ModRegistros.Proveedores;
 import ModRegistros.Usuarios1;
+import ModRegistros.informes.InformeGralVentas;
 import ModRegistros.informes.InformeVentas;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import utiles.ClassMenu;
 
 /**
  *
@@ -27,12 +30,13 @@ import javax.swing.JDialog;
  */
 public class FormRegistrosBase extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormRegistrosBase
-     */
-    public FormRegistrosBase() {
+    ClassMenu classMenu = new ClassMenu();
+    
+    public FormRegistrosBase(String user, String grupo) {
         initComponents();
         cerrarVentana();
+        jMnuBarRegistros.setVisible(false);
+        classMenu.permisosMenu(user, grupo, jMnuBarRegistros);
     }
 
     private void cerrarVentana()
@@ -43,6 +47,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
             public void windowClosing(WindowEvent e)
             {
                 FormMain.resultExitRegistros = false;
+                FormMain.formRegBase = null;
             }
         });
     }
@@ -58,7 +63,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMnuBarRegistros = new javax.swing.JMenuBar();
         jMnuRegistros = new javax.swing.JMenu();
         jMnuIArticulos = new javax.swing.JMenuItem();
         jMnuIGruposSub = new javax.swing.JMenuItem();
@@ -71,8 +76,10 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuSistema = new javax.swing.JMenu();
         jMnuIUsuarios = new javax.swing.JMenuItem();
         jMnuIParametros = new javax.swing.JMenuItem();
-        jMnuInformes = new javax.swing.JMenu();
+        jMnuInformesRegistrosBase = new javax.swing.JMenu();
+        jMnuVentas = new javax.swing.JMenu();
         jMnuIInformVentas = new javax.swing.JMenuItem();
+        jMnuIInformeGralVentas = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -94,12 +101,16 @@ public class FormRegistrosBase extends javax.swing.JFrame {
             .addGap(0, 739, Short.MAX_VALUE)
         );
 
+        jMnuBarRegistros.setName("jMnuBarRegistros"); // NOI18N
+
         jMnuRegistros.setText("Registros");
         jMnuRegistros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuRegistros.setName("jMnuRegistros"); // NOI18N
 
         jMnuIArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
         jMnuIArticulos.setText("Artículos");
+        jMnuIArticulos.setName("jMnuIArticulos"); // NOI18N
         jMnuIArticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIArticulosActionPerformed(evt);
@@ -110,6 +121,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIGruposSub.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIGruposSub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/grupos24.png"))); // NOI18N
         jMnuIGruposSub.setText("Grupos");
+        jMnuIGruposSub.setName("jMnuIGruposSub"); // NOI18N
         jMnuIGruposSub.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIGruposSubActionPerformed(evt);
@@ -120,6 +132,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIMarcas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIMarcas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/marcas24.png"))); // NOI18N
         jMnuIMarcas.setText("Marcas");
+        jMnuIMarcas.setName("jMnuIMarcas"); // NOI18N
         jMnuIMarcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIMarcasActionPerformed(evt);
@@ -130,6 +143,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuICiudades.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICiudades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ciudades24.png"))); // NOI18N
         jMnuICiudades.setText("Ciudades");
+        jMnuICiudades.setName("jMnuICiudades"); // NOI18N
         jMnuICiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICiudadesActionPerformed(evt);
@@ -140,6 +154,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIBarrios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIBarrios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/barrios24.png"))); // NOI18N
         jMnuIBarrios.setText("Barrios");
+        jMnuIBarrios.setName("jMnuIBarrios"); // NOI18N
         jMnuIBarrios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIBarriosActionPerformed(evt);
@@ -150,6 +165,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIProveedores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/proveedores24.png"))); // NOI18N
         jMnuIProveedores.setText("Proveedores");
+        jMnuIProveedores.setName("jMnuIProveedores"); // NOI18N
         jMnuIProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIProveedoresActionPerformed(evt);
@@ -160,6 +176,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIMonedas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIMonedas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/moneda24.png"))); // NOI18N
         jMnuIMonedas.setText("Monedas");
+        jMnuIMonedas.setName("jMnuIMonedas"); // NOI18N
         jMnuIMonedas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIMonedasActionPerformed(evt);
@@ -170,6 +187,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cliente24.png"))); // NOI18N
         jMnuIClientes.setText("Clientes");
+        jMnuIClientes.setName("jMnuIClientes"); // NOI18N
         jMnuIClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIClientesActionPerformed(evt);
@@ -177,14 +195,16 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         });
         jMnuRegistros.add(jMnuIClientes);
 
-        jMenuBar1.add(jMnuRegistros);
+        jMnuBarRegistros.add(jMnuRegistros);
 
         jMnuSistema.setText("Sistema");
         jMnuSistema.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuSistema.setName("jMnuSistema"); // NOI18N
 
         jMnuIUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/usuarios24.png"))); // NOI18N
         jMnuIUsuarios.setText("Usuarios del sistema");
+        jMnuIUsuarios.setName("jMnuIUsuarios"); // NOI18N
         jMnuIUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIUsuariosActionPerformed(evt);
@@ -195,6 +215,7 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         jMnuIParametros.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIParametros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/parametros24.png"))); // NOI18N
         jMnuIParametros.setText("Parámetros del sistema");
+        jMnuIParametros.setName("jMnuIParametros"); // NOI18N
         jMnuIParametros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIParametrosActionPerformed(evt);
@@ -202,24 +223,44 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         });
         jMnuSistema.add(jMnuIParametros);
 
-        jMenuBar1.add(jMnuSistema);
+        jMnuBarRegistros.add(jMnuSistema);
 
-        jMnuInformes.setText("Informes ");
-        jMnuInformes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesRegistrosBase.setText("Informes ");
+        jMnuInformesRegistrosBase.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesRegistrosBase.setName("jMnuInformesRegistrosBase"); // NOI18N
+
+        jMnuVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/barChart20.png"))); // NOI18N
+        jMnuVentas.setText("Ventas");
+        jMnuVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuVentas.setName("jMnuVentas"); // NOI18N
 
         jMnuIInformVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIInformVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/informe_ventas24.png"))); // NOI18N
         jMnuIInformVentas.setText("Ventas");
+        jMnuIInformVentas.setName("jMnuIInformVentas"); // NOI18N
         jMnuIInformVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIInformVentasActionPerformed(evt);
             }
         });
-        jMnuInformes.add(jMnuIInformVentas);
+        jMnuVentas.add(jMnuIInformVentas);
 
-        jMenuBar1.add(jMnuInformes);
+        jMnuIInformeGralVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIInformeGralVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/consulta_movimiento24.png"))); // NOI18N
+        jMnuIInformeGralVentas.setText("Informe Gral de Ventas");
+        jMnuIInformeGralVentas.setName("jMnuIInformeGralVentas"); // NOI18N
+        jMnuIInformeGralVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuIInformeGralVentasActionPerformed(evt);
+            }
+        });
+        jMnuVentas.add(jMnuIInformeGralVentas);
 
-        setJMenuBar(jMenuBar1);
+        jMnuInformesRegistrosBase.add(jMnuVentas);
+
+        jMnuBarRegistros.add(jMnuInformesRegistrosBase);
+
+        setJMenuBar(jMnuBarRegistros);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -292,17 +333,24 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         clientes.setVisible(true);
     }//GEN-LAST:event_jMnuIClientesActionPerformed
 
+    private void jMnuIParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIParametrosActionPerformed
+        Parametros params = new Parametros(new JFrame(), true);
+        params.pack();
+        params.setVisible(true);
+    }//GEN-LAST:event_jMnuIParametrosActionPerformed
+
     private void jMnuIInformVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIInformVentasActionPerformed
         InformeVentas informeVtas = new InformeVentas(new JFrame(), true);
         informeVtas.pack();
         informeVtas.setVisible(true);
     }//GEN-LAST:event_jMnuIInformVentasActionPerformed
 
-    private void jMnuIParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIParametrosActionPerformed
-        Parametros params = new Parametros(new JFrame(), true);
-        params.pack();
-        params.setVisible(true);
-    }//GEN-LAST:event_jMnuIParametrosActionPerformed
+    private void jMnuIInformeGralVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIInformeGralVentasActionPerformed
+        JOptionPane.showMessageDialog(this, "MÓDULO EN DESARROLLO!\nLos reportes aun no cuentan con detalles!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        InformeGralVentas gral = new InformeGralVentas(new JFrame(), true);
+        gral.pack();
+        gral.setVisible(true);
+    }//GEN-LAST:event_jMnuIInformeGralVentasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,28 +382,30 @@ public class FormRegistrosBase extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormRegistrosBase().setVisible(true);
+                //new FormRegistrosBase().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMnuBarRegistros;
     private javax.swing.JMenuItem jMnuIArticulos;
     private javax.swing.JMenuItem jMnuIBarrios;
     private javax.swing.JMenuItem jMnuICiudades;
     private javax.swing.JMenuItem jMnuIClientes;
     private javax.swing.JMenuItem jMnuIGruposSub;
     private javax.swing.JMenuItem jMnuIInformVentas;
+    private javax.swing.JMenuItem jMnuIInformeGralVentas;
     private javax.swing.JMenuItem jMnuIMarcas;
     private javax.swing.JMenuItem jMnuIMonedas;
     private javax.swing.JMenuItem jMnuIParametros;
     private javax.swing.JMenuItem jMnuIProveedores;
     private javax.swing.JMenuItem jMnuIUsuarios;
-    private javax.swing.JMenu jMnuInformes;
+    private javax.swing.JMenu jMnuInformesRegistrosBase;
     private javax.swing.JMenu jMnuRegistros;
     private javax.swing.JMenu jMnuSistema;
+    private javax.swing.JMenu jMnuVentas;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

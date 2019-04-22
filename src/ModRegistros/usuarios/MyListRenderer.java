@@ -16,7 +16,7 @@ import principal.FormMain;
  *
  * @author ANDRES
  */
-public class MyListRenderer extends JLabel implements ListCellRenderer {
+class MyListRenderer extends JLabel implements ListCellRenderer {
     ImageIcon selected, notSelected;
     
     public MyListRenderer(){
@@ -24,7 +24,6 @@ public class MyListRenderer extends JLabel implements ListCellRenderer {
         notSelected = new ImageIcon("/" + FormMain.nombreCarpetaProyecto + "/Glyphs/image2.gif");
     }
 
-    @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         if(isSelected){
             setBackground(list.getSelectionBackground());

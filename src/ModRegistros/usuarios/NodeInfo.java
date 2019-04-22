@@ -29,11 +29,4 @@ public class NodeInfo {
     public ArrayList<STNodo> getFuente() {
         return fuente;
     }
-
-    /**
-     * @param fuente the fuente to set
-     */
-    public void setFuente(ArrayList<STNodo> fuente) {
-        this.fuente = fuente;
-    }
 }

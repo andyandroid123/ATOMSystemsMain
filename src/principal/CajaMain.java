@@ -19,6 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import utiles.ClassMenu;
 import utiles.DBManager;
 import utiles.InfoErrores;
 
@@ -48,12 +49,16 @@ public class CajaMain extends javax.swing.JFrame {
     Ventas ventas = null;
     RegistroCobroClientes1 cobroClientes = null;
     
-    public CajaMain() {
+    ClassMenu classMenu = new ClassMenu();
+    
+    public CajaMain(String user, String grupo) {
         initComponents();
         this.setTitle("ATOMSystems|Main - Módulo de Ventas - (CAJA " + nroTerminal + ")");
         cerrarVentana();
         labelBotones();
         startTitleAnimation();
+        jMenuBar1.setVisible(false);
+        classMenu.permisosMenu(user, grupo, jMenuBar1);
     }
     
     private void msgDesarrollo(){
@@ -64,6 +69,7 @@ public class CajaMain extends javax.swing.JFrame {
         //int exit = JOptionPane.showConfirmDialog(this, "Desea salir del sistema?", "Salir del sistema", JOptionPane.YES_NO_OPTION);
         //if(exit == 0){
             FormMain.resultExitCajaMain = false;
+            FormMain.formVENTAS = null;
             this.dispose();
         //}
     }
@@ -303,12 +309,16 @@ public class CajaMain extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBCobroClientes, jBReImpresionDocs, jBTurnoVenta, jBVentas});
 
+        jMenuBar1.setName("jMenuBar1"); // NOI18N
+
         jMnuOperacionesCaja.setText("Operaciones ");
         jMnuOperacionesCaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuOperacionesCaja.setName("jMnuOperacionesCaja"); // NOI18N
 
         jMnuIAnulacionDocVenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionDocVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar24.png"))); // NOI18N
         jMnuIAnulacionDocVenta.setText("Anulación de doc de venta");
+        jMnuIAnulacionDocVenta.setName("jMnuIAnulacionDocVenta"); // NOI18N
         jMnuIAnulacionDocVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAnulacionDocVentaActionPerformed(evt);
@@ -320,10 +330,12 @@ public class CajaMain extends javax.swing.JFrame {
 
         jMnuInformeDeMovimientos.setText("Informes de movimientos");
         jMnuInformeDeMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformeDeMovimientos.setName("jMnuInformeDeMovimientos"); // NOI18N
 
         jMnuIOtrosTurnos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIOtrosTurnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seleccionar24_1.png"))); // NOI18N
         jMnuIOtrosTurnos.setText("Resumen por turno de ventas");
+        jMnuIOtrosTurnos.setName("jMnuIOtrosTurnos"); // NOI18N
         jMnuIOtrosTurnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIOtrosTurnosActionPerformed(evt);
@@ -435,7 +447,7 @@ public class CajaMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CajaMain().setVisible(true);
+                //new CajaMain().setVisible(true);
             }
         });
     }

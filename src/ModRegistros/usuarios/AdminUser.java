@@ -7,17 +7,14 @@ package ModRegistros.usuarios;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import sun.management.AgentConfigurationError;
 import utiles.DBManager;
 import utiles.InfoErrores;
 import utiles.StatementManager;
@@ -55,7 +52,7 @@ public class AdminUser extends javax.swing.JDialog {
     private void initTree(){
         NodeInfo app_nivel0;
         int nivel = 0;
-        app_nivel0 = new NodeInfo("ATOMSystems|Main - Árbol de administración de usuarios", 0, nivel);
+        app_nivel0 = new NodeInfo("Arbol de administracion de usuarios", 0, nivel);
         top = new DefaultMutableTreeNode(app_nivel0.getFuente());
         createNodes(top, "NU");
         treeModel = new DefaultTreeModel(top);
@@ -109,7 +106,7 @@ public class AdminUser extends javax.swing.JDialog {
         int modulo = 0;
         try{
             while(DataNode2.next()){
-                if(DataNode2.getInt("cod_modulo") != modulo && DataNode2.getInt("cod_usuario_perfil") != usucod){
+                if(DataNode2.getInt("cod_modulo") != modulo && DataNode2.getInt("cod_usuario_perfil") == usucod){
                     node = new DefaultMutableTreeNode(DataNode2.getString("modulos"));
                     parentnode.add(node);
                     modulo = DataNode2.getInt("cod_modulo");
@@ -128,8 +125,8 @@ public class AdminUser extends javax.swing.JDialog {
         int menu = 0;
         try{
             while(DataNode3.next()){
-                if(DataNode3.getInt("cod_modulo") == modulo && DataNode3.getInt("cod_usuario_perfil") == usucod && DataNode3.getInt("cod_menu") == menu){
-                    node = new DefaultMutableTreeNode(DataNode3.getInt("menus"));
+                if(DataNode3.getInt("cod_modulo") == modulo && DataNode3.getInt("cod_usuario_perfil") == usucod && DataNode3.getInt("cod_menu") != menu){
+                    node = new DefaultMutableTreeNode(DataNode3.getString("menus"));
                     parentnode.add(node);
                     menu = DataNode3.getInt("cod_menu");
                     createIneritNode1(node, modulo, usucod, menu);
@@ -147,8 +144,9 @@ public class AdminUser extends javax.swing.JDialog {
         int item = 0;
         try{
             while(DataNode4.next()){
-                if(DataNode4.getInt("cod_modulo") == modulo && DataNode4.getInt("cod_usuario_perfil") == usucod && DataNode4.getInt("cod_menu") == menu && DataNode4.getInt("cod_item") == item){
-                    node = new DefaultMutableTreeNode(DataNode4.getInt("item"));
+                if(DataNode4.getInt("cod_modulo") == modulo && DataNode4.getInt("cod_usuario_perfil") == usucod && DataNode4.getInt("cod_menu") == menu 
+                   && DataNode4.getInt("cod_item") != item){
+                    node = new DefaultMutableTreeNode(DataNode4.getString("item"));
                     parentnode.add(node);
                     item = DataNode4.getInt("cod_item");
                 }
@@ -302,7 +300,7 @@ public class AdminUser extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         jBBuscarUsuario = new javax.swing.JButton();
         jBReCatastrarUsuariosActivos = new javax.swing.JButton();
-        jBManipulacionPrivilegios = new javax.swing.JButton();
+        jBPrivilegioUsuario = new javax.swing.JButton();
         jBRefresh = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
 
@@ -385,12 +383,12 @@ public class AdminUser extends javax.swing.JDialog {
             }
         });
 
-        jBManipulacionPrivilegios.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jBManipulacionPrivilegios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/grupo_user24.png"))); // NOI18N
-        jBManipulacionPrivilegios.setText("Manipulación de Privilegios");
-        jBManipulacionPrivilegios.addActionListener(new java.awt.event.ActionListener() {
+        jBPrivilegioUsuario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBPrivilegioUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/grupo_user24.png"))); // NOI18N
+        jBPrivilegioUsuario.setText("Privilegios de usuarios ");
+        jBPrivilegioUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBManipulacionPrivilegiosActionPerformed(evt);
+                jBPrivilegioUsuarioActionPerformed(evt);
             }
         });
 
@@ -421,13 +419,13 @@ public class AdminUser extends javax.swing.JDialog {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBBuscarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBReCatastrarUsuariosActivos)
-                    .addComponent(jBManipulacionPrivilegios, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBPrivilegioUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBBuscarUsuario, jBManipulacionPrivilegios, jBReCatastrarUsuariosActivos, jBRefresh, jBSalir});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBBuscarUsuario, jBPrivilegioUsuario, jBReCatastrarUsuariosActivos, jBRefresh, jBSalir});
 
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +435,7 @@ public class AdminUser extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBReCatastrarUsuariosActivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBManipulacionPrivilegios)
+                .addComponent(jBPrivilegioUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBRefresh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -445,7 +443,7 @@ public class AdminUser extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBBuscarUsuario, jBManipulacionPrivilegios, jBReCatastrarUsuariosActivos, jBRefresh, jBSalir});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBBuscarUsuario, jBPrivilegioUsuario, jBReCatastrarUsuariosActivos, jBRefresh, jBSalir});
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -568,44 +566,30 @@ public class AdminUser extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBReCatastrarUsuariosActivosActionPerformed
 
-    private void jBManipulacionPrivilegiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBManipulacionPrivilegiosActionPerformed
-        TreePath currentSelection = JTreePrivileges.getSelectionPath();
-        if(currentSelection != null){
-            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)(currentSelection.getLastPathComponent());
-            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
-            Object[] userObj = currentNode.getUserObjectPath();
-            int cantNodo = userObj.length;
-            ArrayList<STNodo> app = (ArrayList) userObj [cantNodo - 1];
-            
-            String sql = "SELECT mc.cod_menu, '>> ' || md.descripcion AS descripcion, md.cod_modulo, 0 AS cod_item "
-                       + "FROM modulo_menu md "
-                       + "UNION ALL "
-                       + "SELECT a.cod_menu b.descripcion AS descripcion, a.cod_modulo, b.cod_item "
-                       + "FROM modulo_menu a, modulo_menuitem b "
-                       + "WHERE a.cod_menu = b.cod_menu ORDER BY 1";
-            String nomuser = app.get(0).getNDescripcion();
-            String user = String.valueOf(app.get(0).getNCodigo());
-            if(!user.equals("0")){
-                final PerfilGrupo dlGrupo = new PerfilGrupo(new JFrame(), true, sql, nomuser, user, "Asignación de Permisos de Usuarios");
-                dlGrupo.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(null,"Debe seleccionar un usuario del árbol de Permisos","Atención",JOptionPane.WARNING_MESSAGE);
-            }
-        }else{
-            JOptionPane.showMessageDialog(null,"Debe seleccionar un usuario del árbol de Permisos","Atención",JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_jBManipulacionPrivilegiosActionPerformed
+    private void jBPrivilegioUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrivilegioUsuarioActionPerformed
+        PrivilegioUsuario privilegio = new PrivilegioUsuario(new JFrame(), true);
+        privilegio.pack();
+        privilegio.setVisible(true);
+    }//GEN-LAST:event_jBPrivilegioUsuarioActionPerformed
 
     private void jBRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRefreshActionPerformed
         try{
-            
+            DataNode1 = rsDataNode();
+            DataNode2 = rsDataNode();
+            DataNode3 = rsDataNode();
+            DataNode4 = rsDataNode();
+            top.removeAllChildren();
+            createNodes(top, "NU");
+            treeModel = (DefaultTreeModel) JTreePrivileges.getModel();
+            treeModel.nodeStructureChanged(top);;
+            closeStatements();
         }catch(NullPointerException nullex){}
     }//GEN-LAST:event_jBRefreshActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree JTreePrivileges;
     private javax.swing.JButton jBBuscarUsuario;
-    private javax.swing.JButton jBManipulacionPrivilegios;
+    private javax.swing.JButton jBPrivilegioUsuario;
     private javax.swing.JButton jBReCatastrarUsuariosActivos;
     private javax.swing.JButton jBRefresh;
     private javax.swing.JButton jBSalir;

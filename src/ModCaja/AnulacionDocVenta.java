@@ -87,9 +87,11 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
     
     private boolean updateStockHisArt(String codEmpresa, String codLocal, String nroDoc, String tipoDoc, String codCaja){
         String codArticulo = "", siglaVenta = "", cansiVenta = "", codSector = "";
-        double canVenta = 0;
+        double canVenta = 0, montoCosto = 0, montoMargen = 0, montoIvaCosto = 0, montoTotalVenta = 0;
         boolean result = false;
-        String sqlCodArticulo = "SELECT cod_articulo, can_venta, cansi_venta, sigla_venta, cod_sector "
+        int codSubGrupo, codGrupo, codMarca, codProveedor, pctIva;
+        String sqlCodArticulo = "SELECT cod_articulo, can_venta, cansi_venta, sigla_venta, cod_sector, pct_iva, "
+                              + "mon_costo, mon_margen, mon_venta "
                               + "FROM venta_det "
                               + "WHERE cod_empresa = " + codEmpresa + " "
                               + "AND cod_local = " + codLocal + " "
@@ -105,8 +107,29 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
                     siglaVenta = rs.getString("sigla_venta");
                     cansiVenta = rs.getString("cansi_venta");
                     codSector = rs.getString("cod_sector");
+                    pctIva = rs.getInt("pct_iva");
+                    montoCosto = rs.getDouble("mon_costo");
+                    montoMargen = rs.getDouble("mon_margen");
+                    montoTotalVenta = rs.getDouble("mon_venta");
+                    codSubGrupo = getCodSubGrupoArticulo(codArticulo);
+                    codGrupo = getCodGrupoArticulo(codArticulo);
+                    codMarca = getCodMarcaArticulo(codArticulo);
+                    codProveedor = getCodProveedorArticulo(codArticulo);
+                    if(pctIva == 10){
+                        montoIvaCosto = (montoTotalVenta / 11);
+                    }
+                    if(pctIva == 5){
+                        montoIvaCosto = (montoTotalVenta / 21);
+                    }
+                    
+                    if(pctIva == 0){
+                        montoIvaCosto = 0;
+                    }
+                    
                     updateStockArtSum(codArticulo, canVenta);
                     updateHisMoviArticulo(codEmpresa, codLocal, codSector, codArticulo, siglaVenta, cansiVenta, canVenta, tipoDoc, nroDoc);
+                    insertHisVentaArticulo(codEmpresa, codLocal, codArticulo, canVenta, pctIva, montoCosto, montoMargen, montoIvaCosto, montoTotalVenta, 
+                                           codSubGrupo, codProveedor, codMarca, codGrupo, codSector, tipoDoc);
                 }
                 result = false;
             }
@@ -118,6 +141,78 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
             DBManager.CerrarStatements();
         }
         return result;
+    }
+    
+    private int getCodGrupoArticulo(String codArticulo){
+        int codigo = 0;
+        try{
+            String sql = "SELECT cod_grupo FROM articulo WHERE cod_articulo = " + codArticulo;
+            ResultSet rs = DBManager.ejecutarDSL(sql);
+            if(rs != null){
+                if(rs.next()){
+                    codigo = rs.getInt("cod_grupo");
+                }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return codigo;
+    }
+    
+    private int getCodSubGrupoArticulo(String codArticulo){
+        int codigo = 0;
+        try{
+            String sql = "SELECT cod_subgrupo FROM articulo WHERE cod_articulo = " + codArticulo;
+            ResultSet rs = DBManager.ejecutarDSL(sql);
+            if(rs != null){
+                if(rs.next()){
+                    codigo = rs.getInt("cod_subgrupo");
+                }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return codigo;
+    }
+    
+    private int getCodMarcaArticulo(String codArticulo){
+        int codigo = 0;
+        try{
+            String sql = "SELECT cod_marca FROM articulo WHERE cod_articulo = " + codArticulo;
+            ResultSet rs = DBManager.ejecutarDSL(sql);
+            if(rs != null){
+                if(rs.next()){
+                    codigo = rs.getInt("cod_marca");
+                }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return codigo;
+    }
+    
+    private int getCodProveedorArticulo(String codArticulo){
+        int codigo = 0;
+        try{
+            String sql = "SELECT cod_proveedor FROM articulo WHERE cod_articulo = " + codArticulo;
+            ResultSet rs = DBManager.ejecutarDSL(sql);
+            if(rs != null){
+                if(rs.next()){
+                    codigo = rs.getInt("cod_proveedor");
+                }
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return codigo;
     }
     
     private void updateStockArtSum(String codArticulo, double canVenta){
@@ -141,6 +236,30 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
         grabarPrevioCommit(sql);
     }
     
+    private void insertHisVentaArticulo(String codEmpresa, String codLocal, String codArticulo, double cantidad, int pctIva, double montoCosto, 
+                                        double montoMargen, double montoIva, double montoTotal, int codSubGrupo, int codProveedor, int codMarca, 
+                                        int codGrupo, String codSector, String tipoComp) {
+        String sql = "INSERT INTO hisventa_articulo (cod_empresa, cod_local, cod_articulo, fec_venta, cant_venta, pct_iva, monto_costo, monto_margen, "
+                   + "monto_iva, monto_total, cod_subgrupo, cod_proveedor, cod_marca, cod_grupo, cod_sector, procesado, fec_vigencia, monto_costo_avg, "
+                   + "tip_comprob, nro_asiento_cmv) VALUES ("
+                   + codEmpresa + ", "
+                   + codLocal + ", "
+                   + codArticulo + ", 'now()', -"
+                   + cantidad + ", "
+                   + pctIva + ", -"
+                   + montoCosto + ", -"
+                   + montoMargen + ", -"
+                   + montoIva + ", -"
+                   + montoTotal + ", "
+                   + codSubGrupo + ", "
+                   + codProveedor + ", "
+                   + codMarca + ", "
+                   + codGrupo + ", "
+                   + codSector + ", 'N', 'now()', 0, '"
+                   + tipoComp + "', 0)";
+        grabarPrevioCommit(sql);
+    }
+    
     private void anularDocumento(){
         String codCaja = jTFCodCaja.getText().trim();
         String tipoDocumento = jCBTipoDocumento.getSelectedItem().toString();
@@ -160,7 +279,7 @@ public class AnulacionDocVenta extends javax.swing.JDialog {
             
             if (confirm == 0){
                 resultOperacionesAnulacionVenta = anulacionVenta(codCaja, tipoDocumento, nroDoc, codEmpresa, codLocal);
-                resultUpdateStockHisArt = updateStockHisArt(codEmpresa, codLocal, nroDoc, tipoDocumento, codCaja);
+                resultUpdateStockHisArt = updateStockHisArt(codEmpresa, codLocal, nroDoc, tipoDocumento, codCaja);                
 
                 if(resultOperacionesAnulacionVenta || resultUpdateStockHisArt){
                     if(!rollBacktDatos()){

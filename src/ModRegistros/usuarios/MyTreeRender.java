@@ -24,10 +24,8 @@ public class MyTreeRender extends JLabel implements TreeCellRenderer{
         iconoHoja = new ImageIcon("/" + FormMain.nombreCarpetaProyecto + "/Glyphs/hoja.gif");
         iconoAbierto = new ImageIcon("/" + FormMain.nombreCarpetaProyecto + "/Glyphs/proyecto.gif");
         iconoCerrado = new ImageIcon("/" + FormMain.nombreCarpetaProyecto + "/Glyphs/entrenador.gif");
-        
     }
     
-    @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         if(selected){
             setBackground(tree.getBackground());

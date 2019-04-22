@@ -1,0 +1,170 @@
+Apr 22, 2019 5:05:12 PM null
+OFF: The connection attempt failed.
+Apr 22, 2019 5:05:12 PM null
+ALL: org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:280)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:67)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:212)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: org.postgresql.Driver.makeConnection(Driver.java:407)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: org.postgresql.Driver.connect(Driver.java:275)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.sql.DriverManager.getConnection(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.sql.DriverManager.getConnection(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: utiles.DBManager.conectar(DBManager.java:33)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.DlgLogin.jBEntrarActionPerformed(DlgLogin.java:306)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.DlgLogin.access$800(DlgLogin.java:39)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.DlgLogin$9.actionPerformed(DlgLogin.java:188)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.AbstractButton.fireActionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.DefaultButtonModel.setPressed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.plaf.basic.BasicButtonListener$Actions.actionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.SwingUtilities.notifyAction(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.JComponent.processKeyBinding(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.JComponent.processKeyBindings(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.JComponent.processKeyEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.processEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Container.processEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Container.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.dispatchEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.KeyboardFocusManager.redispatchEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.dispatchKeyEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.preDispatchKeyEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.DefaultKeyboardFocusManager.dispatchEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Container.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Window.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.dispatchEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue.access$500(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue$4.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue$4.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue.dispatchEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.WaitDispatchSupport$2.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.WaitDispatchSupport$4.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.WaitDispatchSupport$4.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.WaitDispatchSupport.enter(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Dialog.show(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.show(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Component.setVisible(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Window.setVisible(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.Dialog.setVisible(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.FormMain.jBLoginActionPerformed(FormMain.java:661)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.FormMain.access$000(FormMain.java:37)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.FormMain$2.actionPerformed(FormMain.java:241)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.AbstractButton.fireActionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.DefaultButtonModel.setPressed(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.AbstractButton.doClick(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: javax.swing.AbstractButton.doClick(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.FormMain.<init>(FormMain.java:82)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: principal.FormMain$13.run(FormMain.java:936)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.event.InvocationEvent.dispatch(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue.dispatchEventImpl(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue.access$500(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue$3.run(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.AccessController.doPrivileged(Native Method)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventQueue.dispatchEvent(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpEvents(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.pumpEvents(Unknown Source)ok
+Apr 22, 2019 5:05:12 PM null
+ALL: java.awt.EventDispatchThread.run(Unknown Source)ok

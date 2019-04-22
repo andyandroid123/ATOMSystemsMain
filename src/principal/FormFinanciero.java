@@ -17,6 +17,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import utiles.ClassMenu;
 
 /**
  *
@@ -24,12 +25,13 @@ import javax.swing.JFrame;
  */
 public class FormFinanciero extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormFinanciero
-     */
-    public FormFinanciero() {
+    ClassMenu classMenu = new ClassMenu();
+    
+    public FormFinanciero(String user, String grupo) {
         initComponents();
         cerrarVentana();
+        jMenuBar1.setVisible(false);
+        classMenu.permisosMenu(user, grupo, jMenuBar1);
     }
 
     private void cerrarVentana()
@@ -40,6 +42,7 @@ public class FormFinanciero extends javax.swing.JFrame {
             public void windowClosing(WindowEvent e)
             {
                 FormMain.resultExitFinanciero = false;
+                FormMain.formFinanciero = null;
             }
         });
     }
@@ -84,12 +87,16 @@ public class FormFinanciero extends javax.swing.JFrame {
             .addGap(0, 739, Short.MAX_VALUE)
         );
 
+        jMenuBar1.setName("jMenuBar1"); // NOI18N
+
         jMnuOperacionesFinanciero.setText("Operaciones");
         jMnuOperacionesFinanciero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuOperacionesFinanciero.setName("jMnuOperacionesFinanciero"); // NOI18N
 
         jMnuIModificarVencimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIModificarVencimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/calculo_dias_horas24.png"))); // NOI18N
         jMnuIModificarVencimiento.setText("Modificar Vencimientos de Cuotas");
+        jMnuIModificarVencimiento.setName("jMnuIModificarVencimiento"); // NOI18N
         jMnuIModificarVencimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIModificarVencimientoActionPerformed(evt);
@@ -100,6 +107,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIRedefinicionCuotas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRedefinicionCuotas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png"))); // NOI18N
         jMnuIRedefinicionCuotas.setText("Re definición de cuotas");
+        jMnuIRedefinicionCuotas.setName("jMnuIRedefinicionCuotas"); // NOI18N
         jMnuIRedefinicionCuotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRedefinicionCuotasActionPerformed(evt);
@@ -110,6 +118,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIAnulacionCobroClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionCobroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancelar24.png"))); // NOI18N
         jMnuIAnulacionCobroClientes.setText("Anulación de Cobro de Clientes");
+        jMnuIAnulacionCobroClientes.setName("jMnuIAnulacionCobroClientes"); // NOI18N
         jMnuIAnulacionCobroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAnulacionCobroClientesActionPerformed(evt);
@@ -120,6 +129,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIRegistroDebCre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroDebCre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png"))); // NOI18N
         jMnuIRegistroDebCre.setText("Registro de DEB/CRE a Clientes");
+        jMnuIRegistroDebCre.setName("jMnuIRegistroDebCre"); // NOI18N
         jMnuIRegistroDebCre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRegistroDebCreActionPerformed(evt);
@@ -131,10 +141,12 @@ public class FormFinanciero extends javax.swing.JFrame {
 
         jMnuInformesFinanciero.setText("Informes");
         jMnuInformesFinanciero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesFinanciero.setName("jMnuInformesFinanciero"); // NOI18N
 
         jMnuICobroClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICobroClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
         jMnuICobroClientes.setText("Cobros y Anulaciones de cobro de Clientes");
+        jMnuICobroClientes.setName("jMnuICobroClientes"); // NOI18N
         jMnuICobroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICobroClientesActionPerformed(evt);
@@ -145,6 +157,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIAnulacionesDocsVentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionesDocsVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/diashoras24.png"))); // NOI18N
         jMnuIAnulacionesDocsVentas.setText("Anulaciones de docs de ventas");
+        jMnuIAnulacionesDocsVentas.setName("jMnuIAnulacionesDocsVentas"); // NOI18N
         jMnuIAnulacionesDocsVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAnulacionesDocsVentasActionPerformed(evt);
@@ -155,6 +168,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuICuentasClientes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuICuentasClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cuenta_cliente24.png"))); // NOI18N
         jMnuICuentasClientes.setText("Cuentas de Clientes");
+        jMnuICuentasClientes.setName("jMnuICuentasClientes"); // NOI18N
         jMnuICuentasClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuICuentasClientesActionPerformed(evt);
@@ -165,6 +179,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         jMnuIImpresionReciboPagare.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIImpresionReciboPagare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recibos_pagares24.png"))); // NOI18N
         jMnuIImpresionReciboPagare.setText("Impresión de Recibos / Pagaré");
+        jMnuIImpresionReciboPagare.setName("jMnuIImpresionReciboPagare"); // NOI18N
         jMnuIImpresionReciboPagare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIImpresionReciboPagareActionPerformed(evt);
@@ -269,7 +284,7 @@ public class FormFinanciero extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormFinanciero().setVisible(true);
+                //new FormFinanciero().setVisible(true);
             }
         });
     }

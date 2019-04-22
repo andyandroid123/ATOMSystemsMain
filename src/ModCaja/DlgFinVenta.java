@@ -9,9 +9,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JDialog;
+import principal.FormMain;
 
 /**
  *
@@ -19,6 +24,10 @@ import javax.swing.JDialog;
  */
 public class DlgFinVenta extends javax.swing.JDialog {
 
+    // MOSTRAR HORA ACTUAL DEL SO 
+    private String hora, minutos, segundos;
+    Thread thread;
+    
     private TimerTask task;
     private Timer tiempo;
     private int indice = 0;
@@ -31,9 +40,36 @@ public class DlgFinVenta extends javax.swing.JDialog {
         initComponents();
         startTitleAnimation();
         jLNombreEmpresa.setText(utiles.Utiles.getRazonSocialEmpresa(utiles.Utiles.getCodEmpresaDefault()));
+        jLNombreEmpresaDlg.setText(FormMain.empresaBean.getDescripcion());
+        jLDescLocalDlg.setText(FormMain.empresaBean.getDescripcion());
         jTFVuelto.setText(decimalFormat.format(vuelto));
+        getFechaActual();
     }
 
+    private void getFechaActual(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        jLFechaActual.setText(sdf.format(date));
+    }
+    
+    public void run(){
+        Thread current = Thread.currentThread();
+        
+        while(current == thread){
+            time();
+            jLHoraActual.setText(hora + ":" + minutos + ":" + segundos);
+        }
+    }
+    
+    private void time(){
+        Calendar calendario = new GregorianCalendar();
+        Date currentTime = new Date();
+        calendario.setTime(currentTime);
+        hora = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY): "0" + calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE): "0" + calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND): "0" + calendario.get(Calendar.SECOND);
+    }
+    
     private void cerrarVentana()
     {
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -59,6 +95,11 @@ public class DlgFinVenta extends javax.swing.JDialog {
         task = new TimerTask() {
             @Override
             public void run() {
+                
+                // hora
+                time();
+                jLHoraActual.setText(hora + ":" + minutos + ":" + segundos);
+                    
                 if(indice == titulo().length()){
                     indice = 1;
                 }else{
@@ -86,6 +127,10 @@ public class DlgFinVenta extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTFVuelto = new javax.swing.JTextField();
+        jLHoraActual = new javax.swing.JLabel();
+        jLFechaActual = new javax.swing.JLabel();
+        jLNombreEmpresaDlg = new javax.swing.JLabel();
+        jLDescLocalDlg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ATOMSystems|Main - Ventas");
@@ -149,6 +194,20 @@ public class DlgFinVenta extends javax.swing.JDialog {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jLHoraActual.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLHoraActual.setText("00:00:00");
+
+        jLFechaActual.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLFechaActual.setText("dd/MM/yyyy");
+
+        jLNombreEmpresaDlg.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLNombreEmpresaDlg.setForeground(new java.awt.Color(153, 153, 153));
+        jLNombreEmpresaDlg.setText("***");
+
+        jLDescLocalDlg.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLDescLocalDlg.setForeground(new java.awt.Color(153, 153, 153));
+        jLDescLocalDlg.setText("***");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,6 +215,14 @@ public class DlgFinVenta extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLDescLocalDlg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLHoraActual))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLNombreEmpresaDlg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLFechaActual))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -179,7 +246,15 @@ public class DlgFinVenta extends javax.swing.JDialog {
                         .addComponent(jLGraciasPref)))
                 .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLFechaActual)
+                    .addComponent(jLNombreEmpresaDlg))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLHoraActual)
+                    .addComponent(jLDescLocalDlg))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,8 +333,12 @@ public class DlgFinVenta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLDescLocalDlg;
+    private javax.swing.JLabel jLFechaActual;
     private javax.swing.JLabel jLGraciasPref;
+    private javax.swing.JLabel jLHoraActual;
     private javax.swing.JLabel jLNombreEmpresa;
+    private javax.swing.JLabel jLNombreEmpresaDlg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

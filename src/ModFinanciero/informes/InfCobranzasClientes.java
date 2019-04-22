@@ -200,7 +200,7 @@ public class InfCobranzasClientes extends javax.swing.JDialog {
                        + "ON cab.nro_pago = det.nro_pago "
                        + "LEFT OUTER JOIN cliente cli "
                        + "ON cab.cod_cliente = cli.cod_cliente "
-                       + "WHERE cab.cod_cliente = " + cod_cliente + " AND cab.fec_pago::vigencia >= '" + fecDesde + "'::date AND cab.fec_vigenciao::date <= '" + fecHasta + "'::date "
+                       + "WHERE cab.cod_cliente = " + cod_cliente + " AND cab.fec_pago::date >= '" + fecDesde + "'::date AND cab.fec_vigencia::date <= '" + fecHasta + "'::date "
                        + estado + " "
                        + "GROUP BY cab.cod_caja, cab.nro_turno, cab.nro_pago, cab.nro_recibo, cab.fec_pago, cli.razon_soc, cab.monto_pago, "
                        + "cab.estado, cab.cod_cobrador, cab.observacion, cab.monto_vuelto "

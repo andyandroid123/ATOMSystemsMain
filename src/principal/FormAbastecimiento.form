@@ -3,6 +3,9 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jMenuBar1" noResource="true"/>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMnuOperacionesAbastecimiento">
           <Properties>
@@ -10,6 +13,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuOperacionesAbastecimiento" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIRecepcionMercaderias">
@@ -21,6 +25,7 @@
                   <Image iconType="3" name="/resources/recepcion_mercaderias24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Recepci&#xf3;n de Mercader&#xed;as"/>
+                <Property name="name" type="java.lang.String" value="jMnuIRecepcionMercaderias" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRecepcionMercaderiasActionPerformed"/>
@@ -35,6 +40,7 @@
                   <Image iconType="3" name="/resources/registro_compra24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registro de Compra de Mercader&#xed;as"/>
+                <Property name="name" type="java.lang.String" value="jMnuIRegistroCompraMercaderias" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRegistroCompraMercaderiasActionPerformed"/>
@@ -49,6 +55,7 @@
                   <Image iconType="3" name="/resources/gastos24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registro de Comprobantes de Gastos"/>
+                <Property name="name" type="java.lang.String" value="jMnuIRegistroComprobantesGastos" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRegistroComprobantesGastosActionPerformed"/>
@@ -63,6 +70,7 @@
                   <Image iconType="3" name="/resources/eliminar24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Anulaci&#xf3;n de doc de compras/gastos"/>
+                <Property name="name" type="java.lang.String" value="jMnuIAnulacionDocCompra" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIAnulacionDocCompraActionPerformed"/>
@@ -76,6 +84,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuStock" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIAjusteStock">
@@ -87,6 +96,7 @@
                   <Image iconType="3" name="/resources/ajuste_stock24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ajuste de Stock"/>
+                <Property name="name" type="java.lang.String" value="jMnuIAjusteStock" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIAjusteStockActionPerformed"/>
@@ -100,9 +110,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuConsultas" noResource="true"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMnuIArticulos">
+            <MenuItem class="javax.swing.JMenuItem" name="jMnuIArticulosConsulta">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
@@ -111,9 +122,10 @@
                   <Image iconType="3" name="/resources/abastecimiento24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Articulos"/>
+                <Property name="name" type="java.lang.String" value="jMnuIArticulosConsulta" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIArticulosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIArticulosConsultaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -124,6 +136,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuInformesAbastecimiento" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIReImpresionRecepcion">
@@ -135,6 +148,7 @@
                   <Image iconType="3" name="/resources/recepcion_mercaderias24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Re Impresi&#xf3;n Recepci&#xf3;n de Mercaderias"/>
+                <Property name="name" type="java.lang.String" value="jMnuIReImpresionRecepcion" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIReImpresionRecepcionActionPerformed"/>
@@ -149,6 +163,7 @@
                   <Image iconType="3" name="/resources/ajuste_stock24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Re Impresi&#xf3;n de Ajuste de Stock"/>
+                <Property name="name" type="java.lang.String" value="jMnuIReImpresionAjuste" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIReImpresionAjusteActionPerformed"/>
@@ -163,6 +178,7 @@
                   <Image iconType="3" name="/resources/inf_comprasgastos24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Compras y Gastos"/>
+                <Property name="name" type="java.lang.String" value="jMnuIComprasGastos" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIComprasGastosActionPerformed"/>
@@ -177,6 +193,7 @@
                   <Image iconType="3" name="/resources/listado_articulos24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Listado de Art&#xed;culos"/>
+                <Property name="name" type="java.lang.String" value="jMnuIListadoArticulos" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIListadoArticulosActionPerformed"/>

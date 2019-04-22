@@ -19,6 +19,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import utiles.ClassMenu;
 
 /**
  *
@@ -26,13 +27,13 @@ import javax.swing.JFrame;
  */
 public class FormAbastecimiento extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormAbastecimiento
-     */
-    public FormAbastecimiento() {
+    ClassMenu classMenu = new ClassMenu();
+    
+    public FormAbastecimiento(String user, String grupo) {
         initComponents();
         cerrarVentana();
-        
+        jMenuBar1.setVisible(false);
+        classMenu.permisosMenu(user, grupo, jMenuBar1);
     }
     
     private void cerrarVentana()
@@ -43,6 +44,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
             public void windowClosing(WindowEvent e)
             {
                 FormMain.resultExitAbastecimiento = false;
+                FormMain.formAbast = null;
             }
         });
     }
@@ -66,7 +68,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuStock = new javax.swing.JMenu();
         jMnuIAjusteStock = new javax.swing.JMenuItem();
         jMnuConsultas = new javax.swing.JMenu();
-        jMnuIArticulos = new javax.swing.JMenuItem();
+        jMnuIArticulosConsulta = new javax.swing.JMenuItem();
         jMnuInformesAbastecimiento = new javax.swing.JMenu();
         jMnuIReImpresionRecepcion = new javax.swing.JMenuItem();
         jMnuIReImpresionAjuste = new javax.swing.JMenuItem();
@@ -91,12 +93,16 @@ public class FormAbastecimiento extends javax.swing.JFrame {
             .addGap(0, 746, Short.MAX_VALUE)
         );
 
+        jMenuBar1.setName("jMenuBar1"); // NOI18N
+
         jMnuOperacionesAbastecimiento.setText("Operaciones");
         jMnuOperacionesAbastecimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuOperacionesAbastecimiento.setName("jMnuOperacionesAbastecimiento"); // NOI18N
 
         jMnuIRecepcionMercaderias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRecepcionMercaderias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recepcion_mercaderias24.png"))); // NOI18N
         jMnuIRecepcionMercaderias.setText("Recepción de Mercaderías");
+        jMnuIRecepcionMercaderias.setName("jMnuIRecepcionMercaderias"); // NOI18N
         jMnuIRecepcionMercaderias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRecepcionMercaderiasActionPerformed(evt);
@@ -107,6 +113,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIRegistroCompraMercaderias.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroCompraMercaderias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/registro_compra24.png"))); // NOI18N
         jMnuIRegistroCompraMercaderias.setText("Registro de Compra de Mercaderías");
+        jMnuIRegistroCompraMercaderias.setName("jMnuIRegistroCompraMercaderias"); // NOI18N
         jMnuIRegistroCompraMercaderias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRegistroCompraMercaderiasActionPerformed(evt);
@@ -117,6 +124,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIRegistroComprobantesGastos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIRegistroComprobantesGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/gastos24.png"))); // NOI18N
         jMnuIRegistroComprobantesGastos.setText("Registro de Comprobantes de Gastos");
+        jMnuIRegistroComprobantesGastos.setName("jMnuIRegistroComprobantesGastos"); // NOI18N
         jMnuIRegistroComprobantesGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIRegistroComprobantesGastosActionPerformed(evt);
@@ -127,6 +135,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIAnulacionDocCompra.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAnulacionDocCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/eliminar24.png"))); // NOI18N
         jMnuIAnulacionDocCompra.setText("Anulación de doc de compras/gastos");
+        jMnuIAnulacionDocCompra.setName("jMnuIAnulacionDocCompra"); // NOI18N
         jMnuIAnulacionDocCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAnulacionDocCompraActionPerformed(evt);
@@ -138,10 +147,12 @@ public class FormAbastecimiento extends javax.swing.JFrame {
 
         jMnuStock.setText("Stock");
         jMnuStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuStock.setName("jMnuStock"); // NOI18N
 
         jMnuIAjusteStock.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIAjusteStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ajuste_stock24.png"))); // NOI18N
         jMnuIAjusteStock.setText("Ajuste de Stock");
+        jMnuIAjusteStock.setName("jMnuIAjusteStock"); // NOI18N
         jMnuIAjusteStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIAjusteStockActionPerformed(evt);
@@ -153,25 +164,29 @@ public class FormAbastecimiento extends javax.swing.JFrame {
 
         jMnuConsultas.setText("Consultas");
         jMnuConsultas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuConsultas.setName("jMnuConsultas"); // NOI18N
 
-        jMnuIArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMnuIArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
-        jMnuIArticulos.setText("Articulos");
-        jMnuIArticulos.addActionListener(new java.awt.event.ActionListener() {
+        jMnuIArticulosConsulta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuIArticulosConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
+        jMnuIArticulosConsulta.setText("Articulos");
+        jMnuIArticulosConsulta.setName("jMnuIArticulosConsulta"); // NOI18N
+        jMnuIArticulosConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuIArticulosActionPerformed(evt);
+                jMnuIArticulosConsultaActionPerformed(evt);
             }
         });
-        jMnuConsultas.add(jMnuIArticulos);
+        jMnuConsultas.add(jMnuIArticulosConsulta);
 
         jMenuBar1.add(jMnuConsultas);
 
         jMnuInformesAbastecimiento.setText("Informes ");
         jMnuInformesAbastecimiento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jMnuInformesAbastecimiento.setName("jMnuInformesAbastecimiento"); // NOI18N
 
         jMnuIReImpresionRecepcion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIReImpresionRecepcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/recepcion_mercaderias24.png"))); // NOI18N
         jMnuIReImpresionRecepcion.setText("Re Impresión Recepción de Mercaderias");
+        jMnuIReImpresionRecepcion.setName("jMnuIReImpresionRecepcion"); // NOI18N
         jMnuIReImpresionRecepcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIReImpresionRecepcionActionPerformed(evt);
@@ -182,6 +197,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIReImpresionAjuste.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIReImpresionAjuste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ajuste_stock24.png"))); // NOI18N
         jMnuIReImpresionAjuste.setText("Re Impresión de Ajuste de Stock");
+        jMnuIReImpresionAjuste.setName("jMnuIReImpresionAjuste"); // NOI18N
         jMnuIReImpresionAjuste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIReImpresionAjusteActionPerformed(evt);
@@ -192,6 +208,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIComprasGastos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIComprasGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/inf_comprasgastos24.png"))); // NOI18N
         jMnuIComprasGastos.setText("Compras y Gastos");
+        jMnuIComprasGastos.setName("jMnuIComprasGastos"); // NOI18N
         jMnuIComprasGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIComprasGastosActionPerformed(evt);
@@ -202,6 +219,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         jMnuIListadoArticulos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jMnuIListadoArticulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/listado_articulos24.png"))); // NOI18N
         jMnuIListadoArticulos.setText("Listado de Artículos");
+        jMnuIListadoArticulos.setName("jMnuIListadoArticulos"); // NOI18N
         jMnuIListadoArticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMnuIListadoArticulosActionPerformed(evt);
@@ -240,11 +258,11 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         infoRecepcion.setVisible(true);
     }//GEN-LAST:event_jMnuIReImpresionRecepcionActionPerformed
 
-    private void jMnuIArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIArticulosActionPerformed
+    private void jMnuIArticulosConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIArticulosConsultaActionPerformed
         Articulos articulos = new Articulos(new JFrame(), true, "ABASTECIMIENTO", "");
         articulos.pack();
         articulos.setVisible(true);
-    }//GEN-LAST:event_jMnuIArticulosActionPerformed
+    }//GEN-LAST:event_jMnuIArticulosConsultaActionPerformed
 
     private void jMnuIAjusteStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuIAjusteStockActionPerformed
         AjusteStock stock = new AjusteStock(new JFrame(), true);
@@ -318,7 +336,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormAbastecimiento().setVisible(true);
+                //new FormAbastecimiento().setVisible(true);
             }
         });
     }
@@ -328,7 +346,7 @@ public class FormAbastecimiento extends javax.swing.JFrame {
     private javax.swing.JMenu jMnuConsultas;
     private javax.swing.JMenuItem jMnuIAjusteStock;
     private javax.swing.JMenuItem jMnuIAnulacionDocCompra;
-    private javax.swing.JMenuItem jMnuIArticulos;
+    private javax.swing.JMenuItem jMnuIArticulosConsulta;
     private javax.swing.JMenuItem jMnuIComprasGastos;
     private javax.swing.JMenuItem jMnuIListadoArticulos;
     private javax.swing.JMenuItem jMnuIReImpresionAjuste;

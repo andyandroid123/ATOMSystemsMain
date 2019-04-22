@@ -7,12 +7,15 @@ package ModRegistros;
 
 import ModRRHH.GenericInfoAuditoria;
 import ModRegistros.usuarios.AdminUser;
+import ModRegistros.usuarios.Jbox;
+import ModRegistros.usuarios.Structura;
 import beans.UsuarioBean;
 import controls.UsuarioCtrl;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,6 +38,7 @@ public class Usuarios1 extends javax.swing.JDialog {
     static boolean esNuevo, actualizar;
     Cifrador cifrar;
     private ResultSet resultUsuario = null;
+    private boolean check = false;
     
     public Usuarios1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,10 +46,9 @@ public class Usuarios1 extends javax.swing.JDialog {
         cerrarVentana();
         estadoComponentes(false);
         setConfigCampos();
-        jBCancelar.setEnabled(false);
         cargaUsuario();
     }
-
+        
     private void configBotonesModificar(){
         jBNuevo.setEnabled(false);
         jBSalir.setEnabled(false);
@@ -53,6 +56,7 @@ public class Usuarios1 extends javax.swing.JDialog {
         jBCancelar.setEnabled(true);
         jBInformacion.setEnabled(false);
         jBModificar.setEnabled(true);
+        jBCambiarGrupoUsuario.setEnabled(true);
     }
     
     private void cargaUsuario() {
@@ -80,6 +84,9 @@ public class Usuarios1 extends javax.swing.JDialog {
             String activo = bean.getActivo();
             String esCajero = bean.getEsCajero();
             String esFiscal = bean.getEsFiscal();
+            int codGrupoUsuario = bean.getCodGrupoUsuario();
+            jCBGrupoUsuarios.removeAllItems();
+            jCBGrupoUsuarios.addItem(getDescripcionGrupoUsuario(codGrupoUsuario));
             if(activo.equals("S")){
                 jRBActivo.setSelected(true);
                 jRBInactivo.setSelected(false);
@@ -120,6 +127,7 @@ public class Usuarios1 extends javax.swing.JDialog {
         jRBInactivo.setEnabled(estado);
         jChBEsCajero.setEnabled(estado);
         jChBEsFiscal.setEnabled(estado);
+        jCBGrupoUsuarios.setEnabled(estado);
     }
     
     private void cerrarVentana()
@@ -186,7 +194,7 @@ public class Usuarios1 extends javax.swing.JDialog {
                         + "" + vEsFiscal + "', '"
                         + "" + vActivo + "', '"
                         + "now()', 'now()', 1, "
-                        + "" + vCodUsuarioLogueado + ", 1, "
+                        + "" + vCodUsuarioLogueado + ", " + getCodigoGrupoUsuario(jCBGrupoUsuarios.getSelectedItem().toString().trim()) + ", "
                         + "" + null + ", '"
                         + "" + vClavePlana + "', 1)";
             System.out.println("INSERT USER: " + sqlUsuarios);
@@ -200,7 +208,8 @@ public class Usuarios1 extends javax.swing.JDialog {
                         + "activo = '" + vActivo + "', "
                         + "fec_vigencia = 'now()', "
                         + "codigo_usuario = " + vCodUsuarioLogueado + ", "
-                        + "clave_plana = '" + vClavePlana + "' "
+                        + "clave_plana = '" + vClavePlana + "', "
+                        + "cod_grupo_usuario = " + getCodigoGrupoUsuario(jCBGrupoUsuarios.getSelectedItem().toString().trim()) + " "
                         + "WHERE cod_usuario = " + vCodUsuario;
             System.out.println("UPDATE USER: " + sqlUsuarios);
             actualizar = true;
@@ -208,6 +217,7 @@ public class Usuarios1 extends javax.swing.JDialog {
         
         try{
             int row = DBManager.ejecutarDML(sqlUsuarios);
+            grabarPerfilUsuario(getCodigoGrupoUsuario(jCBGrupoUsuarios.getSelectedItem().toString()), vCodUsuario);
             if(row != 0){
                 if(actualizar){
                     result = alterarUserBD(vAlias, vClavePlana);
@@ -255,7 +265,6 @@ public class Usuarios1 extends javax.swing.JDialog {
         boolean result = true;
         try
         {
-            
             String createUser = "CREATE ROLE " + USER.toUpperCase() + " LOGIN ENCRYPTED PASSWORD '" + PASSW + "' "
                               + "SUPERUSER INHERIT CREATEDB CREATEROLE";
             int create = DBManager.ejecutarDML(createUser);
@@ -301,6 +310,111 @@ public class Usuarios1 extends javax.swing.JDialog {
         return result;
     }
     
+    private void cargarComboGrupoUsuario(){
+        jCBGrupoUsuarios.removeAllItems();
+        ResultSet rs = null;
+        String sql = "SELECT a.cod_grupo_usuario, a.descripcion "
+                   + "FROM grupo_usuario a, perfil_grupo b "
+                   + "WHERE a.cod_grupo_usuario = b.cod_grupo_usuario "
+                   + "GROUP BY a.cod_grupo_usuario, a.descripcion "
+                   + "ORDER BY cod_grupo_usuario";
+        System.out.println("GRUPO DE USUARIOS: " + sql);
+        rs = DBManager.ejecutarDSL(sql);
+        Jbox proveeDatos = new Jbox(rs);
+        try{
+            for(Structura stru : proveeDatos.getFuente()){
+                jCBGrupoUsuarios.addItem(stru.toString());
+            }
+        }catch(Exception ex){}finally{DBManager.CerrarStatements();}
+    }
+    
+    private void grabarPerfilUsuario(String cod_grupo_usuario, String cod_usuario){
+        borrarPerfilAnterior(cod_usuario);
+        if(!check){
+            ResultSet rs = null;
+            String sql = "SELECT a.cod_modulo, a.cod_menu, d.cod_item "
+                       + "FROM perfil_grupo a "
+                       + "INNER JOIN modulo b "
+                       + "ON a.cod_modulo = b.cod_modulo "
+                       + "INNER JOIN modulo_menu c "
+                       + "ON a.cod_menu = c.cod_menu "
+                       + "INNER JOIN modulo_menuitem d "
+                       + "ON a.cod_menu = d.cod_menu "
+                       + "WHERE a.cod_grupo_usuario = " + cod_grupo_usuario + " "
+                       + "AND a.cod_item = 0 "
+                       + "UNION ALL "
+                       + "SELECT a.cod_modulo, a.cod_menu, a.cod_item "
+                       + "FROM perfil_grupo a "
+                       + "WHERE a.cod_grupo_usuario = " + cod_grupo_usuario + " "
+                       + "AND a.cod_item <> 0";
+            rs = DBManager.ejecutarDSL(sql);
+            try{
+                while(rs.next()){
+                    String COD_MODULO = rs.getString("cod_modulo");
+                    String COD_MENU = rs.getString("cod_menu");
+                    String COD_ITEM = rs.getString("cod_item");
+                    String sqlInsertUser = "INSERT INTO perfil_usuario VALUES (" + cod_usuario + ", " + COD_MODULO + ", 1, 'now()', "
+                                         + COD_MENU + ", " + COD_ITEM + ")";
+                    int row = DBManager.ejecutarDML(sqlInsertUser);
+                }
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }finally{
+                DBManager.CerrarStatements();
+            }
+        }else{
+            check = false;
+        }
+    }
+    
+    private void borrarPerfilAnterior(String cod_usuario){
+        String sql = "DELETE FROM perfil_usuario WHERE cod_usuario_perfil = " + cod_usuario;
+        int row = DBManager.ejecutarDML(sql);
+    }
+    
+    private String getCodigoGrupoUsuario(String descripcion){
+        String result = "";
+        ResultSet rs = null;
+        String sql = "SELECT cod_grupo_usuario FROM grupo_usuario WHERE descripcion LIKE '%" + descripcion + "%'";
+        System.out.println("RESULTADO DEL CODIGO DE GRUPO DE USUARIO: " + sql);
+        rs = DBManager.ejecutarDSL(sql);
+        try{
+            if(rs != null){
+                if(rs.next()){
+                    result = String.valueOf(rs.getInt("cod_grupo_usuario"));
+                }else{
+                    result = "0";
+                }
+            }
+        }catch(SQLException sqlex){
+            sqlex.printStackTrace();
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return result;
+    }
+    
+    private String getDescripcionGrupoUsuario(int codigo){
+        String result = "";
+        ResultSet rs = null;
+        String sql = "SELECT descripcion FROM grupo_usuario WHERE cod_grupo_usuario = '" + codigo + "'";
+        System.out.println("GRUPO DE USUARIO: " + sql);
+        rs = DBManager.ejecutarDSL(sql);
+        try{
+            if(rs != null){
+                if(rs.next()){
+                    result = rs.getString("descripcion");
+                }
+            }
+        }catch(SQLException sqlex){
+            sqlex.printStackTrace();
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        System.out.println("RESULT: " + result);
+        return result;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -328,6 +442,9 @@ public class Usuarios1 extends javax.swing.JDialog {
         jChBEsCajero = new javax.swing.JCheckBox();
         jChBEsFiscal = new javax.swing.JCheckBox();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel8 = new javax.swing.JLabel();
+        jCBGrupoUsuarios = new javax.swing.JComboBox<>();
+        jBCambiarGrupoUsuario = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jBNuevo = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
@@ -443,37 +560,59 @@ public class Usuarios1 extends javax.swing.JDialog {
         jChBEsFiscal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jChBEsFiscal.setText("Es Fiscal");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setText("Grupo:");
+
+        jCBGrupoUsuarios.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jBCambiarGrupoUsuario.setText("Cambiar Grupo");
+        jBCambiarGrupoUsuario.setEnabled(false);
+        jBCambiarGrupoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCambiarGrupoUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jChBEsCajero)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jChBEsFiscal))
-                            .addComponent(jTFCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTFNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jPClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                .addComponent(jTFAlias, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(jRBActivo)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRBInactivo)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFCodUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPClave)
+                                    .addComponent(jTFAlias)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jChBEsCajero)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jChBEsFiscal)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jRBActivo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRBInactivo)
+                                        .addGap(13, 13, 13))))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBGrupoUsuarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBCambiarGrupoUsuario)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,14 +636,17 @@ public class Usuarios1 extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jChBEsCajero)
-                    .addComponent(jChBEsFiscal))
+                    .addComponent(jChBEsFiscal)
+                    .addComponent(jRBInactivo)
+                    .addComponent(jRBActivo))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRBActivo)
-                    .addComponent(jRBInactivo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel8)
+                    .addComponent(jCBGrupoUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCambiarGrupoUsuario))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
@@ -528,6 +670,7 @@ public class Usuarios1 extends javax.swing.JDialog {
 
         jBCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cancelar24.png"))); // NOI18N
         jBCancelar.setText("Cancelar");
+        jBCancelar.setEnabled(false);
         jBCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCancelarActionPerformed(evt);
@@ -717,13 +860,14 @@ public class Usuarios1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jBInformacionActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        DlgConsultas moneda = new DlgConsultas(new JFrame(), true);
-        moneda.pack();
-        moneda.setTitle("ATOMSystems|Main - Consulta Usuarios");
-        moneda.dConsultas("usuario", "nombre", "cod_usuario", "nombre", "alias", "activo", "Código", "Nombre", "Alias", "Activo");
-        moneda.setText(jTFCodUsuario);
-        moneda.tfDescripcionBusqueda.setText("%");
-        moneda.setVisible(true);
+        DlgConsultas usuario = new DlgConsultas(new JFrame(), true);
+        usuario.pack();
+        usuario.setTitle("ATOMSystems|Main - Consulta Usuarios");
+        usuario.dConsultas("usuario", "nombre", "cod_usuario", "nombre", "alias", "activo", "Código", "Nombre", "Alias", "Activo");
+        usuario.setText(jTFCodUsuario);
+        usuario.tfDescripcionBusqueda.setText("%");
+        usuario.setVisible(true);
+        jCBGrupoUsuarios.removeAllItems();
         getUsuario(Integer.parseInt(jTFCodUsuario.getText()));
         jBModificar.grabFocus();
     }//GEN-LAST:event_jBBuscarActionPerformed
@@ -733,6 +877,7 @@ public class Usuarios1 extends javax.swing.JDialog {
             jBModificar.setText("Guardar");
             jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/guardar24.png")));
             estadoComponentes(true);
+            jCBGrupoUsuarios.setEnabled(false);
             configBotonesModificar();
             jTFNombreUsuario.requestFocus();
             esNuevo = false;
@@ -761,11 +906,11 @@ public class Usuarios1 extends javax.swing.JDialog {
         jTFCodUsuario.setText(getCodigoUsuario());
         limpiarCampos();
         configBotonesNuevo();
+        cargarComboGrupoUsuario();
         jTFNombreUsuario.requestFocus();
         jChBEsCajero.setSelected(false);
         jChBEsFiscal.setSelected(false);
         jRBActivo.setSelected(true);
-        
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
@@ -807,7 +952,7 @@ public class Usuarios1 extends javax.swing.JDialog {
     }//GEN-LAST:event_jPClaveFocusGained
 
     private void jBPrivilegiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrivilegiosUsuarioActionPerformed
-        AdminUser adminUser = new AdminUser(new JFrame(), true, jTFCodUsuarioPrivilegios.getText().trim());
+        AdminUser adminUser = new AdminUser(new JFrame(), true, jTFCodUsuarioPrivilegios.getText());
         adminUser.pack();
         adminUser.setVisible(true);
     }//GEN-LAST:event_jBPrivilegiosUsuarioActionPerformed
@@ -839,6 +984,11 @@ public class Usuarios1 extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTFCodUsuarioPrivilegiosKeyPressed
 
+    private void jBCambiarGrupoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCambiarGrupoUsuarioActionPerformed
+        jCBGrupoUsuarios.setEnabled(true);
+        cargarComboGrupoUsuario();
+    }//GEN-LAST:event_jBCambiarGrupoUsuarioActionPerformed
+
     private void configBotonesCancelar(){
         jBNuevo.setEnabled(true);
         jBSalir.setEnabled(true);
@@ -846,6 +996,7 @@ public class Usuarios1 extends javax.swing.JDialog {
         jBCancelar.setEnabled(false);
         jBInformacion.setEnabled(true);
         jBModificar.setEnabled(true);
+        jBCambiarGrupoUsuario.setEnabled(false);
     }
     
     private String getCodigoUsuario(){
@@ -862,6 +1013,7 @@ public class Usuarios1 extends javax.swing.JDialog {
         jBCancelar.setEnabled(true);
         jBInformacion.setEnabled(false);
         jBModificar.setEnabled(true);
+        jBCambiarGrupoUsuario.setEnabled(false);
     }
     
     private void limpiarCampos(){
@@ -916,12 +1068,14 @@ public class Usuarios1 extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBCambiarGrupoUsuario;
     private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBInformacion;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBNuevo;
     private javax.swing.JButton jBPrivilegiosUsuario;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JComboBox<String> jCBGrupoUsuarios;
     private javax.swing.JCheckBox jChBEsCajero;
     private javax.swing.JCheckBox jChBEsFiscal;
     private javax.swing.JLabel jLNombreUsuarioPrivilegios;
@@ -932,6 +1086,7 @@ public class Usuarios1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField jPClave;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

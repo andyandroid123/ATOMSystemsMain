@@ -214,7 +214,9 @@ public class InformeArticulos extends javax.swing.JDialog {
         if(codigoFiltro.equals("0")){
             sql = "SELECT articulo.descripcion, articulo.cod_articulo, stockart.stock, costoart.costo_neto, preciosart.precio_venta, "
                 + "articulo." + campo_articulo_listado_todos +  " || ' ' || " + campo_desc_listado_todos + " AS grupo,"
-                + "(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad "
+                + "(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad, "
+                + "(costoart.costo_neto * stockart.stock) AS total_costo, "
+                + "(preciosart.precio_venta * stockart.stock) AS total_venta "
                 + "FROM articulo "
                 + "RIGHT OUTER JOIN stockart "
                 + "ON stockart.cod_articulo = articulo.cod_articulo "
@@ -229,7 +231,9 @@ public class InformeArticulos extends javax.swing.JDialog {
             informe_jasper = "informe_articulo_agrupado";
         }else{
             sql = "SELECT articulo.descripcion, articulo.cod_articulo, stockart.stock, costoart.costo_neto, preciosart.precio_venta, "
-                + "(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad "
+                + "(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad,"
+                + "(costoart.costo_neto * stockart.stock) AS total_costo, "
+                + "(preciosart.precio_venta * stockart.stock) AS total_venta "
                 + "FROM articulo "
                 + "RIGHT OUTER JOIN stockart "
                 + "ON stockart.cod_articulo = articulo.cod_articulo "

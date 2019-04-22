@@ -3,6 +3,9 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="jMenuBar1" noResource="true"/>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMnuRegistrosRRHH">
           <Properties>
@@ -10,6 +13,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuRegistrosRRHH" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIEmpleados">
@@ -21,6 +25,7 @@
                   <Image iconType="3" name="/resources/empleado24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Empleados"/>
+                <Property name="name" type="java.lang.String" value="jMnuIEmpleados" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIEmpleadosActionPerformed"/>
@@ -35,6 +40,7 @@
                   <Image iconType="3" name="/resources/profesion24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Profesiones"/>
+                <Property name="name" type="java.lang.String" value="jMnuIProfesion" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIProfesionActionPerformed"/>
@@ -49,6 +55,7 @@
                   <Image iconType="3" name="/resources/seccion24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Secciones"/>
+                <Property name="name" type="java.lang.String" value="jMnuISeccion" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuISeccionActionPerformed"/>
@@ -63,6 +70,7 @@
                   <Image iconType="3" name="/resources/cargo24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cargos"/>
+                <Property name="name" type="java.lang.String" value="jMnuICargo" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuICargoActionPerformed"/>
@@ -77,6 +85,7 @@
                   <Image iconType="3" name="/resources/ciudades24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ciudades"/>
+                <Property name="name" type="java.lang.String" value="jMnuICiudad" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuICiudadActionPerformed"/>
@@ -91,6 +100,7 @@
                   <Image iconType="3" name="/resources/barrios24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Barrios"/>
+                <Property name="name" type="java.lang.String" value="jMnuIBarrio" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIBarrioActionPerformed"/>
@@ -105,6 +115,7 @@
                   <Image iconType="3" name="/resources/conceptos24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Conceptos "/>
+                <Property name="name" type="java.lang.String" value="jMnuIConceptos" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIConceptosActionPerformed"/>
@@ -119,6 +130,7 @@
                   <Image iconType="3" name="/resources/horarios24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Horarios"/>
+                <Property name="name" type="java.lang.String" value="jMnuIHorarios" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIHorariosActionPerformed"/>
@@ -133,6 +145,7 @@
                   <Image iconType="3" name="/resources/motivoLiquidacion24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Motivo Liquidaci&#xf3;n"/>
+                <Property name="name" type="java.lang.String" value="jMnuIMotivoLiquidacion" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIMotivoLiquidacionActionPerformed"/>
@@ -146,6 +159,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuMantenimientoRRHH" noResource="true"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMnuIDescBenef">
@@ -157,6 +171,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="jMnuIRegistroDescuentoBeneficio" noResource="true"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMnuIAnticipo">
@@ -165,6 +180,7 @@
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Anticipo"/>
+                    <Property name="name" type="java.lang.String" value="jMnuIAnticipo" noResource="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIAnticipoActionPerformed"/>
@@ -176,6 +192,7 @@
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Otros descuentos/beneficios"/>
+                    <Property name="name" type="java.lang.String" value="jMnuIRegistroDescuentoBeneficio" noResource="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRegistroDescuentoBeneficioActionPerformed"/>
@@ -192,6 +209,7 @@
                   <Image iconType="3" name="/resources/anulacion24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Anulaci&#xf3;n Descuentos/Beneficios"/>
+                <Property name="name" type="java.lang.String" value="jMnuIAnulacionDescBen" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIAnulacionDescBenActionPerformed"/>
@@ -206,6 +224,7 @@
                   <Image iconType="3" name="/resources/diashoras24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registro/Modificaci&#xf3;n de Dias y Horas Trabajadas"/>
+                <Property name="name" type="java.lang.String" value="jMnuIRegModDiasHoras" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRegModDiasHorasActionPerformed"/>
@@ -219,6 +238,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuInformesRRHH" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIDescBen">
@@ -230,6 +250,7 @@
                   <Image iconType="3" name="/resources/descuentoBeneficios24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Descuentos y Beneficios"/>
+                <Property name="name" type="java.lang.String" value="jMnuIDescBen" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIDescBenActionPerformed"/>
@@ -244,6 +265,7 @@
                   <Image iconType="3" name="/resources/liquidacion_definitiva24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Liquidaci&#xf3;n de Salarios"/>
+                <Property name="name" type="java.lang.String" value="jMnuILiqSalarios" noResource="true"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIRecibos">
@@ -255,7 +277,11 @@
                   <Image iconType="3" name="/resources/recibo24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Recibos de Salarios"/>
+                <Property name="name" type="java.lang.String" value="jMnuIRecibos" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIRecibosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -265,6 +291,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="jMnuProcesos" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMnuIPreLiquidacionSalarios">
@@ -276,6 +303,7 @@
                   <Image iconType="3" name="/resources/pre_liquidacion24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pre Liquidaci&#xf3;n de Salarios"/>
+                <Property name="name" type="java.lang.String" value="jMnuIPreLiquidacionSalarios" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuIPreLiquidacionSalariosActionPerformed"/>
@@ -290,6 +318,7 @@
                   <Image iconType="3" name="/resources/liquidacion_definitiva24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Liquidaci&#xf3;n Definitiva de Salarios"/>
+                <Property name="name" type="java.lang.String" value="jMnuILiquidacionDefinitivaSalarios" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuILiquidacionDefinitivaSalariosActionPerformed"/>
@@ -304,6 +333,7 @@
                   <Image iconType="3" name="/resources/calculo_dias_horas24.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="C&#xe1;lculo de D&#xed;as/Horas Trabajadas"/>
+                <Property name="name" type="java.lang.String" value="jMnuICalculoDiasHoras" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMnuICalculoDiasHorasActionPerformed"/>

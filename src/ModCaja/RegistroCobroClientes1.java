@@ -928,7 +928,7 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
                 double valor_interes = Double.parseDouble(jTDetalleDocs.getValueAt(secuencia, 8).toString());
                 String observacion = getObservacionDoc(nro_comprobante, cobroCodCliente, tipo_comprob);
                 int can_cuota = Integer.parseInt(jTDetalleDocs.getValueAt(secuencia, 3).toString());
-                int nro_caja_ticket = getNroCaja(nro_comprobante, cobroCodCliente, tipo_comprob);
+                int nro_caja_ticket = getNroCaja(nro_comprobante, cobroCodCliente, tipo_comprob, fec_comprob);
 
                 resultOperacionGrabaCobro = grabarPagoDet(cobroCodEmpresa, cobroCodLocal, cobroCodCaja, cobroNroPago, secuencia, tipo_comprob, nro_comprobante, 
                                                           nro_cuota, fec_comprob, fec_venc, cod_moneda, tipo_cambio, monto_comprob, montoRetenido, 
@@ -1163,11 +1163,11 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
         return obs;
     }
     
-    private int getNroCaja(int nroComprob, int codCliente, String tipComprob){
+    private int getNroCaja(int nroComprob, int codCliente, String tipComprob, String fecComprob){
         int result = 0;
         try{
             String sql = "SELECT cod_caja FROM venta_det_cuotas WHERE nro_comprob = " + nroComprob + " AND cod_cliente = " + codCliente + " "
-                       + "AND tip_comprob = '" + tipComprob + "'";
+                       + "AND tip_comprob = '" + tipComprob + "' AND fec_comprob::date = '" + fecComprob + "'::date";
             ResultSet rs = DBManager.ejecutarDSL(sql);
             if(rs != null){
                 if(rs.next()){
@@ -1194,14 +1194,21 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
         getDatosCabeceraCobro(nro_pago);
 
         // -- Convertir en texto el monto
+            String montoCobradoStr = String.valueOf(montoCobrado);
             String mon;
-            String mont = String.valueOf(montoCobrado).substring(0, String.valueOf(montoCobrado).length() - 2); // ejemplo 300,000.00 deja en 300000.
+            //String mont = String.valueOf(montoCobrado).substring(0, String.valueOf(montoCobrado).length() - 2); // ejemplo 300,000.00 deja en 300000.
+            String mont = montoCobradoStr.replace(".", "");
             if(mont.length() > 6){ // si alcanza el millon
                 mont = mont.substring(0, mont.length());
                 mon = mont.replace(",", ""); // deja en 300000
+                System.out.println("MONTO EN EL IF: " + mon);
             }else{
                 mon = mont.replace(",", ""); // deja en 300000
+                System.out.println("MONTO EN EL ELSE DEL IF: " + mon);
             }
+            
+            System.out.println("MONTO SALIENDO DE LA CONDICION: " + mon);
+            
             int monto = Integer.parseInt(mon); // valor entero
             NumeroATexto numero = new NumeroATexto(); // clase conversora
             String montoTxt = numero.convertirLetras(monto);
@@ -1532,7 +1539,7 @@ public class RegistroCobroClientes1 extends javax.swing.JDialog {
                     jTFDiferencia.setBackground(new Color(255,153,153));
                     jTFDiferencia.setText(decimalFormat.format(det_monto_credito));
                 }
-            }else if(det_monto_vuelto > 0){
+            }else if(det_monto_vuelto < 0){
                 jLDiferencia.setText("VUELTO");
                 jTFDiferencia.setBackground(new Color(102,255,102));
                 jTFDiferencia.setText(decimalFormat.format(det_monto_vuelto));

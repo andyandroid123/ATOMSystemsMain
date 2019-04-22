@@ -12,7 +12,9 @@
 	<queryString>
 		<![CDATA[SELECT articulo.descripcion, articulo.cod_articulo, stockart.stock, costoart.costo_neto,
 preciosart.precio_venta, articulo.cod_grupo || ' ' || grupo.descripcion AS grupo,
-(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad
+(SELECT COUNT(articulo.cod_articulo) FROM articulo) AS cantidad,
+(costoart.costo_neto * stockart.stock) AS total_costo,
+(preciosart.precio_venta * stockart.stock) AS total_venta
 FROM articulo
 RIGHT OUTER JOIN stockart
 ON stockart.cod_articulo = articulo.cod_articulo
@@ -23,6 +25,7 @@ ON preciosart.cod_articulo = articulo.cod_articulo
 INNER JOIN grupo
 ON grupo.cod_grupo = articulo.cod_grupo
 WHERE costoart.vigente = 'S' and preciosart.vigente = 'S' and preciosart.cod_lista = 1
+GROUP BY articulo.descripcion, articulo.cod_articulo, stockart.stock, costoart.costo_neto, preciosart.precio_venta, grupo.descripcion
 ORDER BY articulo.cod_grupo, articulo.descripcion]]>
 	</queryString>
 	<field name="descripcion" class="java.lang.String"/>
@@ -32,9 +35,23 @@ ORDER BY articulo.cod_grupo, articulo.descripcion]]>
 	<field name="precio_venta" class="java.math.BigDecimal"/>
 	<field name="grupo" class="java.lang.String"/>
 	<field name="cantidad" class="java.lang.Long"/>
+	<field name="total_costo" class="java.math.BigDecimal"/>
+	<field name="total_venta" class="java.math.BigDecimal"/>
 	<variable name="cantidad_articulos" class="java.math.BigDecimal" calculation="Count">
 		<variableExpression><![CDATA[$F{cod_articulo}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="costo_neto_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{costo_neto}]]></variableExpression>
+	</variable>
+	<variable name="precio_venta_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{precio_venta}]]></variableExpression>
+	</variable>
+	<variable name="total_costo_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_costo}]]></variableExpression>
+	</variable>
+	<variable name="total_venta_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_venta}]]></variableExpression>
 	</variable>
 	<group name="filtro_page_header">
 		<groupExpression><![CDATA[$F{grupo}]]></groupExpression>
@@ -228,21 +245,57 @@ ORDER BY articulo.cod_grupo, articulo.descripcion]]>
 		</band>
 	</detail>
 	<summary>
-		<band height="23">
+		<band height="76">
 			<textField pattern="#,##0">
-				<reportElement x="96" y="6" width="44" height="14" uuid="af612e05-1c7a-42f7-9820-31fed23352db"/>
+				<reportElement x="96" y="11" width="44" height="14" uuid="af612e05-1c7a-42f7-9820-31fed23352db"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{cantidad_articulos}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="4" y="6" width="91" height="14" uuid="0ca4fe01-67dc-47a7-bad6-601556b73f96"/>
+				<reportElement x="4" y="11" width="91" height="14" uuid="0ca4fe01-67dc-47a7-bad6-601556b73f96"/>
 				<textElement>
 					<font size="10" isBold="true" isItalic="false"/>
 				</textElement>
 				<text><![CDATA[Cantidad artìculos:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="151" y="11" width="60" height="14" uuid="b5c86cee-a9df-4400-a6cc-83a07d931bca"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Costo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="11" width="60" height="14" uuid="7f150bf2-8ee9-44b8-99b5-38236aade387"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Venta:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="5" width="537" height="1" uuid="c7112757-fbd8-4e58-8707-fc0a236076fb"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="2" y="29" width="537" height="1" uuid="96fa4fec-1ce7-4b0e-85bf-8ab1b1f30519"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="214" y="11" width="92" height="14" uuid="5f19f7b6-c7ee-442a-b806-5b991d0ef708"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_costo_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="376" y="11" width="100" height="14" uuid="b4bcff23-ec10-4c12-b65f-3a42d1d15531"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_venta_1}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

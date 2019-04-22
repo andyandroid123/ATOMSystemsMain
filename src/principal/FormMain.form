@@ -387,17 +387,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                      <Component id="jBBase" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="REGISTROS" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBAbastecimiento" min="-2" max="-2" attributes="0"/>
+                      <Component id="ABASTECIMIENTO" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBPagos" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="PAGOS" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBFinanciero" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="FINANCIERO" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBVentas" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="VENTAS" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBRRHH" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
+                      <Component id="RRHH" linkSize="3" min="-2" pref="163" max="-2" attributes="0"/>
                       <EmptySpace pref="106" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -407,12 +407,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jBBase" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jBAbastecimiento" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jBPagos" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jBFinanciero" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jBVentas" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jBRRHH" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="REGISTROS" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="ABASTECIMIENTO" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="PAGOS" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="FINANCIERO" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="VENTAS" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="RRHH" linkSize="4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -420,7 +420,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jBBase">
+            <Component class="javax.swing.JButton" name="REGISTROS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -432,15 +432,16 @@
                 <Property name="text" type="java.lang.String" value="Registros Base"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="REGISTROS" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBaseActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="REGISTROSActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jBAbastecimiento">
+            <Component class="javax.swing.JButton" name="ABASTECIMIENTO">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -451,15 +452,16 @@
                 <Property name="mnemonic" type="int" value="65"/>
                 <Property name="text" type="java.lang.String" value="Abastecimiento"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="ABASTECIMIENTO" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBAbastecimientoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ABASTECIMIENTOActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jBPagos">
+            <Component class="javax.swing.JButton" name="PAGOS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -468,17 +470,18 @@
                   <Image iconType="3" name="/resources/pagos24.png"/>
                 </Property>
                 <Property name="mnemonic" type="int" value="80"/>
-                <Property name="text" type="java.lang.String" value="Pagos"/>
+                <Property name="text" type="java.lang.String" value="***"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="PAGOS" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBPagosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PAGOSActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jBFinanciero">
+            <Component class="javax.swing.JButton" name="FINANCIERO">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -489,15 +492,16 @@
                 <Property name="mnemonic" type="int" value="70"/>
                 <Property name="text" type="java.lang.String" value="Financiero"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="FINANCIERO" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBFinancieroActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FINANCIEROActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jBVentas">
+            <Component class="javax.swing.JButton" name="VENTAS">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -508,15 +512,16 @@
                 <Property name="mnemonic" type="int" value="67"/>
                 <Property name="text" type="java.lang.String" value="Ventas"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="VENTAS" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBVentasActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VENTASActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jBRRHH">
+            <Component class="javax.swing.JButton" name="RRHH">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -527,9 +532,10 @@
                 <Property name="mnemonic" type="int" value="82"/>
                 <Property name="text" type="java.lang.String" value="RRHH"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="RRHH" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBRRHHActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RRHHActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>

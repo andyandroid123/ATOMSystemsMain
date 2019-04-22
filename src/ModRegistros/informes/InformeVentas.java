@@ -68,14 +68,14 @@ public class InformeVentas extends javax.swing.JDialog {
     
     private void getFecVigencia(){
         try {
-                //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                java.util.Date d = new java.util.Date();
-                fecVigencia = sdf.format(d);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error Formateando Fecha...");
-            }
+            //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            java.util.Date d = new java.util.Date();
+            fecVigencia = sdf.format(d);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error Formateando Fecha...");
+        }
     }
     
     private void configuraTablaVtasCaja(){
@@ -125,8 +125,8 @@ public class InformeVentas extends javax.swing.JDialog {
                        + "FROM venta_det "
                        + "INNER JOIN venta_cab "
                        + "ON venta_det.nro_ticket = venta_cab.nro_ticket "
-                       + "WHERE venta_det.fec_comprob::date >= '" + fecDesde + "'::date AND venta_det.fec_comprob::date <= '" + fecHasta + "'::date "
-                       + "AND venta_cab.fec_comprob::date >= '" + fecDesde + "'::date AND venta_cab.fec_comprob::date <= '" + fecHasta + "'::date "
+                       + "WHERE venta_det.fec_comprob::date >= to_date('" + fecDesde + "', 'dd/MM/yyyy') AND venta_det.fec_comprob::date <= to_date('" + fecHasta + "', 'dd/MM/yyyy') "
+                       + "AND venta_cab.fec_comprob::date >= to_date('" + fecDesde + "', 'dd/MM/yyyy') AND venta_cab.fec_comprob::date <= to_date('" + fecHasta + "', 'dd/MM/yyyy') "
                        + "AND venta_det.estado = 'V' AND venta_cab.estado = 'V' "
                        + "GROUP BY venta_det.cod_caja";
             System.out.println("INFORME DE VENTAS X CAJA (SCRIPT): " + sql);
@@ -182,7 +182,7 @@ public class InformeVentas extends javax.swing.JDialog {
                        + "FROM forma_pago "
                        + "INNER JOIN cuenta "
                        + "ON forma_pago.cod_cuenta = cuenta.cod_cuenta "
-                       + "WHERE forma_pago.fec_cobro::date >= '" + fecDesde + "'::date and forma_pago.fec_cobro::date <= '" + fecHasta + "'::date "
+                       + "WHERE forma_pago.fec_cobro::date >= to_date('" + fecDesde + "', 'dd/MM/yyyy') and forma_pago.fec_cobro::date <= to_date('" + fecHasta + "', 'dd/MM/yyyy') "
                        + "GROUP BY forma_pago.nom_librador, forma_pago.cod_cuenta, forma_pago.tip_cambio, forma_pago.tipo_cuenta, cuenta.cod_cliente "
                        + "ORDER BY forma_pago.cod_cuenta ";
             System.out.println("INFORME DE VENTAS X FORMA DE PAGO (SCRIPT): " + sql);
@@ -234,7 +234,7 @@ public class InformeVentas extends javax.swing.JDialog {
                        + "ON venta_det.cod_articulo = articulo.cod_articulo "
                        + "INNER JOIN grupo "
                        + "ON grupo.cod_grupo = articulo.cod_grupo "
-                       + "WHERE venta_det.fec_comprob::date >= '" + fecDesde + "'::date AND venta_det.fec_comprob::date <= '" + fecHasta + "'::date "
+                       + "WHERE venta_det.fec_comprob::date >= to_date('" + fecDesde + "', 'dd/MM/yyyy') AND venta_det.fec_comprob::date <= to_date('" + fecHasta + "', 'dd/MM/yyyy') "
                        + "AND venta_det.estado = 'V' "
                        + "GROUP BY grupo.cod_grupo";
             
@@ -467,7 +467,7 @@ public class InformeVentas extends javax.swing.JDialog {
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Empresa:");
@@ -530,7 +530,7 @@ public class InformeVentas extends javax.swing.JDialog {
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Desde:");
@@ -679,7 +679,7 @@ public class InformeVentas extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTVentas);
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Resumen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Resumen", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jLTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLTotal.setText("Total Ventas:");

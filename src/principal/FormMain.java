@@ -18,12 +18,16 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.ServerSocket;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.swing.JDialog;
 import utiles.DBManager;
+import utiles.InfoAppGlobal;
 import utiles.SetAppearance;
 
 /**
@@ -50,12 +54,12 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     public static List<LocalBean> listBeanLocal = null;
     public static String nombreUsuario = "";
     public static String nombreServidor = "";
-    FormAbastecimiento formAbast = null;
-    FormRegistrosBase formRegBase = null;
-    Ventas formVENTAS = null;
-    FormRRHH formRRHH = null;
-    CajaMain cajaMAIN = null;
-    FormFinanciero formFinanciero = null;
+    public static FormAbastecimiento formAbast = null;
+    public static FormRegistrosBase formRegBase = null;
+    public static Ventas formVENTAS = null;
+    public static FormRRHH formRRHH = null;
+    public static CajaMain cajaMAIN = null;
+    public static FormFinanciero formFinanciero = null;
     public static String nombreCarpetaProyecto = "ATOMSystemsMain";
     public static int horasIPSMes = 192;
     public static boolean resultExitAbastecimiento = false; //redundante (para entender)
@@ -126,7 +130,7 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     
     public static String getFechaSystema() {
         Date ultimaModificacao;
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd 'de' MMMM 'de' yyyy h:mm:ss:SSS");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd 'de' MMMM 'de' yyyy h:mm:ss:SSS", new Locale("es_ES"));
         File arquivo;
         arquivo = new File("/" + FormMain.nombreCarpetaProyecto + "/ATOMSystems-Main.jar");
         ultimaModificacao = new Date(arquivo.lastModified());
@@ -139,11 +143,12 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     }
     
     public static void setEstadoBotonesMenus(boolean estado){
-        jBBase.setEnabled(estado);
-        jBAbastecimiento.setEnabled(estado);
-        jBVentas.setEnabled(estado);
-        jBRRHH.setEnabled(estado);
-        jBFinanciero.setEnabled(estado);
+        REGISTROS.setEnabled(estado);
+        ABASTECIMIENTO.setEnabled(estado);
+        VENTAS.setEnabled(estado);
+        RRHH.setEnabled(estado);
+        FINANCIERO.setEnabled(estado);
+        PAGOS.setEnabled(estado);
     }
     
     private void cerrarVentana()
@@ -155,6 +160,13 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             {
             }
         });
+    }
+    
+    private void clearMemory(){
+        Runtime garbage = Runtime.getRuntime();
+        System.out.println("Free memory before cleaning: " + garbage.freeMemory());
+        garbage.gc();
+        System.out.println("Memory after cleaning: " + garbage.freeMemory());
     }
     
     /**
@@ -183,12 +195,12 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         jLabel3 = new javax.swing.JLabel();
         jLNombreUsuario = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jBBase = new javax.swing.JButton();
-        jBAbastecimiento = new javax.swing.JButton();
-        jBPagos = new javax.swing.JButton();
-        jBFinanciero = new javax.swing.JButton();
-        jBVentas = new javax.swing.JButton();
-        jBRRHH = new javax.swing.JButton();
+        REGISTROS = new javax.swing.JButton();
+        ABASTECIMIENTO = new javax.swing.JButton();
+        PAGOS = new javax.swing.JButton();
+        FINANCIERO = new javax.swing.JButton();
+        VENTAS = new javax.swing.JButton();
+        RRHH = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLAlias = new javax.swing.JLabel();
@@ -343,70 +355,76 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         jPanel5.setBackground(new java.awt.Color(204, 255, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jBBase.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBBase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/base24.png"))); // NOI18N
-        jBBase.setMnemonic('B');
-        jBBase.setText("Registros Base");
-        jBBase.setToolTipText("");
-        jBBase.setEnabled(false);
-        jBBase.addActionListener(new java.awt.event.ActionListener() {
+        REGISTROS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        REGISTROS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/base24.png"))); // NOI18N
+        REGISTROS.setMnemonic('B');
+        REGISTROS.setText("Registros Base");
+        REGISTROS.setToolTipText("");
+        REGISTROS.setEnabled(false);
+        REGISTROS.setName("REGISTROS"); // NOI18N
+        REGISTROS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBaseActionPerformed(evt);
+                REGISTROSActionPerformed(evt);
             }
         });
 
-        jBAbastecimiento.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBAbastecimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
-        jBAbastecimiento.setMnemonic('A');
-        jBAbastecimiento.setText("Abastecimiento");
-        jBAbastecimiento.setEnabled(false);
-        jBAbastecimiento.addActionListener(new java.awt.event.ActionListener() {
+        ABASTECIMIENTO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ABASTECIMIENTO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/abastecimiento24.png"))); // NOI18N
+        ABASTECIMIENTO.setMnemonic('A');
+        ABASTECIMIENTO.setText("Abastecimiento");
+        ABASTECIMIENTO.setEnabled(false);
+        ABASTECIMIENTO.setName("ABASTECIMIENTO"); // NOI18N
+        ABASTECIMIENTO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAbastecimientoActionPerformed(evt);
+                ABASTECIMIENTOActionPerformed(evt);
             }
         });
 
-        jBPagos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pagos24.png"))); // NOI18N
-        jBPagos.setMnemonic('P');
-        jBPagos.setText("Pagos");
-        jBPagos.setEnabled(false);
-        jBPagos.addActionListener(new java.awt.event.ActionListener() {
+        PAGOS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PAGOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pagos24.png"))); // NOI18N
+        PAGOS.setMnemonic('P');
+        PAGOS.setText("***");
+        PAGOS.setEnabled(false);
+        PAGOS.setName("PAGOS"); // NOI18N
+        PAGOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBPagosActionPerformed(evt);
+                PAGOSActionPerformed(evt);
             }
         });
 
-        jBFinanciero.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBFinanciero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/financiero24.png"))); // NOI18N
-        jBFinanciero.setMnemonic('F');
-        jBFinanciero.setText("Financiero");
-        jBFinanciero.setEnabled(false);
-        jBFinanciero.addActionListener(new java.awt.event.ActionListener() {
+        FINANCIERO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        FINANCIERO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/financiero24.png"))); // NOI18N
+        FINANCIERO.setMnemonic('F');
+        FINANCIERO.setText("Financiero");
+        FINANCIERO.setEnabled(false);
+        FINANCIERO.setName("FINANCIERO"); // NOI18N
+        FINANCIERO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBFinancieroActionPerformed(evt);
+                FINANCIEROActionPerformed(evt);
             }
         });
 
-        jBVentas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/caja24.png"))); // NOI18N
-        jBVentas.setMnemonic('C');
-        jBVentas.setText("Ventas");
-        jBVentas.setEnabled(false);
-        jBVentas.addActionListener(new java.awt.event.ActionListener() {
+        VENTAS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        VENTAS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/caja24.png"))); // NOI18N
+        VENTAS.setMnemonic('C');
+        VENTAS.setText("Ventas");
+        VENTAS.setEnabled(false);
+        VENTAS.setName("VENTAS"); // NOI18N
+        VENTAS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBVentasActionPerformed(evt);
+                VENTASActionPerformed(evt);
             }
         });
 
-        jBRRHH.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jBRRHH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/rrhh24.png"))); // NOI18N
-        jBRRHH.setMnemonic('R');
-        jBRRHH.setText("RRHH");
-        jBRRHH.setEnabled(false);
-        jBRRHH.addActionListener(new java.awt.event.ActionListener() {
+        RRHH.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        RRHH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/rrhh24.png"))); // NOI18N
+        RRHH.setMnemonic('R');
+        RRHH.setText("RRHH");
+        RRHH.setEnabled(false);
+        RRHH.setName("RRHH"); // NOI18N
+        RRHH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBRRHHActionPerformed(evt);
+                RRHHActionPerformed(evt);
             }
         });
 
@@ -416,37 +434,37 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(95, 95, 95)
-                .addComponent(jBBase, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(REGISTROS, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBAbastecimiento)
+                .addComponent(ABASTECIMIENTO)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PAGOS, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBFinanciero, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(FINANCIERO, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(VENTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBRRHH, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RRHH, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBBase, jBFinanciero, jBPagos, jBRRHH});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {FINANCIERO, PAGOS, REGISTROS, RRHH});
 
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBBase, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBAbastecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBFinanciero, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBRRHH, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(REGISTROS, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ABASTECIMIENTO, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PAGOS, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FINANCIERO, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VENTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RRHH, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBAbastecimiento, jBBase, jBFinanciero, jBPagos, jBRRHH});
+        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ABASTECIMIENTO, FINANCIERO, PAGOS, REGISTROS, RRHH});
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -658,10 +676,12 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             JOptionPane.showMessageDialog(this, "Existen formularios abiertos" , "ATENCION", JOptionPane.WARNING_MESSAGE);
         }else{            
             int exit = JOptionPane.showConfirmDialog(this, "¿Desloguearse?", "CERRAR CONEXION", JOptionPane.YES_NO_OPTION);
-            if(exit == 0){                
+            if(exit == 0){     
+                clearMemory();
                 cerrarSocket();
                 conectadoServer = false;
                 jBLogin.setEnabled(true);
+                DBManager.CerrarStatements();
                 DBManager.cerrarBD();
                 setEstadoMenus(false);
                 setEstadoBotonesMenus(false);
@@ -672,9 +692,10 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         
     }//GEN-LAST:event_jBLogOutActionPerformed
 
-    private void jBBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBaseActionPerformed
+    private void REGISTROSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGISTROSActionPerformed
         if (formRegBase == null){
-            formRegBase= new FormRegistrosBase();
+            clearMemory();
+            formRegBase= new FormRegistrosBase(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
             formRegBase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formRegBase.setVisible(true);
             resultExitRegistros = true;
@@ -683,11 +704,12 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             formRegBase.setVisible(true);
             resultExitRegistros = true;
         }
-    }//GEN-LAST:event_jBBaseActionPerformed
+    }//GEN-LAST:event_REGISTROSActionPerformed
 
-    private void jBAbastecimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAbastecimientoActionPerformed
+    private void ABASTECIMIENTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ABASTECIMIENTOActionPerformed
         if (formAbast == null){
-            formAbast= new FormAbastecimiento();
+            clearMemory();
+            formAbast= new FormAbastecimiento(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
             formAbast.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formAbast.setVisible(true);
             resultExitAbastecimiento = true;
@@ -695,7 +717,7 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             formAbast.setVisible(true);
             resultExitAbastecimiento = true;
         }
-    }//GEN-LAST:event_jBAbastecimientoActionPerformed
+    }//GEN-LAST:event_ABASTECIMIENTOActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Soporte soporte = new Soporte(new JFrame(), true);
@@ -709,9 +731,10 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         acerca.setVisible(true);
     }//GEN-LAST:event_jMnuIAcercaActionPerformed
 
-    private void jBVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVentasActionPerformed
+    private void VENTASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VENTASActionPerformed
         if(cajaMAIN == null){
-            cajaMAIN = new CajaMain();
+            clearMemory();
+            cajaMAIN = new CajaMain(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
             cajaMAIN.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             cajaMAIN.setVisible(true);
             resultExitCajaMain = true;
@@ -730,11 +753,12 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             formVENTAS.setVisible(true);
             resultExitVentas = true;
         }*/
-    }//GEN-LAST:event_jBVentasActionPerformed
+    }//GEN-LAST:event_VENTASActionPerformed
 
-    private void jBFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinancieroActionPerformed
+    private void FINANCIEROActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FINANCIEROActionPerformed
         if (formFinanciero == null){
-            formFinanciero = new FormFinanciero();
+            clearMemory();
+            formFinanciero = new FormFinanciero(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
             formFinanciero.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formFinanciero.setVisible(true);
             resultExitFinanciero = true;
@@ -742,15 +766,16 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             formFinanciero.setVisible(true);
             resultExitFinanciero = true;
         }
-    }//GEN-LAST:event_jBFinancieroActionPerformed
+    }//GEN-LAST:event_FINANCIEROActionPerformed
 
-    private void jBPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPagosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBPagosActionPerformed
+    private void PAGOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PAGOSActionPerformed
+        JOptionPane.showMessageDialog(this, "Módulo NO DISPONIBLE!\nEn desarrollo!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_PAGOSActionPerformed
 
-    private void jBRRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRRHHActionPerformed
+    private void RRHHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RRHHActionPerformed
         if (formRRHH == null){
-            formRRHH = new FormRRHH();
+            clearMemory();
+            formRRHH = new FormRRHH(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
             formRRHH.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formRRHH.setVisible(true);
             resultExitRRHH = true;
@@ -759,7 +784,7 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
             formRRHH.setVisible(true);
             resultExitRRHH = true;
         }
-    }//GEN-LAST:event_jBRRHHActionPerformed
+    }//GEN-LAST:event_RRHHActionPerformed
 
     private void salirDelSistema()
     {
@@ -812,6 +837,72 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         return result;
     }
     
+    public static void permisosModulos(boolean estado, ResultSet rs){
+        if(InfoAppGlobal.getUserGroupApp().equals("1")){
+            REGISTROS.setEnabled(estado);
+            ABASTECIMIENTO.setEnabled(estado);
+            FINANCIERO.setEnabled(estado);
+            PAGOS.setEnabled(estado);
+            RRHH.setEnabled(estado);
+            VENTAS.setEnabled(estado);
+        }else{
+            botones();
+            rs = obtenerPerfil(InfoAppGlobal.getUserGroupApp());
+            try{
+                while(rs.next()){
+                    recorrerBotones(estado, rs.getString("nombre_objeto"));
+                }
+            }catch(SQLException sqlex){
+                sqlex.printStackTrace();
+            }finally{
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    private static void recorrerBotones(boolean estado, String rs){
+        if(ABASTECIMIENTO.getName().equals(rs)){
+            ABASTECIMIENTO.setEnabled(estado);
+        }else if(REGISTROS.getName().equals(rs)){
+            REGISTROS.setEnabled(estado);
+        }else if(FINANCIERO.getName().equals(rs)){
+            FINANCIERO.setEnabled(estado);
+        }else if(PAGOS.getName().equals(rs)){
+            PAGOS.setEnabled(estado);
+        }else if(RRHH.getName().equals(rs)){
+            RRHH.setEnabled(estado);
+        }else if(VENTAS.getName().equals(rs)){
+            VENTAS.setEnabled(estado);
+        }
+    }
+    
+    private static ResultSet obtenerPerfil(String string){
+        String sql = "SELECT m.nombre_objeto "
+                   + "FROM perfil_usuario pu "
+                   + "INNER JOIN usuario u ON pu.cod_usuario_perfil = u.cod_usuario "
+                   + "INNER JOIN modulo m ON pu.cod_modulo = m.cod_modulo "
+                   + "WHERE pu.cod_usuario_perfil = " + codUsuario + " "
+                   + "AND u.activo = 'S' "
+                   + "GROUP BY m.nombre_objeto "
+                   + "ORDER BY m.nombre_objeto";
+        ResultSet rs = DBManager.ejecutarDSL(sql);
+        System.out.println("SQL OBTENER PERFIL: " + sql);
+        return rs;
+    }
+    
+    private static void botones(){
+        REGISTROS.setEnabled(false);
+        ABASTECIMIENTO.setEnabled(false);
+        FINANCIERO.setEnabled(false);
+        PAGOS.setEnabled(false);
+        RRHH.setEnabled(false);
+        VENTAS.setEnabled(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -848,15 +939,15 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static javax.swing.JButton jBAbastecimiento;
-    private static javax.swing.JButton jBBase;
-    private static javax.swing.JButton jBFinanciero;
+    private static javax.swing.JButton ABASTECIMIENTO;
+    private static javax.swing.JButton FINANCIERO;
+    private static javax.swing.JButton PAGOS;
+    private static javax.swing.JButton REGISTROS;
+    private static javax.swing.JButton RRHH;
+    private static javax.swing.JButton VENTAS;
     private javax.swing.JButton jBLogOut;
     private javax.swing.JButton jBLogin;
-    private static javax.swing.JButton jBPagos;
-    private static javax.swing.JButton jBRRHH;
     private javax.swing.JButton jBSalir;
-    private static javax.swing.JButton jBVentas;
     private javax.swing.JButton jButton1;
     public static javax.swing.JLabel jLAlias;
     public static javax.swing.JLabel jLConectadoDesde;

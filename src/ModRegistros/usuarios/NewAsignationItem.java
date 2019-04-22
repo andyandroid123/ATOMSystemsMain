@@ -13,27 +13,19 @@ import java.util.ArrayList;
  */
 public class NewAsignationItem {
     
-    private ArrayList<EstructuraList> fuente;
+    private ArrayList<StructuraList> fuente;
     
     public NewAsignationItem(int cod, String des, int cod1, int cod2){
         try{
             this.fuente = new ArrayList();
-            getFuente().add(new EstructuraList(cod, des, cod1, cod2));
+            getFuente().add(new StructuraList(cod, des, cod1, cod2));
         }catch(Exception ex){}
     }
 
     /**
      * @return the fuente
      */
-    public ArrayList<EstructuraList> getFuente() {
+    public ArrayList<StructuraList> getFuente() {
         return fuente;
     }
-
-    /**
-     * @param fuente the fuente to set
-     */
-    public void setFuente(ArrayList<EstructuraList> fuente) {
-        this.fuente = fuente;
-    }
-    
 }

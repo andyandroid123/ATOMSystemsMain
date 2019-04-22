@@ -14,22 +14,22 @@ import utiles.DBManager;
  * @author ANDRES
  */
 public class ItemList {
-    private ArrayList<EstructuraList> fuente;
+    private ArrayList<StructuraList> fuente;
     
     public ItemList(ResultSet rs, boolean flag){
         if(flag){
             try{
                 this.fuente = new ArrayList();
                 while(rs.next()){
-                    getFuente().add(new EstructuraList(rs.getInt(1), rs.getString(2).trim(), rs.getInt(3), rs.getInt(4)));
+                    getFuente().add(new StructuraList(rs.getInt(1), rs.getString(2).trim(), rs.getInt(3), rs.getInt(4)));
                 }
             }catch(Exception ex){}
         }else{
             try{
-                this.fuente = new ArrayList<>();
+                this.fuente = new ArrayList();
                 while(rs.next()){
                     String nombre = getDescripcionItem(rs.getInt("cod_menu"), rs.getInt("cod_item"));
-                    getFuente().add(new EstructuraList(rs.getInt(1), nombre.trim(), rs.getInt(3), rs.getInt(4)));
+                    getFuente().add(new StructuraList(rs.getInt(1), nombre.trim(), rs.getInt(2), rs.getInt(3)));
                 }
             }catch(Exception e){}
         }
@@ -59,14 +59,7 @@ public class ItemList {
     /**
      * @return the fuente
      */
-    public ArrayList<EstructuraList> getFuente() {
+    public ArrayList<StructuraList> getFuente() {
         return fuente;
-    }
-
-    /**
-     * @param fuente the fuente to set
-     */
-    public void setFuente(ArrayList<EstructuraList> fuente) {
-        this.fuente = fuente;
     }
 }

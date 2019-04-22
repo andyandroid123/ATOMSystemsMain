@@ -2,7 +2,7 @@
 PING 127.0.0.1 -n 1 | FIND "TTL=" >NUL
 IF ERRORLEVEL 1 GOTO Next
 
-   @echo CASA DE BEBIDAS "LA ROSARINA" 
+   @echo ATOMSystems "Sistema de Gestion" 
    @echo Abriendo su SISTEMA DE GESTION, aguarde... 
 
 REM ====================================

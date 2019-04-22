@@ -15,7 +15,7 @@ public class STNodo {
     private Integer NCodigo;
     private Integer NNivel;
     
-    public STNodo(Integer Ncod, String NDes, Integer NNiv){
+    public STNodo(int Ncod, String NDes, int NNiv){
         this.NDescripcion = NDes;
         this.NCodigo = Ncod;
         this.NNivel = NNiv;
@@ -63,4 +63,10 @@ public class STNodo {
         this.NNivel = NNivel;
     }
     
+    public String toString() {
+        String retValue;
+        
+        retValue = this.getNDescripcion();
+        return retValue;
+    }
 }

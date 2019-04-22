@@ -34,7 +34,7 @@ import principal.FormMain;
 import utiles.DBManager;
 import utiles.Focus;
 import utiles.InfoErrores;
-import utiles.LibReportesBoletaVenta;
+import utiles.LibReportes;
 import utiles.MaxLength;
 import utiles.StatementManager;
 import utiles.Utiles;
@@ -321,6 +321,8 @@ public class Ventas extends javax.swing.JFrame {
          * total (float)
          */
         
+        // si codcuenta es tipo credito entonces suma, si no va por secuencia
+               
         long vCodCuenta = Long.parseLong(jTFCodCuenta.getText().trim());
         String vDenominacion = jTFDenominacionCta.getText().trim();
         float vCotizacion = 0, vRecibido = 0, vTotal =0;
@@ -329,8 +331,22 @@ public class Ventas extends javax.swing.JFrame {
         vTotal = Math.round(vRecibido * vCotizacion);
         System.out.println("TOTAL FORMA DE PAGO REGISTRADO: " + vTotal);
         
-        dtmFormaPago.addRow(new Object[]{vCodCuenta, vDenominacion, vCotizacion, vRecibido, vTotal});
-        totalizarFormaPago();
+        if(cuentaCredito(jTFCodCuenta.getText().trim())){
+            if(existeFormaPagoDetalle(jTFCodCuenta.getText().trim())){
+                float pago = Float.parseFloat(dtmFormaPago.getValueAt(filaExistente, 3).toString());
+                vRecibido += pago;
+                vTotal = Math.round(vRecibido * vCotizacion);
+                dtmFormaPago.setValueAt(vRecibido, filaExistente, 3);
+                dtmFormaPago.setValueAt(vTotal, filaExistente, 4);
+                totalizarFormaPago();
+            }else{
+                dtmFormaPago.addRow(new Object[]{vCodCuenta, vDenominacion, vCotizacion, vRecibido, vTotal});
+                totalizarFormaPago();
+            }
+        }else{
+            dtmFormaPago.addRow(new Object[]{vCodCuenta, vDenominacion, vCotizacion, vRecibido, vTotal});
+            totalizarFormaPago();
+        }
     }
     
     private void totalizarFormaPago(){
@@ -502,6 +518,58 @@ public class Ventas extends javax.swing.JFrame {
         }finally{
             DBManager.CerrarStatements();
         }
+    }
+    
+    private boolean cuentaCredito(String cuenta){
+        String tipoCuenta = "";
+        boolean result = true;
+        String sql = "SELECT tipo_cuenta FROM cuenta WHERE cod_cuenta = " + cuenta;
+        try{
+            ResultSet rs = DBManager.ejecutarDSL(sql);
+            if(rs != null){
+                if(rs.next()){
+                    tipoCuenta = rs.getString("tipo_cuenta");
+                }
+            }
+            
+            if(tipoCuenta.equals("CRE")){
+                result = true;
+            }else{
+                result = false;
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            InfoErrores.errores(ex); 
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return result;
+    }
+    
+    private boolean esCuentaDelCliente(String cuentaCliente){
+        boolean result = true;
+        String codCliente = "";
+        String sql = "SELECT cod_cliente FROM cuenta WHERE cod_cuenta = " + cuentaCliente;
+        try{
+            ResultSet rs = DBManager.ejecutarDSL(sql);
+            if(rs != null){
+                if(rs.next()){
+                    codCliente = rs.getString("cod_cliente");
+                }
+            }
+            
+            if(jTFCodCliente.getText().trim().equals(codCliente)){
+                result = true; 
+            }else{
+                result = false; 
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            InfoErrores.errores(ex);
+        }finally{
+            DBManager.CerrarStatements();
+        }
+        return result;
     }
     
     private void getDenominacionCtaCodCliente(String codigo){
@@ -741,7 +809,7 @@ public class Ventas extends javax.swing.JFrame {
             
             if(!resultHistMovimiento){
                 resultOperacionGrabaVentas = agregarArticuloHistoricoVentas(vCodEmpresa, vCodLocal, vCodArticulo, vCantVenta, vMontoCosto, vMontoMargen, 
-                                                                            vMontoIva, vTotalVenta, vCodSubgrupo, vCodProveedor, vCodMarca, vCodGrupo, 
+                                                                            vMontoIva, vMontoVenta, vCodSubgrupo, vCodProveedor, vCodMarca, vCodGrupo, 
                                                                             vCodSector, vTipoComprob, vPctIva);
             }
             
@@ -1178,10 +1246,10 @@ public class Ventas extends javax.swing.JFrame {
                    + "'now()', "
                    +  cantVenta + ", "
                    +  pctIva + ", "
-                   +  montoCosto + ", "
-                   +  montoMargen + ", "
-                   +  montoIva + ", "
-                   +  montoTotalVenta + ", "
+                   +  Math.round(montoCosto) + ", "
+                   +  Math.round(montoMargen) + ", "
+                   +  Math.round(montoIva) + ", "
+                   +  Math.round(montoTotalVenta) + ", "
                    +  codSubgrupo + ", "
                    +  codProveedor + ", "
                    +  codMarca + ", "
@@ -1195,7 +1263,7 @@ public class Ventas extends javax.swing.JFrame {
     private int getCodGrupoArticulo(long codArticulo){
         int codigo = 0;
         try{
-            String sql = "SELECT cod_grupo FROM articulo WHERE cod_articulo = " + codigo;
+            String sql = "SELECT cod_grupo FROM articulo WHERE cod_articulo = " + codArticulo;
             ResultSet rs = DBManager.ejecutarDSL(sql);
             if(rs != null){
                 if(rs.next()){
@@ -1213,7 +1281,7 @@ public class Ventas extends javax.swing.JFrame {
     private int getCodSubGrupoArticulo(long codArticulo){
         int codigo = 0;
         try{
-            String sql = "SELECT cod_subgrupo FROM articulo WHERE cod_articulo = " + codigo;
+            String sql = "SELECT cod_subgrupo FROM articulo WHERE cod_articulo = " + codArticulo;
             ResultSet rs = DBManager.ejecutarDSL(sql);
             if(rs != null){
                 if(rs.next()){
@@ -1231,7 +1299,7 @@ public class Ventas extends javax.swing.JFrame {
     private int getCodMarcaArticulo(long codArticulo){
         int codigo = 0;
         try{
-            String sql = "SELECT cod_marca FROM articulo WHERE cod_articulo = " + codigo;
+            String sql = "SELECT cod_marca FROM articulo WHERE cod_articulo = " + codArticulo;
             ResultSet rs = DBManager.ejecutarDSL(sql);
             if(rs != null){
                 if(rs.next()){
@@ -1249,7 +1317,7 @@ public class Ventas extends javax.swing.JFrame {
     private int getCodProveedorArticulo(long codArticulo){
         int codigo = 0;
         try{
-            String sql = "SELECT cod_proveedor FROM articulo WHERE cod_articulo = " + codigo;
+            String sql = "SELECT cod_proveedor FROM articulo WHERE cod_articulo = " + codArticulo;
             ResultSet rs = DBManager.ejecutarDSL(sql);
             if(rs != null){
                 if(rs.next()){
@@ -1311,20 +1379,21 @@ public class Ventas extends javax.swing.JFrame {
         }
         
         try{
-            LibReportesBoletaVenta.parameters.put("pRazonSocEmpresa", utiles.Utiles.getRazonSocialEmpresa(utiles.Utiles.getCodEmpresaDefault()));
-            LibReportesBoletaVenta.parameters.put("pActividadEmpresa", actividadEmpresa);
-            LibReportesBoletaVenta.parameters.put("pDireccionEmpresa", direccionEmpresa);
-            LibReportesBoletaVenta.parameters.put("pCiudadEmpresa", ciudadEmpresa);
-            LibReportesBoletaVenta.parameters.put("pTelEmpresa", telEmpresa);
-            LibReportesBoletaVenta.parameters.put("pNroTicket", Integer.parseInt(vNroComprob));
-            LibReportesBoletaVenta.parameters.put("pCajero", getNombreCajero(codCajero));
-            LibReportesBoletaVenta.parameters.put("pMsgPieBoleta", getMsgPieBoleta());
-            LibReportesBoletaVenta.parameters.put("pNombreCliente", jTFNombreCliente.getText().trim());
-            LibReportesBoletaVenta.parameters.put("pTerminal", FormMain.codCaja);
-            LibReportesBoletaVenta.parameters.put("pFecVigencia", fecVigencia);
-            LibReportesBoletaVenta.parameters.put("pNroTurno", Integer.parseInt(nroTurno));
-            LibReportesBoletaVenta.parameters.put("REPORT_CONNECTION", DBManager.conn);
-            LibReportesBoletaVenta.generarReportes(sql, tipo_impresion);
+            //LibReportesBoletaVenta.parameters.put("pRazonSocEmpresa", utiles.Utiles.getRazonSocialEmpresa(utiles.Utiles.getCodEmpresaDefault()));
+            LibReportes.parameters.put("pRazonSocEmpresa", utiles.Utiles.getRazonSocialEmpresa(utiles.Utiles.getCodEmpresaDefault()));
+            LibReportes.parameters.put("pActividadEmpresa", actividadEmpresa);
+            LibReportes.parameters.put("pDireccionEmpresa", direccionEmpresa);
+            LibReportes.parameters.put("pCiudadEmpresa", ciudadEmpresa);
+            LibReportes.parameters.put("pTelEmpresa", telEmpresa);
+            LibReportes.parameters.put("pNroTicket", Integer.parseInt(vNroComprob));
+            LibReportes.parameters.put("pCajero", getNombreCajero(codCajero));
+            LibReportes.parameters.put("pMsgPieBoleta", getMsgPieBoleta());
+            LibReportes.parameters.put("pNombreCliente", jTFNombreCliente.getText().trim());
+            LibReportes.parameters.put("pTerminal", FormMain.codCaja);
+            LibReportes.parameters.put("pFecVigencia", fecVigencia);
+            LibReportes.parameters.put("pNroTurno", Integer.parseInt(nroTurno));
+            LibReportes.parameters.put("REPORT_CONNECTION", DBManager.conn);
+            LibReportes.generarReportes(sql, tipo_impresion);
             //LibReportesBoletaVenta.generarReportes(sql, "boletaVenta");
         }catch(SQLException sqlex){
             sqlex.printStackTrace();
@@ -2551,17 +2620,42 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCodCuentaKeyPressed
 
     private void jTFCodCuentaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFCodCuentaFocusLost
-        if(!jTFCodCuenta.getText().trim().equals("")){
-            getCtaDenCotiz(jTFCodCuenta.getText().trim());
-            jLMsgCuenta.setText("");
-            double totalVenta = 0, totalRecibido = 0, descuento = 0;
-            descuento = Double.parseDouble(jTFDescMonto.getText().trim().replace(",", ""));
-            totalVenta = (Double.parseDouble(jTFTotalVenta.getText().trim().replace(",", ""))) - descuento;
-            totalRecibido = Double.parseDouble(jTFMontoRecibidoTotal.getText().trim().replace(",", ""));
-            if( totalRecibido >= totalVenta ){
-                jBConfirmar.setEnabled(true);
-                jBConfirmar.requestFocus();
+        
+        String cuentaCliente = jTFCodCuenta.getText().trim();
+        
+        if(cuentaCredito(cuentaCliente)){
+            if(esCuentaDelCliente(cuentaCliente)){
+                if(!cuentaCliente.equals("")){
+                    getCtaDenCotiz(jTFCodCuenta.getText().trim());
+                    jLMsgCuenta.setText("");
+                    double totalVenta = 0, totalRecibido = 0, descuento = 0;
+                    descuento = Double.parseDouble(jTFDescMonto.getText().trim().replace(",", ""));
+                    totalVenta = (Double.parseDouble(jTFTotalVenta.getText().trim().replace(",", ""))) - descuento;
+                    totalRecibido = Double.parseDouble(jTFMontoRecibidoTotal.getText().trim().replace(",", ""));
+                    if( totalRecibido >= totalVenta ){
+                        jBConfirmar.setEnabled(true);
+                        jBConfirmar.requestFocus();
+                    }
+                }   
+            }else{
+                JOptionPane.showMessageDialog(this, "La cuenta no corresponde al cliente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                jTFDenominacionCta.setText("");
+                jTFCodCuenta.grabFocus();
+                jTFCodCuenta.selectAll();
             }
+        }else{
+            if(!cuentaCliente.equals("")){
+                getCtaDenCotiz(jTFCodCuenta.getText().trim());
+                jLMsgCuenta.setText("");
+                double totalVenta = 0, totalRecibido = 0, descuento = 0;
+                descuento = Double.parseDouble(jTFDescMonto.getText().trim().replace(",", ""));
+                totalVenta = (Double.parseDouble(jTFTotalVenta.getText().trim().replace(",", ""))) - descuento;
+                totalRecibido = Double.parseDouble(jTFMontoRecibidoTotal.getText().trim().replace(",", ""));
+                if( totalRecibido >= totalVenta ){
+                    jBConfirmar.setEnabled(true);
+                    jBConfirmar.requestFocus();
+                }
+            }   
         }
     }//GEN-LAST:event_jTFCodCuentaFocusLost
 

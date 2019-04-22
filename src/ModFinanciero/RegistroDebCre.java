@@ -5,7 +5,6 @@
  */
 package ModFinanciero;
 
-import static ModCaja.RegistroCobroClientes1.dtmFormaPago;
 import controls.EmpleadoCtrl;
 import java.awt.Color;
 import java.awt.Font;
@@ -1642,9 +1641,9 @@ public class RegistroDebCre extends javax.swing.JDialog {
 
     private void jBConfirmarFormaPagoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBConfirmarFormaPagoKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            String concepto = jCBTipoOperacion.getSelectedItem().toString() + " NRO: " + jTFNroDoc.getText().trim() + " EN CUENTA DE CLIENTE.";
+            /*String concepto = jCBTipoOperacion.getSelectedItem().toString() + " NRO: " + jTFNroDoc.getText().trim() + " EN CUENTA DE CLIENTE.";
             jTFConcepto.setText(concepto);
-            jTFConcepto.grabFocus();
+            jTFConcepto.grabFocus();*/
         }
     }//GEN-LAST:event_jBConfirmarFormaPagoKeyPressed
 
@@ -1721,6 +1720,9 @@ public class RegistroDebCre extends javax.swing.JDialog {
 
     private void jBConfirmarFormaPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarFormaPagoActionPerformed
         totalizar();
+        String concepto = jCBTipoOperacion.getSelectedItem().toString() + " NRO: " + jTFNroDoc.getText().trim() + " EN CUENTA DE CLIENTE.";
+        jTFConcepto.setText(concepto);
+        jTFConcepto.grabFocus();
     }//GEN-LAST:event_jBConfirmarFormaPagoActionPerformed
 
     private void jTFPrimerVencimientoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPrimerVencimientoFocusLost
