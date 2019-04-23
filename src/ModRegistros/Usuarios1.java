@@ -915,7 +915,7 @@ public class Usuarios1 extends javax.swing.JDialog {
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
         jBModificar.setText("Modificar");
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/guardar24.png")));
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/modificar24.png")));
         configBotonesCancelar();
         estadoComponentes(false);
         cargaUsuario();
