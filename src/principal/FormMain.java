@@ -11,6 +11,7 @@ import beans.EmpresaBean;
 import beans.LocalBean;
 import beans.SectorBean;
 import java.awt.Frame;
+import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -78,7 +79,6 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         appearance.setLookAndFeel();
         setEstadoMenus(false);
         setEstadoBotonesMenus(false);
-        this.setVisible(true);
         jBLogin.doClick();
         //jMnuRegistros.setVisible(false);
         cerrarVentana();
@@ -696,6 +696,8 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         if (formRegBase == null){
             clearMemory();
             formRegBase= new FormRegistrosBase(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
+            formRegBase.setLocation(0,0);
+            formRegBase.setSize(Toolkit.getDefaultToolkit().getScreenSize().getSize());
             formRegBase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formRegBase.setVisible(true);
             resultExitRegistros = true;
@@ -710,6 +712,8 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         if (formAbast == null){
             clearMemory();
             formAbast= new FormAbastecimiento(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
+            formAbast.setLocation(0,0);
+            formAbast.setSize(Toolkit.getDefaultToolkit().getScreenSize().getSize());
             formAbast.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formAbast.setVisible(true);
             resultExitAbastecimiento = true;
@@ -759,6 +763,8 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         if (formFinanciero == null){
             clearMemory();
             formFinanciero = new FormFinanciero(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
+            formFinanciero.setLocation(0,0);
+            formFinanciero.setSize(Toolkit.getDefaultToolkit().getScreenSize().getSize());
             formFinanciero.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formFinanciero.setVisible(true);
             resultExitFinanciero = true;
@@ -776,6 +782,8 @@ public class FormMain extends javax.swing.JFrame implements Runnable{
         if (formRRHH == null){
             clearMemory();
             formRRHH = new FormRRHH(InfoAppGlobal.getUserReal(), InfoAppGlobal.getUserGroupApp());
+            formRRHH.setLocation(0,0);
+            formRRHH.setSize(Toolkit.getDefaultToolkit().getScreenSize().getSize());
             formRRHH.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             formRRHH.setVisible(true);
             resultExitRRHH = true;

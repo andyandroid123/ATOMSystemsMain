@@ -74,6 +74,7 @@ public class ReImpresionDocVenta extends javax.swing.JDialog {
     }
     
     private void llenarTabla(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String cod_caja = jTFCodCaja.getText().trim();
         String fecDesde = jTFFecDesde.getText().trim();
         String fecHasta = jTFFecHasta.getText().trim();
@@ -94,15 +95,15 @@ public class ReImpresionDocVenta extends javax.swing.JDialog {
         ResultSet rs = null;
         String sql = "";
         
-        if(codCaja == "0"){
+        if(!codCaja.equals("0")){
             sql =     "SELECT DISTINCT cab.cod_caja, cab.nro_comprob, cab.cod_cliente || ' ' || cli.razon_soc AS cliente, "
                     + "to_char(cab.fec_comprob, 'dd/MM/yyyy') AS fecha, cab.mon_total, cab.nro_turno, "
                     + "(SELECT nombre || ' ' || apellido FROM empleado WHERE cod_empleado = cab.cod_cajero) AS cajero "
                     + "FROM venta_cab cab "
                     + "INNER JOIN cliente cli "
                     + "ON cab.cod_cliente = cli.cod_cliente "
-                    + "WHERE cab.fec_comprob::date >= '" + fecDesde +"'::date "
-                    + "AND  cab.fec_comprob::date <= '" + fecHasta + "'::date "
+                    + "WHERE cab.fec_comprob::date >= to_date('" + fecDesde +"', 'dd/MM/yyyy') "
+                    + "AND  cab.fec_comprob::date <= to_date('" + fecHasta + "', 'dd/MM/yyyy') "
                     + "AND cab.cod_caja = " + codCaja
                     + " ORDER BY cab.cod_caja, cab.nro_comprob";
         }else{
@@ -112,8 +113,8 @@ public class ReImpresionDocVenta extends javax.swing.JDialog {
                     + "FROM venta_cab cab "
                     + "INNER JOIN cliente cli "
                     + "ON cab.cod_cliente = cli.cod_cliente "
-                    + "WHERE cab.fec_comprob::date >= '" + fecDesde +"'::date "
-                    + "AND  cab.fec_comprob::date <= '" + fecHasta + "'::date "
+                    + "WHERE cab.fec_comprob::date >= to_date('" + fecDesde +"', 'dd/MM/yyyy') "
+                    + "AND  cab.fec_comprob::date <= to_date('" + fecHasta + "', 'dd/MM/yyyy') "
                     + "ORDER BY cab.cod_caja, cab.nro_comprob";
         }
         

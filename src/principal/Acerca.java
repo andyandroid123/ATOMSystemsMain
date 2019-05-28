@@ -73,10 +73,10 @@ public class Acerca extends javax.swing.JDialog {
         jLabel5.setText("¿Porqué?");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Es la unidad mínima de la materia, la unidad base de todo organismo, de la vida. Es una unidad indivisible");
+        jLabel6.setText("Es la unidad de partículas más pequeñas que puede existir como sustancia simple y que compone ");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("que compone toda la materia del universo.");
+        jLabel7.setText("todos los elementos, presente en todos lados e indispensable. ");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Pero, lo que representa para mi es el fruto del trabajo constante, dedicación y perseverancia, simbolo ");

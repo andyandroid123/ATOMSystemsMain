@@ -281,7 +281,7 @@ public class TurnoVentas extends javax.swing.JDialog {
                    + codLocal + ", "
                    + codCaja + ", "
                    + nroNuevoTurno + ", '"
-                   + fechaHabTurno + "', "
+                   + "now()', "
                    + codFisHabil + ", "
                    + codCajero + ", "
                    + saldoInicial + ", "

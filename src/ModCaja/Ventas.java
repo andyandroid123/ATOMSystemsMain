@@ -256,6 +256,7 @@ public class Ventas extends javax.swing.JFrame {
         jTDetallesVenta.getColumnModel().getColumn(6).setPreferredWidth(35); // precio venta
         jTDetallesVenta.getColumnModel().getColumn(7).setPreferredWidth(20); // cantidad
         jTDetallesVenta.getColumnModel().getColumn(8).setPreferredWidth(35); // totalitem
+//        jTDetallesVenta.removeColumn(jTDetallesVenta.getColumnModel().getColumn(8));
         jTDetallesVenta.setRowHeight(25);
     }
     
@@ -1364,7 +1365,7 @@ public class Ventas extends javax.swing.JFrame {
                    + "INNER JOIN articulo "
                    + "ON venta_det.cod_articulo = articulo.cod_articulo "
                    + "WHERE venta_cab.nro_ticket = " + vNroComprob + " AND venta_cab.cod_caja = " + FormMain.codCaja + " AND "
-                   + "venta_cab.fec_comprob::date = '" + fecVigencia + "'::date AND venta_cab.nro_turno = " + nroTurno + " "
+                   + "to_date(venta_cab.fec_comprob::text, 'dd/MM/yyyy') = to_date(now()::text, 'dd/MM/yyyy') AND venta_cab.nro_turno = " + nroTurno + " "
                    + "AND venta_det.cod_caja = " + FormMain.codCaja + " AND venta_det.nro_ticket = " + vNroComprob + " "
                    + "AND venta_det.nro_turno = " + nroTurno;
         
@@ -1641,6 +1642,8 @@ public class Ventas extends javax.swing.JFrame {
             jTDetallesVenta.getColumnModel().getColumn(5).setResizable(false);
             jTDetallesVenta.getColumnModel().getColumn(6).setResizable(false);
             jTDetallesVenta.getColumnModel().getColumn(7).setResizable(false);
+            jTDetallesVenta.getColumnModel().getColumn(8).setResizable(false);
+            jTDetallesVenta.getColumnModel().getColumn(8).setPreferredWidth(0);
         }
 
         javax.swing.GroupLayout jPVentasLayout = new javax.swing.GroupLayout(jPVentas);

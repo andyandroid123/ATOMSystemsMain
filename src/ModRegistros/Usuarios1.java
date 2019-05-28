@@ -176,7 +176,7 @@ public class Usuarios1 extends javax.swing.JDialog {
         String vEsCajero = jChBEsCajero.isSelected() ? "S" : "N";
         String vEsFiscal = jChBEsFiscal.isSelected() ? "S" : "N";
         String vActivo = jRBActivo.isSelected() ? "S": "N";
-        String clave = cifrar.encriptar("0xab", jPClave.getText().trim());
+        String clave = cifrar.encriptar("0xab", jPClave.getText());
         String vCodUsuario = jTFCodUsuario.getText().trim();
         String vNombreUsuario = jTFNombreUsuario.getText().trim();
         String vAlias = jTFAlias.getText().trim();
@@ -944,6 +944,8 @@ public class Usuarios1 extends javax.swing.JDialog {
     private void jPClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPClaveKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             jBModificar.requestFocus();
+            String clave_encriptada = Cifrador.encriptar("0xab", jPClave.getText());
+            System.out.println("CLAVE ENCRIPTADA: " + clave_encriptada);
         }
     }//GEN-LAST:event_jPClaveKeyPressed
 

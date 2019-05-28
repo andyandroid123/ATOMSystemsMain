@@ -188,11 +188,6 @@ public class DlgLogin extends javax.swing.JDialog {
                 jBEntrarActionPerformed(evt);
             }
         });
-        jBEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jBEntrarKeyPressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,12 +279,6 @@ public class DlgLogin extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTFPasswordKeyPressed
 
-    private void jBEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBEntrarKeyPressed
-//        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-//            jBEntrar.doClick();
-//        }
-    }//GEN-LAST:event_jBEntrarKeyPressed
-
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
         int codGrupoUsuario = 0;
         Locale.setDefault(Locale.US);
@@ -327,6 +316,7 @@ public class DlgLogin extends javax.swing.JDialog {
                 }
                 String fecha = sdf.format(new Date());
                 FormMain.jLConectadoDesde.setText(fecha);
+                System.out.println("Alias Usuario: " + jTFUsuario.getText() + "\nPassword: " + jTFPassword.getText() + "\nClave: " + pass);
                 
                 ResultSet resultUsuario = DBManager.ejecutarDSL("SELECT cod_usuario, nombre, alias, cod_grupo_usuario, activo FROM usuario WHERE alias = '" + jTFUsuario.getText().trim() + "'");
                 try{
